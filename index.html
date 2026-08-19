@@ -1,0 +1,988 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>브랜디크 · 브랜드 디자인 스튜디오</title>
+<meta name="description" content="흩어진 디자인을 하나의 언어로. 로고·네이밍부터 웹사이트, 패키지·인쇄물까지 완성하는 브랜드 디자인 스튜디오 브랜디크. 서울 강남구 압구정로2길 46.">
+<meta name="theme-color" content="#F8F7F4">
+<style>
+/* ══════════════════════════════════════════════════════════
+   브랜디크 홈페이지 — 언디자이닝 구조 + 브랜디크 감성 톤
+   자체완결 파일: 외부 폰트/스크립트/이미지 의존 없음
+   ══════════════════════════════════════════════════════════ */
+
+/* ── 디자인 토큰 (Sage Garden 무드 고정) ── */
+:root{
+  --paper:#F8F7F4;      /* 기본 배경 */
+  --wash:#F1EFE9;       /* 교차 섹션 배경 */
+  --card:#FFFFFF;       /* 카드 */
+  --ink:#1A1F2E;        /* 본문 글자 */
+  --sub:#6B7280;        /* 보조 글자 */
+  --brand:#7C9082;      /* 포인트(세이지 그린) */
+  --brand-deep:#54685B; /* 진한 세이지 — 어두운 배경/호버 */
+  --brand-tint:#EDF1EC; /* 아주 옅은 세이지 */
+  --line:#E4E2DC;       /* 테두리 */
+  --soft:#CED4BF;       /* 소프트 면 */
+
+  --serif:"AppleMyungjo","Nanum Myeongjo","Apple SD Gothic Neo",serif;
+  --sans:"Pretendard","Apple SD Gothic Neo",-apple-system,BlinkMacSystemFont,system-ui,"Malgun Gothic",sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+
+  --wrap:1180px;
+  --gnb-h:70px;
+  --r:16px;             /* 기본 라운드 */
+  --shadow:0 1px 2px rgba(26,31,46,.04),0 8px 24px rgba(26,31,46,.05);
+  --shadow-lift:0 2px 6px rgba(26,31,46,.06),0 18px 44px rgba(26,31,46,.10);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--gnb-h) + 16px);-webkit-text-size-adjust:100%}
+body{
+  background:var(--paper);color:var(--ink);font-family:var(--sans);
+  line-height:1.72;letter-spacing:-.003em;
+  /* 한글이 음절 단위로 끊기지 않고 띄어쓰기에서만 줄바꿈되게 */
+  word-break:keep-all;overflow-wrap:break-word;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--brand);outline-offset:3px;border-radius:4px}
+
+/* ── 공통 레이아웃 ── */
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+section{padding:clamp(72px,8.5vw,132px) 0}
+.wash{background:var(--wash);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+
+/* ── 타이포 ── */
+h1,h2,h3,h4{font-family:var(--serif);font-weight:700;text-wrap:balance;letter-spacing:-.015em;line-height:1.24}
+h1{font-size:clamp(2.3rem,5.4vw,3.9rem);line-height:1.18}
+h2{font-size:clamp(1.7rem,3.4vw,2.6rem)}
+h3{font-size:1.18rem}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--mono);font-size:.7rem;font-weight:600;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--brand);
+}
+.eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--brand)}
+.muted{color:var(--sub)}
+.sec-head{margin-bottom:clamp(34px,4.5vw,56px)}
+.sec-head .eyebrow{margin-bottom:16px}
+.sec-head p{color:var(--sub);max-width:56ch;margin-top:14px;font-size:1.02rem}
+.sec-head.center{text-align:center}
+.sec-head.center p{margin-left:auto;margin-right:auto}
+.sec-head.center .eyebrow{justify-content:center}
+
+/* ── 버튼 ── */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  font-family:var(--sans);font-size:.95rem;font-weight:600;letter-spacing:-.01em;
+  padding:14px 26px;border-radius:999px;border:1px solid transparent;
+  transition:background-color .2s,color .2s,border-color .2s,transform .2s,box-shadow .2s;
+}
+.btn .arw{transition:transform .2s}
+.btn:hover .arw{transform:translateX(3px)}
+.btn.primary{background:var(--brand);color:#fff;box-shadow:0 6px 18px rgba(124,144,130,.28)}
+.btn.primary:hover{background:var(--brand-deep);transform:translateY(-1px);box-shadow:0 10px 26px rgba(124,144,130,.34)}
+.btn.ghost{border-color:var(--line);background:var(--card);color:var(--ink)}
+.btn.ghost:hover{border-color:var(--brand);color:var(--brand-deep)}
+.btn.onink{background:#fff;color:var(--brand-deep)}
+.btn.onink:hover{background:var(--brand-tint);transform:translateY(-1px)}
+.btn.sm{padding:10px 18px;font-size:.86rem}
+
+/* ══ 상단 고정 GNB ══ */
+.gnb{
+  position:sticky;top:0;z-index:60;height:var(--gnb-h);
+  background:color-mix(in srgb,var(--paper) 86%,transparent);
+  backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px);
+  border-bottom:1px solid transparent;transition:border-color .25s,box-shadow .25s;
+}
+.gnb.stuck{border-bottom-color:var(--line);box-shadow:0 1px 20px rgba(26,31,46,.05)}
+.gnb .row{max-width:var(--wrap);margin:0 auto;padding:0 24px;height:100%;display:flex;align-items:center;gap:20px}
+.logo{display:flex;align-items:baseline;gap:9px;font-family:var(--serif);font-size:1.32rem;font-weight:700;letter-spacing:-.01em}
+.logo .mark{
+  width:26px;height:26px;border-radius:8px;background:var(--brand);
+  display:inline-flex;align-items:center;justify-content:center;
+  color:#fff;font-family:var(--mono);font-size:.72rem;font-weight:700;
+  align-self:center;flex:none;
+}
+.logo small{font-family:var(--mono);font-size:.56rem;letter-spacing:.24em;color:var(--sub);font-weight:600}
+.menu{margin-left:auto;display:flex;align-items:center;gap:30px}
+.menu a{font-size:.92rem;font-weight:500;color:var(--ink);position:relative;padding:4px 0;transition:color .2s}
+.menu a::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:1.5px;
+  background:var(--brand);transform:scaleX(0);transform-origin:left;transition:transform .25s;
+}
+.menu a:hover{color:var(--brand-deep)}
+.menu a:hover::after{transform:scaleX(1)}
+/* 메뉴 안의 CTA는 모바일 펼침 메뉴 전용 — 데스크톱에서는 .cta-slot 것만 보인다 */
+.menu > .btn{display:none}
+.gnb .cta-slot{display:flex;align-items:center;gap:10px}
+.burger{display:none;width:40px;height:40px;border-radius:10px;border:1px solid var(--line);background:var(--card);
+  align-items:center;justify-content:center;flex-direction:column;gap:4px}
+.burger i{display:block;width:16px;height:1.6px;background:var(--ink);border-radius:2px;transition:transform .25s,opacity .2s}
+.gnb.open .burger i:nth-child(1){transform:translateY(5.6px) rotate(45deg)}
+.gnb.open .burger i:nth-child(2){opacity:0}
+.gnb.open .burger i:nth-child(3){transform:translateY(-5.6px) rotate(-45deg)}
+
+@media(max-width:900px){
+  .menu,.gnb .cta-slot .btn{display:none}
+  .burger{display:flex;margin-left:auto}
+  .gnb.open .menu{
+    display:flex;flex-direction:column;align-items:stretch;gap:0;
+    position:absolute;top:var(--gnb-h);left:0;right:0;
+    background:var(--paper);border-bottom:1px solid var(--line);
+    padding:8px 24px 20px;box-shadow:0 20px 40px rgba(26,31,46,.08);
+  }
+  .gnb.open .menu a{padding:14px 0;border-bottom:1px solid var(--line);font-size:1rem}
+  .gnb.open .menu a::after{display:none}
+  .gnb.open .menu .btn{display:inline-flex;margin-top:16px;align-self:flex-start}
+}
+
+/* ══ 히어로 ══ */
+.hero{padding-top:clamp(56px,7vw,96px);padding-bottom:clamp(56px,7vw,92px);position:relative;overflow:hidden}
+.hero::after{ /* 은은한 세이지 광원 */
+  content:"";position:absolute;top:-220px;right:-160px;width:620px;height:620px;border-radius:50%;
+  background:radial-gradient(circle,rgba(124,144,130,.16),transparent 68%);pointer-events:none;
+}
+.hero .inner{position:relative;z-index:1;max-width:820px}
+.hero .eyebrow{margin-bottom:22px}
+.hero h1{margin-bottom:22px}
+.hero h1 em{font-style:normal;color:var(--brand-deep)}
+.hero .lede{font-size:clamp(1.02rem,1.5vw,1.16rem);color:var(--sub);max-width:50ch;margin-bottom:34px}
+.hero .cta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:52px}
+.hero-facts{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:var(--r);overflow:hidden;position:relative;z-index:1}
+.hero-facts div{background:var(--paper);padding:22px 20px}
+.hero-facts b{display:block;font-family:var(--serif);font-size:1.55rem;color:var(--brand-deep);line-height:1.2}
+.hero-facts span{font-size:.83rem;color:var(--sub);letter-spacing:-.01em}
+@media(max-width:760px){.hero-facts{grid-template-columns:repeat(2,1fr)}}
+
+/* ══ 포트폴리오 ══ */
+.work-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.grid-work{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+@media(max-width:980px){.grid-work{grid-template-columns:repeat(2,1fr);gap:20px}}
+@media(max-width:620px){.grid-work{grid-template-columns:1fr}}
+.work{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;
+  transition:transform .28s cubic-bezier(.2,.7,.3,1),box-shadow .28s,border-color .28s;
+}
+.work:hover{transform:translateY(-5px);box-shadow:var(--shadow-lift);border-color:var(--soft)}
+.work .thumb{aspect-ratio:4/3;position:relative;overflow:hidden;background:var(--brand-tint)}
+.work .thumb img{width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.2,.7,.3,1)}
+.work:hover .thumb img{transform:scale(1.045)}
+/* 이미지 없을 때 — 비어 보이지 않는 자리표시자 */
+.work .ph{
+  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+  background:
+    linear-gradient(135deg,rgba(124,144,130,.12),rgba(206,212,191,.22)),
+    var(--brand-tint);
+}
+.work .ph .sym{font-family:var(--serif);font-size:2.1rem;color:var(--brand);opacity:.5}
+.work .ph .lbl{font-family:var(--mono);font-size:.64rem;letter-spacing:.18em;color:var(--brand-deep);opacity:.75;text-transform:uppercase}
+.work .meta{padding:20px 22px 24px}
+.work .cat{font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--brand)}
+.work h3{margin:9px 0 6px;font-size:1.12rem}
+.work .tags{font-size:.86rem;color:var(--sub)}
+.work-more{margin-top:40px;text-align:center}
+
+/* ══ 서비스 5종 (언디자이닝 서비스 버튼 대응) ══ */
+.svc-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+@media(max-width:1040px){.svc-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:620px){.svc-grid{grid-template-columns:repeat(2,1fr)}}
+.svc{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  padding:30px 22px 26px;text-align:center;
+  transition:transform .25s,border-color .25s,box-shadow .25s,background-color .25s;
+}
+.svc:hover{transform:translateY(-4px);border-color:var(--brand);box-shadow:var(--shadow-lift)}
+.svc .ico{
+  width:52px;height:52px;margin:0 auto 16px;border-radius:14px;background:var(--brand-tint);
+  display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--brand-deep);
+  transition:background-color .25s;
+}
+.svc:hover .ico{background:var(--soft)}
+.svc h3{font-size:1.05rem;margin-bottom:6px}
+.svc p{font-size:.84rem;color:var(--sub);line-height:1.6}
+
+/* ══ 안심 보증 ══ */
+.guard{display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(32px,5vw,72px);align-items:center}
+@media(max-width:900px){.guard{grid-template-columns:1fr}}
+.guard-visual{
+  aspect-ratio:1/.86;border-radius:24px;position:relative;overflow:hidden;
+  background:linear-gradient(150deg,var(--brand) 0%,var(--brand-deep) 100%);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 24px 60px rgba(84,104,91,.24);
+}
+.guard-visual::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(circle at 30% 22%,rgba(255,255,255,.24),transparent 58%);
+}
+.shield{position:relative;width:min(50%,190px);filter:drop-shadow(0 10px 24px rgba(0,0,0,.18))}
+.guard-list{list-style:none;margin-top:30px;display:grid;gap:2px}
+.guard-list li{display:flex;gap:14px;padding:17px 0;border-top:1px solid var(--line)}
+.guard-list li:last-child{border-bottom:1px solid var(--line)}
+.guard-list .chk{
+  flex:none;width:22px;height:22px;border-radius:50%;background:var(--brand);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:12px;margin-top:3px;
+}
+.guard-list b{display:block;font-size:.98rem;letter-spacing:-.01em}
+.guard-list span{font-size:.88rem;color:var(--sub);line-height:1.6}
+
+/* ══ 프로세스 6단계 ══ */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+@media(max-width:900px){.steps{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.steps{grid-template-columns:1fr}}
+.step{background:var(--card);padding:34px 28px 32px;transition:background-color .25s}
+.step:hover{background:var(--brand-tint)}
+.step .k{display:flex;align-items:center;gap:9px;margin-bottom:16px}
+.step .sym{font-size:.62rem;color:var(--brand);line-height:1}
+.step .no{font-family:var(--mono);font-size:.72rem;font-weight:700;letter-spacing:.16em;color:var(--brand)}
+.step h3{font-size:1.08rem;margin-bottom:8px}
+.step p{font-size:.88rem;color:var(--sub);line-height:1.65}
+
+/* ══ 후기 ══ */
+.live-badge{
+  display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.68rem;
+  font-weight:700;letter-spacing:.18em;color:var(--brand-deep);
+  background:var(--brand-tint);border:1px solid var(--soft);border-radius:999px;padding:6px 14px;
+}
+.live-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--brand);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.82)}}
+.grid-rev{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:980px){.grid-rev{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.grid-rev{grid-template-columns:1fr}}
+.rev{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:26px 24px;display:flex;flex-direction:column;gap:14px}
+.rev .stars{color:var(--brand);font-size:.86rem;letter-spacing:.14em}
+.rev p{font-size:.93rem;line-height:1.72;flex:1}
+.rev .who{display:flex;align-items:center;gap:11px;padding-top:14px;border-top:1px solid var(--line)}
+.rev .av{width:34px;height:34px;border-radius:50%;background:var(--soft);flex:none;
+  display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:.9rem;color:var(--brand-deep)}
+.rev .who b{font-size:.88rem;display:block;font-weight:600}
+.rev .who span{font-size:.78rem;color:var(--sub)}
+.rev.ph{border-style:dashed;background:transparent}
+.rev.ph p{color:var(--sub)}
+
+/* ══ 가격 ══ */
+.grid-price{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;align-items:stretch}
+@media(max-width:1080px){.grid-price{grid-template-columns:repeat(2,1fr);gap:20px}}
+@media(max-width:640px){.grid-price{grid-template-columns:1fr;max-width:520px;margin:0 auto}}
+.plan{
+  background:var(--card);border:1px solid var(--line);border-radius:20px;padding:32px 24px 30px;
+  display:flex;flex-direction:column;transition:transform .25s,box-shadow .25s,border-color .25s;
+}
+.plan:hover{transform:translateY(-4px);box-shadow:var(--shadow-lift)}
+.plan.feat{border-color:var(--brand);box-shadow:0 18px 44px rgba(124,144,130,.16);position:relative}
+.plan.feat::before{
+  content:"추천 구성";position:absolute;top:-12px;left:24px;
+  background:var(--brand);color:#fff;font-size:.7rem;font-weight:700;letter-spacing:.04em;
+  padding:5px 13px;border-radius:999px;
+}
+.plan .pname{font-family:var(--mono);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.plan h3{font-size:1.35rem;margin-bottom:8px}
+.plan .desc{font-size:.88rem;color:var(--sub);min-height:2.9em}
+.plan .price{font-family:var(--serif);font-size:1.5rem;color:var(--brand-deep);margin:20px 0 4px;letter-spacing:-.02em}
+.plan .price small{font-family:var(--sans);font-size:.8rem;color:var(--sub);font-weight:500;letter-spacing:0}
+.plan ul{list-style:none;margin:22px 0 26px;display:grid;gap:11px;flex:1}
+.plan li{display:flex;gap:10px;font-size:.9rem;color:var(--ink);line-height:1.55}
+.plan li::before{content:"—";color:var(--brand);flex:none}
+.price-note{margin-top:26px;font-size:.85rem;color:var(--sub);text-align:center}
+
+/* ══ FAQ ══ */
+.faq-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:30px;justify-content:center}
+.faq-tab{
+  font-size:.9rem;font-weight:600;padding:10px 20px;border-radius:999px;
+  border:1px solid var(--line);background:var(--card);color:var(--sub);transition:all .2s;
+}
+.faq-tab:hover{border-color:var(--brand);color:var(--brand-deep)}
+.faq-tab.on{background:var(--brand);border-color:var(--brand);color:#fff}
+.faq-list{max-width:840px;margin:0 auto;border-top:1px solid var(--line)}
+.qa{border-bottom:1px solid var(--line)}
+.qa summary{
+  list-style:none;cursor:pointer;padding:22px 44px 22px 0;position:relative;
+  font-size:1rem;font-weight:600;letter-spacing:-.01em;transition:color .2s;
+}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary:hover{color:var(--brand-deep)}
+.qa summary .qn{font-family:var(--mono);font-size:.78rem;color:var(--brand);margin-right:11px;font-weight:700}
+.qa summary::after{
+  content:"";position:absolute;right:6px;top:50%;width:9px;height:9px;
+  border-right:1.8px solid var(--sub);border-bottom:1.8px solid var(--sub);
+  transform:translateY(-70%) rotate(45deg);transition:transform .25s,border-color .25s;
+}
+.qa[open] summary::after{transform:translateY(-20%) rotate(-135deg);border-color:var(--brand)}
+.qa .ans{padding:0 20px 26px 0;color:var(--sub);font-size:.94rem;line-height:1.78}
+.qa .ans strong{color:var(--ink);font-weight:600}
+
+/* ══ 하단 CTA ══ */
+.cta-band{
+  background:linear-gradient(135deg,var(--brand) 0%,var(--brand-deep) 100%);
+  color:#fff;text-align:center;position:relative;overflow:hidden;border:0;
+}
+.cta-band::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(circle at 22% 18%,rgba(255,255,255,.16),transparent 55%),
+             radial-gradient(circle at 82% 84%,rgba(255,255,255,.1),transparent 52%);
+}
+.cta-band .wrap{position:relative;z-index:1}
+.cta-band .eyebrow{color:rgba(255,255,255,.82)}
+.cta-band .eyebrow::before{background:rgba(255,255,255,.82)}
+.cta-band h2{color:#fff;margin:16px 0 18px}
+.cta-band p{color:rgba(255,255,255,.86);max-width:48ch;margin:0 auto 34px;font-size:1.02rem}
+.cta-band .row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+/* ══ 스튜디오 안내 (오시는 길) ══ */
+.studio{display:grid;grid-template-columns:1.08fr .92fr;gap:clamp(24px,3vw,40px);align-items:stretch}
+@media(max-width:900px){.studio{grid-template-columns:1fr}}
+.studio-card{
+  background:var(--card);border:1px solid var(--line);border-radius:20px;
+  padding:clamp(28px,3.2vw,42px);box-shadow:var(--shadow);
+}
+.addr-lead{display:flex;gap:16px;align-items:flex-start;padding-bottom:24px;border-bottom:1px solid var(--line)}
+.addr-lead .pin{
+  flex:none;width:48px;height:48px;border-radius:14px;background:var(--brand-tint);
+  display:flex;align-items:center;justify-content:center;color:var(--brand-deep);
+}
+.addr-lead .zip{font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;color:var(--brand);font-weight:700}
+.addr-lead .line1{font-family:var(--serif);font-size:clamp(1.16rem,2vw,1.46rem);font-weight:700;margin:5px 0 4px;letter-spacing:-.02em;line-height:1.35}
+.addr-lead .line2{font-size:.95rem;color:var(--sub)}
+.copy-addr{
+  margin-top:12px;display:inline-flex;align-items:center;gap:7px;font-size:.8rem;font-weight:600;
+  color:var(--brand-deep);background:var(--brand-tint);border:1px solid var(--soft);
+  border-radius:999px;padding:6px 14px;transition:background-color .2s,color .2s;
+}
+.copy-addr:hover{background:var(--soft)}
+.info-rows{list-style:none;margin-top:8px}
+.info-rows li{
+  display:grid;grid-template-columns:96px 1fr;gap:18px;align-items:baseline;
+  padding:15px 0;border-bottom:1px solid var(--line);font-size:.94rem;
+}
+.info-rows li:last-child{border-bottom:0;padding-bottom:0}
+.info-rows .k{font-size:.82rem;font-weight:600;color:var(--sub);letter-spacing:.02em}
+.info-rows .v a{color:var(--brand-deep);text-decoration:underline;text-underline-offset:3px}
+.info-rows .pending{color:#A9ADB4;font-style:italic}
+@media(max-width:480px){.info-rows li{grid-template-columns:1fr;gap:3px}}
+
+.studio-visual{
+  border-radius:20px;position:relative;overflow:hidden;color:#fff;
+  background:linear-gradient(150deg,var(--brand) 0%,var(--brand-deep) 100%);
+  padding:clamp(30px,3.4vw,42px);display:flex;flex-direction:column;justify-content:space-between;gap:28px;
+  box-shadow:0 20px 50px rgba(84,104,91,.22);min-height:340px;
+}
+.studio-visual::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(circle at 78% 16%,rgba(255,255,255,.20),transparent 56%);
+}
+.studio-visual > *{position:relative;z-index:1}
+.studio-visual .glyph{width:88px;opacity:.95;filter:drop-shadow(0 8px 20px rgba(0,0,0,.16))}
+.studio-visual h3{color:#fff;font-size:1.24rem;margin-bottom:9px}
+.studio-visual p{color:rgba(255,255,255,.86);font-size:.92rem;line-height:1.7}
+.studio-visual .btn{align-self:flex-start;margin-top:6px}
+
+/* ══ 푸터 ══ */
+footer{background:var(--paper);border-top:1px solid var(--line);padding:60px 0 44px;font-size:.88rem}
+.f-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;padding-bottom:40px;border-bottom:1px solid var(--line)}
+@media(max-width:820px){.f-top{grid-template-columns:1fr 1fr;gap:32px}.f-brand{grid-column:1/-1}}
+.f-brand .logo{margin-bottom:14px}
+.f-brand p{color:var(--sub);font-size:.9rem;max-width:34ch;line-height:1.7}
+.f-col h4{font-family:var(--sans);font-size:.78rem;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--sub);margin-bottom:16px}
+.f-col ul{list-style:none;display:grid;gap:10px}
+.f-col a{color:var(--ink);transition:color .2s}
+.f-col a:hover{color:var(--brand-deep);text-decoration:underline;text-underline-offset:3px}
+.f-biz{padding-top:30px;display:flex;flex-wrap:wrap;gap:8px 22px;color:var(--sub);font-size:.82rem;line-height:1.9}
+.f-biz .item{display:inline-flex;gap:7px}
+.f-biz .item b{font-weight:600;color:#8B8F96}
+.f-biz .pending{color:#A9ADB4;font-style:italic}
+.f-copy{margin-top:22px;padding-top:20px;border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--sub);font-size:.8rem}
+.f-copy .links{display:flex;gap:18px}
+
+/* ══ 스크롤 등장 ══ */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.3,1),transform .7s cubic-bezier(.2,.7,.3,1)}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none;transition:none}
+  *{animation-duration:.001ms!important;transition-duration:.001ms!important}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════ 상단 고정 GNB ══════════ -->
+<header class="gnb" id="gnb">
+  <div class="row">
+    <a class="logo" href="#top">
+      <span class="mark">B</span>
+      <span>브랜디크 <small>BRANDIQUE</small></span>
+    </a>
+    <nav class="menu" id="menu">
+      <a href="#work">포트폴리오</a>
+      <a href="#price">가격 안내</a>
+      <a href="#process">작업 과정</a>
+      <a href="#review">고객 후기</a>
+      <a href="#faq">자주 묻는 질문</a>
+      <a href="#studio">오시는 길</a>
+      <a class="btn primary sm" href="survey.html">무료 상담 신청</a>
+    </nav>
+    <div class="cta-slot">
+      <a class="btn primary sm" href="survey.html">무료 상담 신청 <span class="arw">→</span></a>
+    </div>
+    <button class="burger" id="burger" aria-label="메뉴 열기" aria-expanded="false" aria-controls="menu">
+      <i></i><i></i><i></i>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ══════════ 히어로 ══════════ -->
+<section class="hero">
+  <div class="wrap">
+    <div class="inner reveal">
+      <span class="eyebrow">Make your brand unforgettable</span>
+      <h1>오래 기억되는 브랜드에는<br><em>이유가 있습니다</em></h1>
+      <p class="lede">
+        로고와 컬러, 웹사이트와 패키지까지 흩어진 디자인을 하나의 언어로 연결합니다.
+        브랜드다운 인상을 만들고, 오래 기억되게 하는 것. 브랜디크가 하는 일입니다.
+      </p>
+      <div class="cta">
+        <a class="btn primary" href="survey.html">무료 상담 신청 <span class="arw">→</span></a>
+        <a class="btn ghost" href="#work">포트폴리오 보기</a>
+      </div>
+    </div>
+    <div class="hero-facts reveal">
+      <div><b>로고+웹+인쇄물</b><span>한 스튜디오에서 전부</span></div>
+      <div><b>3종</b><span>서로 다른 로고 시안 제안</span></div>
+      <div><b>100%</b><span>저작권 전체 양도</span></div>
+      <div><b>무제한</b><span>확정 전 시안 피드백</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 포트폴리오 ══════════ -->
+<section id="work" class="wash">
+  <div class="wrap">
+    <div class="sec-head work-head reveal">
+      <div>
+        <span class="eyebrow">Portfolio</span>
+        <h2 style="margin-top:16px">브랜디크가 만든 브랜드</h2>
+        <p>업종의 언어를 먼저 읽고, 거기에 맞는 톤을 입힙니다.</p>
+      </div>
+      <a class="btn ghost sm" href="#contact" id="workAll">전체 보기 <span class="arw">→</span></a>
+    </div>
+    <div class="grid-work reveal" id="workGrid"></div>
+    <div class="work-more reveal" id="workMore">
+      <a class="btn ghost" href="#contact">더 많은 작업 보기 <span class="arw">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 서비스 5종 ══════════ -->
+<section id="service">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow">Services</span>
+      <h2 style="margin-top:16px">로고부터 웹사이트까지, 브랜드를 한 번에</h2>
+      <p>로고만 따로, 홈페이지는 또 따로 맡기지 않아도 됩니다. 필요한 것만 단품으로도, 전부 묶어서도 진행합니다.</p>
+    </div>
+    <div class="svc-grid reveal">
+      <a class="svc" href="survey.html?type=logo"><div class="ico">✦</div><h3>로고 · 브랜딩</h3><p>워드마크, 심볼, 서브마크, 컬러 가이드</p></a>
+      <a class="svc" href="survey.html?type=web"><div class="ico">▦</div><h3>웹사이트</h3><p>반응형 브랜드 사이트 · 랜딩 페이지</p></a>
+      <a class="svc" href="survey.html?type=print"><div class="ico">◍</div><h3>패키지 · 인쇄물</h3><p>포장지, 라벨, 명함, 리플릿, 메뉴판</p></a>
+      <a class="svc" href="survey.html?type=naming"><div class="ico">✎</div><h3>네이밍</h3><p>브랜드명 후보 도출과 상표 사전 검토</p></a>
+      <a class="svc" href="survey.html?type=store"><div class="ico">▤</div><h3>스마트스토어 키트</h3><p>로고 · 배너 · 썸네일 템플릿 · 상세 모듈</p></a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 안심 보증 ══════════ -->
+<section id="guarantee" class="wash">
+  <div class="wrap">
+    <div class="guard">
+      <div class="guard-visual reveal">
+        <!-- 인라인 SVG 방패 — 외부 이미지 의존 없음 -->
+        <svg class="shield" viewBox="0 0 120 132" fill="none" aria-hidden="true">
+          <path d="M60 4 L112 24 v44c0 30-22 52-52 60C30 120 8 98 8 68V24Z" fill="rgba(255,255,255,.16)" stroke="rgba(255,255,255,.62)" stroke-width="2.5"/>
+          <path d="M60 18 L98 32 v34c0 23-17 40-38 46-21-6-38-23-38-46V32Z" fill="rgba(255,255,255,.14)"/>
+          <path d="M42 66 l13 13 24-26" stroke="#fff" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="reveal">
+        <span class="eyebrow">Safety policy</span>
+        <h2 style="margin:16px 0 14px">디자인 안심 보증</h2>
+        <p class="muted">
+          맡기고 나서 불안해지지 않도록, 브랜디크는 아래 항목을 계약 단계에서 문서로 약속합니다.
+        </p>
+        <ul class="guard-list">
+          <li>
+            <span class="chk">✓</span>
+            <div><b>저작권 100% 양도</b><span>완성된 로고와 디자인의 권리는 전부 고객에게 넘어갑니다.</span></div>
+          </li>
+          <li>
+            <span class="chk">✓</span>
+            <div><b>시안 확정 전 무제한 피드백</b><span>방향이 맞을 때까지 조율합니다. 회차 압박 없이 진행합니다.</span></div>
+          </li>
+          <li>
+            <span class="chk">✓</span>
+            <div><b>원본 파일 전체 제공</b><span>AI·SVG·PNG 등 실무에서 바로 쓰는 형식으로 모두 드립니다.</span></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 프로세스 6단계 ══════════ -->
+<section id="process">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow">Process</span>
+      <h2 style="margin-top:16px">6단계로 완성됩니다</h2>
+      <p>상담부터 납품까지, 지금 어느 단계인지 항상 알 수 있게 진행합니다.</p>
+    </div>
+    <div class="steps reveal">
+      <div class="step"><div class="k"><span class="sym">●</span><span class="no">01</span></div><h3>브랜드 설문</h3><p>업종·타깃·좋아하는 분위기를 문항으로 받습니다. 여기서 방향의 절반이 정해집니다.</p></div>
+      <div class="step"><div class="k"><span class="sym">■</span><span class="no">02</span></div><h3>무료 상담</h3><p>설문을 바탕으로 범위와 일정, 견적을 정리해 드립니다.</p></div>
+      <div class="step"><div class="k"><span class="sym">▲</span><span class="no">03</span></div><h3>계약 · 결제</h3><p>작업 범위와 보증 항목을 문서로 확정하고 시작합니다.</p></div>
+      <div class="step"><div class="k"><span class="sym">●</span><span class="no">04</span></div><h3>톤 설계 · 디자인</h3><p>브랜드의 톤을 먼저 잡고, 거기에 맞춰 시안을 만듭니다.</p></div>
+      <div class="step"><div class="k"><span class="sym">■</span><span class="no">05</span></div><h3>피드백 · 수정</h3><p>확정될 때까지 조율합니다. 실제 적용 목업으로 확인합니다.</p></div>
+      <div class="step"><div class="k"><span class="sym">▲</span><span class="no">06</span></div><h3>납품 · 가이드</h3><p>원본 파일과 사용 가이드를 함께 드립니다. 바로 쓰실 수 있습니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 고객 후기 ══════════ -->
+<section id="review" class="wash">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span id="revBadge"></span>
+      <h2 style="margin-top:18px" id="revTitle"></h2>
+      <p id="revLede"></p>
+    </div>
+    <div class="grid-rev reveal" id="revGrid"></div>
+  </div>
+</section>
+
+<!-- ══════════ 가격 안내 ══════════ -->
+<section id="price">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow">Pricing</span>
+      <h2 style="margin-top:16px">필요한 만큼만 고르세요</h2>
+      <p>작업 범위와 업종에 따라 달라집니다. 상담에서 정확한 금액을 안내해 드립니다.</p>
+    </div>
+    <div class="grid-price reveal">
+
+      <div class="plan">
+        <div class="pname">Logo only</div>
+        <h3>로고 단품</h3>
+        <p class="desc">먼저 브랜드의 얼굴부터 갖추고 싶을 때.</p>
+        <!-- ⬇ 가격 확정되면 아래 한 줄만 바꾸면 됩니다 (예: <div class="price">450,000원<small> 부터</small></div>) -->
+        <div class="price">상담 후 견적<small> 안내</small></div>
+        <ul>
+          <li>로고 시안 3종 제안</li>
+          <li>워드마크 · 심볼 · 서브마크</li>
+          <li>컬러 · 폰트 가이드</li>
+          <li>원본 파일 전체 제공</li>
+        </ul>
+        <a class="btn ghost" href="survey.html?type=logo">문의하기</a>
+      </div>
+
+      <div class="plan feat">
+        <div class="pname">Full bundle</div>
+        <h3>브랜디크 풀 번들</h3>
+        <p class="desc">로고부터 사이트, 인쇄물까지 한 톤으로 한 번에.</p>
+        <!-- ⬇ 가격 확정되면 아래 한 줄만 바꾸면 됩니다 -->
+        <div class="price">상담 후 견적<small> 안내</small></div>
+        <ul>
+          <li>로고 단품 전체 포함</li>
+          <li>반응형 브랜드 웹사이트</li>
+          <li>명함 · 스티커 · 라벨</li>
+          <li>패키지 · 인쇄물 기본 세트</li>
+          <li>브랜드 가이드 문서</li>
+        </ul>
+        <a class="btn primary" href="survey.html">무료 상담 신청 <span class="arw">→</span></a>
+      </div>
+
+      <div class="plan">
+        <div class="pname">Smart store kit</div>
+        <h3>스마트스토어 브랜드 키트</h3>
+        <p class="desc">스토어를 브랜드처럼 보이게 하는 한 세트.</p>
+        <!-- ⬇ 가격 확정되면 아래 한 줄만 바꾸면 됩니다 -->
+        <div class="price">상담 후 견적<small> 안내</small></div>
+        <ul>
+          <li>로고 (가로형 · 정사각형)</li>
+          <li>스토어 상단 배너 PC · 모바일</li>
+          <li>상품 썸네일 템플릿 (편집 가능)</li>
+          <li>상세페이지 공통 모듈 (상단 · 하단)</li>
+          <li>컬러 · 폰트 가이드</li>
+        </ul>
+        <a class="btn ghost" href="survey.html?type=store">문의하기</a>
+      </div>
+
+      <div class="plan">
+        <div class="pname">Web only</div>
+        <h3>웹사이트 단품</h3>
+        <p class="desc">이미 로고가 있고, 사이트만 필요할 때.</p>
+        <!-- ⬇ 가격 확정되면 아래 한 줄만 바꾸면 됩니다 -->
+        <div class="price">상담 후 견적<small> 안내</small></div>
+        <ul>
+          <li>반응형 브랜드 사이트</li>
+          <li>기존 로고 톤에 맞춘 설계</li>
+          <li>모바일 최적화</li>
+          <li>도메인 · 배포 안내</li>
+        </ul>
+        <a class="btn ghost" href="survey.html?type=web">문의하기</a>
+      </div>
+
+    </div>
+    <p class="price-note reveal">범위·업종·납기에 따라 금액이 달라집니다. 상담은 무료이며 비용이 발생하지 않습니다.</p>
+  </div>
+</section>
+
+<!-- ══════════ FAQ ══════════ -->
+<section id="faq" class="wash">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow">FAQ</span>
+      <h2 style="margin-top:16px">자주 묻는 질문</h2>
+    </div>
+    <div class="faq-tabs reveal" id="faqTabs">
+      <button class="faq-tab on" data-g="prep">사전 준비</button>
+      <button class="faq-tab" data-g="work">서비스 · 작업</button>
+      <button class="faq-tab" data-g="done">완료 후</button>
+    </div>
+    <div class="faq-list reveal" id="faqList"></div>
+  </div>
+</section>
+
+<!-- ══════════ 스튜디오 안내 (오시는 길) ══════════ -->
+<section id="studio">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow">Studio</span>
+      <h2 style="margin-top:16px">브랜디크 스튜디오</h2>
+      <p>서울 강남구 압구정에 있습니다. 방문 상담은 예약 후 진행합니다.</p>
+    </div>
+    <div class="studio reveal">
+
+      <div class="studio-card">
+        <div class="addr-lead">
+          <span class="pin">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 21s7-5.4 7-11a7 7 0 1 0-14 0c0 5.6 7 11 7 11Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+              <circle cx="12" cy="10" r="2.6" stroke="currentColor" stroke-width="1.8"/>
+            </svg>
+          </span>
+          <div>
+            <div class="zip">06034</div>
+            <div class="line1">서울특별시 강남구 압구정로2길 46</div>
+            <div class="line2">214 - S147호</div>
+            <button class="copy-addr" id="copyAddr" type="button">
+              <span aria-hidden="true">⧉</span><span id="copyAddrTxt">주소 복사</span>
+            </button>
+          </div>
+        </div>
+
+        <ul class="info-rows">
+          <li><span class="k">상호</span><span class="v">브랜디크 (BRANDIQUE)</span></li>
+          <li><span class="k">대표</span><span class="v">이화연</span></li>
+          <li><span class="k">사업자등록번호</span><span class="v"><span class="pending">등록 진행 중</span></span></li>
+          <li><span class="k">이메일</span><span class="v"><a href="mailto:brandique22@gmail.com">brandique22@gmail.com</a></span></li>
+          <li><span class="k">운영시간</span><span class="v">평일 10:00 – 19:00 <span class="muted" style="font-size:.86rem">(주말·공휴일 휴무)</span></span></li>
+        </ul>
+      </div>
+
+      <div class="studio-visual">
+        <svg class="glyph" viewBox="0 0 96 96" fill="none" aria-hidden="true">
+          <rect x="14" y="30" width="30" height="52" rx="3" stroke="rgba(255,255,255,.9)" stroke-width="3"/>
+          <rect x="52" y="46" width="30" height="36" rx="3" stroke="rgba(255,255,255,.9)" stroke-width="3"/>
+          <path d="M14 30 29 17l15 13" stroke="rgba(255,255,255,.9)" stroke-width="3" stroke-linejoin="round"/>
+          <g fill="rgba(255,255,255,.75)">
+            <rect x="21" y="41" width="7" height="7" rx="1.4"/><rect x="31" y="41" width="7" height="7" rx="1.4"/>
+            <rect x="21" y="54" width="7" height="7" rx="1.4"/><rect x="31" y="54" width="7" height="7" rx="1.4"/>
+            <rect x="59" y="56" width="7" height="7" rx="1.4"/><rect x="69" y="56" width="7" height="7" rx="1.4"/>
+          </g>
+          <path d="M21 82v-11h17v11" stroke="rgba(255,255,255,.9)" stroke-width="3" stroke-linejoin="round"/>
+        </svg>
+        <div>
+          <h3>방문 상담 안내</h3>
+          <p>
+            브랜드 자료를 함께 보며 이야기하는 편이 정확합니다.
+            방문을 원하시면 메일로 미리 일정을 잡아 주세요.
+            원격 상담도 동일하게 진행합니다.
+          </p>
+          <a class="btn onink" href="mailto:brandique22@gmail.com?subject=%5B%EB%B8%8C%EB%9E%9C%EB%94%94%ED%81%AC%5D%20%EB%B0%A9%EB%AC%B8%20%EC%83%81%EB%8B%B4%20%EC%98%88%EC%95%BD">방문 예약 문의 <span class="arw">→</span></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 하단 CTA ══════════ -->
+<section id="contact" class="cta-band">
+  <div class="wrap reveal">
+    <span class="eyebrow">Let's start</span>
+    <h2>브랜드 설문을 작성하고<br>무료 상담을 받아보세요</h2>
+    <p>5분이면 충분합니다. 설문 내용을 보고 방향과 견적을 정리해 답변드립니다.</p>
+    <div class="row">
+      <a class="btn onink" href="survey.html">브랜드 설문 작성하기 <span class="arw">→</span></a>
+      <a class="btn ghost" style="background:transparent;border-color:rgba(255,255,255,.5);color:#fff" href="mailto:brandique22@gmail.com">메일로 문의하기</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ══════════ 푸터 ══════════ -->
+<footer>
+  <div class="wrap">
+    <div class="f-top">
+      <div class="f-brand">
+        <a class="logo" href="#top"><span class="mark">B</span><span>브랜디크 <small>BRANDIQUE</small></span></a>
+        <p>브랜드 디자인 스튜디오. 로고·네이밍부터 웹사이트, 패키지·인쇄물까지 하나의 톤으로 만듭니다. 1인 브랜드부터 기업 프로젝트까지.</p>
+      </div>
+      <div class="f-col">
+        <h4>서비스</h4>
+        <ul>
+          <li><a href="#service">로고 · 브랜딩</a></li>
+          <li><a href="#service">웹사이트 제작</a></li>
+          <li><a href="#service">패키지 · 인쇄물</a></li>
+          <li><a href="#service">네이밍</a></li>
+          <li><a href="#price">스마트스토어 브랜드 키트</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>바로가기</h4>
+        <ul>
+          <li><a href="#work">포트폴리오</a></li>
+          <li><a href="#price">가격 안내</a></li>
+          <li><a href="#process">작업 과정</a></li>
+          <li><a href="#faq">자주 묻는 질문</a></li>
+          <li><a href="survey.html">무료 상담 신청</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 사업자 정보 — 사업자등록번호는 발급 후 아래 자리에 채우면 됩니다 -->
+    <div class="f-biz">
+      <span class="item"><b>상호</b> 브랜디크</span>
+      <span class="item"><b>대표</b> 이화연</span>
+      <span class="item"><b>사업자등록번호</b> <span class="pending">등록 진행 중</span></span>
+      <span class="item"><b>주소</b> (06034) 서울 강남구 압구정로2길 46, 214 - S147호</span>
+      <span class="item"><b>이메일</b> <a href="mailto:brandique22@gmail.com">brandique22@gmail.com</a></span>
+    </div>
+
+    <div class="f-copy">
+      <span>© 2026 BRANDIQUE. All rights reserved.</span>
+      <span class="links">
+        <a href="#faq">개인정보처리방침</a>
+        <a href="#faq">이용약관</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ══════════════════════════════════════════════════════════
+   ⬇⬇ 여기만 고치면 됩니다 — 포트폴리오 / 후기 데이터 ⬇⬇
+   ══════════════════════════════════════════════════════════ */
+
+/* 포트폴리오: 배열이 비어 있으면 자리표시자 카드 9개가 자동으로 깔립니다.
+   작업물이 생기면 아래 형식으로 한 줄씩 추가하세요.
+   img 는 같은 폴더 기준 상대경로 (예: 'assets/butter.jpg'), 없으면 '' 로 두면 됩니다. */
+const WORKS = [
+  // { title:'버터제과', cat:'베이커리', tags:'로고 · 패키지 · 웹사이트', img:'', link:'samples/bakery.html' },
+];
+
+/* 후기: 비어 있으면 "첫 후기를 기다리는 중" 자리표시자가 나옵니다. */
+const REVIEWS = [
+  // { name:'김○○ 대표', biz:'카페 · 서울', stars:5, text:'상담부터 납품까지 방향을 잘 잡아주셨어요.' },
+];
+
+/* FAQ: 그룹(prep 사전준비 / work 서비스·작업 / done 완료 후)별 질문·답변 */
+const FAQ = {
+  prep:[
+    ['상담 전에 미리 준비할 게 있나요?','업종과 브랜드 이름, 참고하고 싶은 분위기의 이미지 몇 장이면 충분합니다. 아직 이름이 없어도 괜찮습니다 — 네이밍부터 함께 진행할 수 있습니다.'],
+    ['원하는 스타일을 콕 집어 말해도 되나요?','물론입니다. 좋아하는 브랜드나 이미지를 보여주시면 그 결을 분석해 방향을 잡습니다. 반대로 <strong>"잘 모르겠다"</strong>고 하셔도 괜찮습니다. 설문으로 취향을 찾아드립니다.'],
+    ['이미 있는 로고를 다듬는 것도 되나요?','가능합니다. 기존 로고의 자산을 유지하면서 정리하는 리브랜딩과, 완전히 새로 만드는 방식 중에 상담에서 함께 결정합니다.'],
+    ['규모가 작아도, 또는 커도 맡길 수 있나요?','1인 브랜드부터 기업 단위 프로젝트까지 진행합니다. 규모에 따라 범위·일정·인원이 달라질 뿐, 브랜드를 설계하는 방식은 같습니다. 기업 프로젝트는 별도 제안서로 안내해 드립니다.'],
+    ['어떤 서비스까지 맡길 수 있나요?','로고·브랜딩, 웹사이트, 패키지·인쇄물, 네이밍까지 가능합니다. 필요한 것만 단품으로도, 전부 묶어서도 진행합니다.'],
+    ['스마트스토어만 운영하는데도 맡길 수 있나요?','네. <strong>스마트스토어 브랜드 키트</strong>를 따로 두고 있습니다. 로고(가로형·정사각형), 스토어 상단 배너(PC·모바일), 상품 썸네일 템플릿, 상세페이지 공통 모듈, 컬러·폰트 가이드가 한 세트입니다. 썸네일은 <strong>편집 가능한 템플릿</strong>으로 드리기 때문에 상품이 늘어도 계속 쓰실 수 있습니다. 상품별 상세페이지 전체 제작은 상품 수에 따라 작업량이 달라져 별도 견적으로 안내드립니다.'],
+  ],
+  work:[
+    ['작업 기간은 얼마나 걸리나요?','로고 단품은 약 <strong>4주</strong>, 웹사이트와 인쇄물을 포함한 풀 번들은 약 <strong>12주</strong>가 기준입니다. 정확한 일정은 상담에서 범위를 확정한 뒤 안내해 드립니다.'],
+    ['시안은 몇 개나 받아볼 수 있나요?','로고 기준 서로 다른 방향의 시안 3종을 제안하고, 그중 하나를 골라 다듬어 나갑니다.'],
+    ['수정 횟수에 제한이 있나요?','방향이 확정되기 전까지는 횟수 제한 없이 조율합니다. 다만 확정 이후 완전히 다른 방향으로 돌아가는 경우는 별도 협의가 필요합니다.'],
+    ['실제로 적용된 모습도 볼 수 있나요?','네. 간판·명함·패키지 등 실제 사용 상황에 얹은 목업으로 확인하실 수 있게 드립니다.'],
+    ['피드백은 어떻게 주고받나요?','메일 또는 편하신 메신저로 진행합니다. 수정 요청은 자유롭게 주시면 되고, 정리해서 반영한 뒤 다시 보여드립니다.'],
+  ],
+  done:[
+    ['어떤 파일 형식으로 받게 되나요?','AI·SVG 같은 원본 벡터 파일과 PNG·JPG 등 바로 쓰는 형식을 함께 드립니다. 인쇄용·웹용을 따로 정리해 전달합니다.'],
+    ['저작권은 누구에게 있나요?','완성된 디자인의 저작권은 <strong>100% 고객에게 양도</strong>됩니다. 사용 범위나 기간에 제한이 없습니다.'],
+    ['나중에 수정이 필요하면 어떻게 하나요?','원본 파일을 모두 드리기 때문에 직접 수정하실 수 있고, 브랜디크에 다시 요청하셔도 됩니다. 기존 고객은 별도 조건으로 안내드립니다.'],
+    ['받은 즉시 바로 사용해도 되나요?','네. 납품과 동시에 간판, 명함, 온라인 스토어 어디에든 제약 없이 사용하실 수 있습니다.'],
+    ['상표 등록도 도와주시나요?','상표 등록 자체는 변리사 영역이라 대행하지 않습니다. 다만 네이밍 단계에서 유사 상표를 미리 확인해 위험을 줄여 드립니다.'],
+  ]
+};
+
+/* ══════════════════════════════════════════════════════════
+   ⬇ 아래부터는 화면을 그리는 코드입니다 (수정 불필요) ⬇
+   ══════════════════════════════════════════════════════════ */
+
+const $ = (s,el=document)=>el.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* ── 포트폴리오 카드 ── */
+(function renderWorks(){
+  const grid = $('#workGrid');
+  if(!grid) return;
+  if(WORKS.length){
+    grid.innerHTML = WORKS.map(w=>{
+      const thumb = w.img
+        ? `<img src="${esc(w.img)}" alt="${esc(w.title)} 브랜딩 작업물" loading="lazy">`
+        : `<div class="ph"><span class="sym">${esc((w.title||'B').slice(0,1))}</span><span class="lbl">Brandique</span></div>`;
+      const card =
+        `<div class="thumb">${thumb}</div>
+         <div class="meta">
+           <span class="cat">${esc(w.cat||'브랜딩')}</span>
+           <h3>${esc(w.title||'')}</h3>
+           <p class="tags">${esc(w.tags||'')}</p>
+         </div>`;
+      return w.link
+        ? `<a class="work" href="${esc(w.link)}">${card}</a>`
+        : `<div class="work">${card}</div>`;
+    }).join('');
+    $('#workAll').style.display = '';
+    $('#workMore').style.display = '';
+  }else{
+    // 작업물이 아직 없을 때 — 자리표시자 6칸 (있는 척하지 않고 준비 중임을 그대로 표기)
+    grid.innerHTML = Array.from({length:6},(_,i)=>`
+      <div class="work">
+        <div class="thumb"><div class="ph">
+          <span class="sym">${['✦','▦','◍','✎','◈','✧'][i]}</span>
+          <span class="lbl">Work ${String(i+1).padStart(2,'0')}</span>
+        </div></div>
+        <div class="meta">
+          <span class="cat">준비 중</span>
+          <h3>작업물 공개 준비 중</h3>
+          <p class="tags">로고 · 웹사이트 · 인쇄물</p>
+        </div>
+      </div>`).join('');
+    // 보여줄 작업이 없으면 "전체 보기 / 더보기" 버튼은 숨김 (빈 링크 방지)
+    $('#workAll').style.display = 'none';
+    $('#workMore').style.display = 'none';
+  }
+})();
+
+/* ── 후기 카드 ── */
+(function renderReviews(){
+  const grid = $('#revGrid');
+  if(!grid) return;
+  if(REVIEWS.length){
+    // 후기가 있을 때만 LIVE 뱃지를 켠다 (없는데 실시간인 척하지 않음)
+    $('#revBadge').outerHTML = '<span class="live-badge" id="revBadge"><span class="dot"></span>LIVE 실시간 후기</span>';
+    $('#revTitle').textContent = '실제 작업하신 분들의 이야기';
+    $('#revLede').textContent = '작업을 마친 고객이 직접 남긴 후기만 올립니다.';
+    grid.innerHTML = REVIEWS.map(r=>`
+      <div class="rev">
+        <div class="stars">${'★'.repeat(r.stars||5)}${'☆'.repeat(5-(r.stars||5))}</div>
+        <p>${esc(r.text||'')}</p>
+        <div class="who">
+          <span class="av">${esc((r.name||'?').slice(0,1))}</span>
+          <span><b>${esc(r.name||'')}</b><span>${esc(r.biz||'')}</span></span>
+        </div>
+      </div>`).join('');
+  }else{
+    // 후기가 없을 때 — 담백하게 준비 중임을 밝힌다
+    $('#revBadge').outerHTML = '<span class="eyebrow" id="revBadge">Reviews</span>';
+    $('#revTitle').textContent = '고객 후기';
+    $('#revLede').textContent = '작업을 마치신 뒤 직접 남겨주신 후기만 이 자리에 올립니다.';
+    grid.innerHTML = Array.from({length:3},()=>`
+      <div class="rev ph">
+        <div class="stars">☆☆☆☆☆</div>
+        <p>첫 후기를 기다리고 있습니다. 지어낸 후기는 올리지 않습니다.</p>
+        <div class="who"><span class="av">·</span><span><b>후기 준비 중</b><span>&nbsp;</span></span></div>
+      </div>`).join('');
+  }
+})();
+
+/* ── FAQ 탭 + 아코디언 ── */
+(function renderFaq(){
+  const list = $('#faqList'), tabs = $('#faqTabs');
+  if(!list || !tabs) return;
+  const draw = g => {
+    list.innerHTML = (FAQ[g]||[]).map(([q,a],i)=>`
+      <details class="qa">
+        <summary><span class="qn">Q${String(i+1).padStart(2,'0')}</span>${esc(q)}</summary>
+        <div class="ans">${a}</div>
+      </details>`).join('');
+  };
+  tabs.addEventListener('click', e=>{
+    const b = e.target.closest('.faq-tab'); if(!b) return;
+    tabs.querySelectorAll('.faq-tab').forEach(t=>t.classList.toggle('on', t===b));
+    draw(b.dataset.g);
+  });
+  draw('prep');
+})();
+
+/* ── 주소 복사 버튼 ── */
+(function copyAddress(){
+  const btn = $('#copyAddr'), txt = $('#copyAddrTxt');
+  if(!btn || !txt) return;
+  const ADDR = '(06034) 서울특별시 강남구 압구정로2길 46, 214 - S147호';
+  btn.addEventListener('click', async ()=>{
+    try{
+      await navigator.clipboard.writeText(ADDR);
+    }catch(_){
+      // 클립보드 API 차단 시(file:// 등) 폴백
+      const ta = document.createElement('textarea');
+      ta.value = ADDR; ta.style.position='fixed'; ta.style.opacity='0';
+      document.body.appendChild(ta); ta.select();
+      try{ document.execCommand('copy'); }catch(e){}
+      document.body.removeChild(ta);
+    }
+    txt.textContent = '복사됨';
+    setTimeout(()=>{ txt.textContent = '주소 복사'; }, 1600);
+  });
+})();
+
+/* ── 모바일 메뉴 ── */
+(function mobileNav(){
+  const gnb = $('#gnb'), burger = $('#burger');
+  if(!gnb || !burger) return;
+  const toggle = on => {
+    gnb.classList.toggle('open', on);
+    burger.setAttribute('aria-expanded', String(on));
+    burger.setAttribute('aria-label', on ? '메뉴 닫기' : '메뉴 열기');
+  };
+  burger.addEventListener('click', ()=>toggle(!gnb.classList.contains('open')));
+  $('#menu').addEventListener('click', e=>{ if(e.target.closest('a')) toggle(false); });
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') toggle(false); });
+})();
+
+/* ── 스크롤 시 GNB 테두리 ── */
+(function stickyGnb(){
+  const gnb = $('#gnb');
+  const onScroll = ()=>gnb.classList.toggle('stuck', window.scrollY > 8);
+  addEventListener('scroll', onScroll, {passive:true}); onScroll();
+})();
+
+/* ── 스크롤 등장 애니메이션 ── */
+(function reveal(){
+  const els = document.querySelectorAll('.reveal');
+  const ok = matchMedia('(prefers-reduced-motion: no-preference)').matches && 'IntersectionObserver' in window;
+  if(!ok){ els.forEach(el=>el.classList.add('in')); return; }
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(x=>{ if(x.isIntersecting){ x.target.classList.add('in'); io.unobserve(x.target); } });
+  },{threshold:.1, rootMargin:'0px 0px -8% 0px'});
+  els.forEach(el=>io.observe(el));
+})();
+</script>
+</body>
+</html>

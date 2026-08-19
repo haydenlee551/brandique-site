@@ -138,7 +138,8 @@ footer{border-top:1px solid var(--line);padding:30px 0;text-align:center;font-si
 
   <!-- 서비스 선택 -->
   <div class="picker" id="picker">
-    <button class="chip on" type="button" data-t="logo">로고 · 브랜딩</button>
+    <button class="chip on" type="button" data-t="logo">로고</button>
+    <button class="chip" type="button" data-t="brand">브랜딩</button>
     <button class="chip" type="button" data-t="web">웹사이트</button>
     <button class="chip" type="button" data-t="print">패키지 · 인쇄물</button>
     <button class="chip" type="button" data-t="naming">네이밍</button>
@@ -177,7 +178,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;text-align:center;font-si
 
     <!-- ── 서비스별 문항 (선택에 따라 하나만 표시) ── -->
     <fieldset data-t="logo">
-      <legend>로고 · 브랜딩</legend>
+      <legend>로고</legend>
       <p class="fs-note">아는 만큼만 적어주셔도 괜찮습니다. 나머지는 상담에서 함께 정합니다.</p>
       <div class="f"><label for="l1">브랜드명의 의미</label>
         <input type="text" id="l1" name="브랜드명 의미" placeholder="이름에 담은 뜻이 있다면"></div>
@@ -197,6 +198,46 @@ footer{border-top:1px solid var(--line);padding:30px 0;text-align:center;font-si
       <div class="f"><label for="l5">선호하는 컬러톤</label>
         <input type="text" id="l5" name="선호 컬러톤" placeholder="예: 따뜻한 베이지 계열 / 채도 낮은 초록"></div>
       <div class="f"><span class="lab">마음에 드는 스타일 <span class="hint">여러 개 고르셔도 됩니다.</span></span>
+        <div class="opts" data-style></div></div>
+    </fieldset>
+
+    <fieldset data-t="brand" hidden>
+      <legend>브랜딩</legend>
+      <p class="fs-note">로고 하나가 아니라, 브랜드 전체가 한 톤으로 보이도록 만드는 작업입니다.</p>
+      <div class="f"><label for="b1">비즈니스 설명</label>
+        <textarea id="b1" name="비즈니스 설명" placeholder="어떤 제품·서비스를 하시는지 편하게 적어주세요."></textarea></div>
+      <div class="f"><label for="b2">타겟층 (성별 · 연령대)</label>
+        <input type="text" id="b2" name="타겟층" placeholder="예: 20~30대 여성"></div>
+      <div class="f"><span class="lab">로고를 이미 가지고 계신가요?</span>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="로고 보유" value="있음"><span>있습니다</span></label>
+          <label class="opt"><input type="radio" name="로고 보유" value="없음 (함께 제작)"><span>없습니다 (함께 제작)</span></label>
+          <label class="opt"><input type="radio" name="로고 보유" value="있지만 리뉴얼 예정"><span>있지만 리뉴얼 예정</span></label>
+        </div></div>
+      <div class="f"><span class="lab">필요한 항목 <span class="hint">여러 개 고르셔도 됩니다.</span></span>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" name="필요 항목" value="컬러 시스템"><span>컬러 시스템</span></label>
+          <label class="opt"><input type="checkbox" name="필요 항목" value="폰트 시스템"><span>폰트 시스템</span></label>
+          <label class="opt"><input type="checkbox" name="필요 항목" value="서브마크·아이콘"><span>서브마크 · 아이콘</span></label>
+          <label class="opt"><input type="checkbox" name="필요 항목" value="브랜드 가이드 문서"><span>브랜드 가이드 문서</span></label>
+          <label class="opt"><input type="checkbox" name="필요 항목" value="톤앤매너·문구 톤"><span>톤앤매너 · 문구 톤</span></label>
+          <label class="opt"><input type="checkbox" name="필요 항목" value="적용 목업"><span>적용 목업</span></label>
+          <label class="opt"><input type="checkbox" name="필요 항목" value="전체 (상담 후 결정)"><span>전체 (상담 후 결정)</span></label>
+        </div></div>
+      <div class="f"><label for="b3">브랜드를 한 문장으로 소개한다면</label>
+        <textarea id="b3" name="브랜드 한 문장" placeholder="고객에게 어떤 브랜드로 기억되고 싶으신가요?"></textarea></div>
+      <div class="f"><span class="lab">어디에 적용할 예정인가요? <span class="hint">여러 개 고르셔도 됩니다.</span></span>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" name="적용 채널" value="웹사이트"><span>웹사이트</span></label>
+          <label class="opt"><input type="checkbox" name="적용 채널" value="SNS"><span>SNS</span></label>
+          <label class="opt"><input type="checkbox" name="적용 채널" value="온라인 스토어"><span>온라인 스토어</span></label>
+          <label class="opt"><input type="checkbox" name="적용 채널" value="패키지"><span>패키지</span></label>
+          <label class="opt"><input type="checkbox" name="적용 채널" value="인쇄물"><span>인쇄물</span></label>
+          <label class="opt"><input type="checkbox" name="적용 채널" value="간판·공간"><span>간판 · 공간</span></label>
+        </div></div>
+      <div class="f"><label for="b4">선호하는 컬러톤</label>
+        <input type="text" id="b4" name="선호 컬러톤" placeholder="예: 따뜻한 베이지 계열 / 채도 낮은 초록"></div>
+      <div class="f"><span class="lab">원하는 분위기 <span class="hint">여러 개 고르셔도 됩니다.</span></span>
         <div class="opts" data-style></div></div>
     </fieldset>
 
@@ -384,7 +425,7 @@ const $ = (s,el=document)=>el.querySelector(s);
 const $$ = (s,el=document)=>[...el.querySelectorAll(s)];
 
 const TYPES = {
-  logo:'로고 · 브랜딩', web:'웹사이트', print:'패키지 · 인쇄물',
+  logo:'로고', brand:'브랜딩', web:'웹사이트', print:'패키지 · 인쇄물',
   naming:'네이밍', store:'스마트스토어 브랜드 키트'
 };
 const STYLES = ['여성스러운','남성스러운','트렌디한','클래식한','캐주얼한','고급스러운','심플한','디테일한','추상적인','직관적인'];

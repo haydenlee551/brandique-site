@@ -360,7 +360,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;text-align:center;font-si
 </div>
 
 <footer>
-  <div class="wrap">브랜디크 · brandique22@gmail.com · 서울 강남구 압구정로2길 46</div>
+  <div class="wrap">브랜디크 · contact@brandique.co.kr · 서울 강남구 압구정로2길 46</div>
 </footer>
 
 <script>
@@ -377,7 +377,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;text-align:center;font-si
 const ENDPOINT = '';
 
 /* 받는 메일 주소 (ENDPOINT가 비었을 때 쓰는 임시 방식용) */
-const MAILTO = 'brandique22@gmail.com';
+const MAILTO = 'contact@brandique.co.kr';
 
 /* ══ 아래부터는 동작 코드 (수정 불필요) ══ */
 const $ = (s,el=document)=>el.querySelector(s);
@@ -489,7 +489,7 @@ $('#form').addEventListener('submit', async e=>{
     window.scrollTo({top:0,behavior:'smooth'});
   }catch(err){
     btn.disabled = false; btn.textContent = '설문 제출하기';
-    note.textContent = '전송에 실패했습니다. 잠시 후 다시 시도하시거나 brandique22@gmail.com 으로 보내주세요.';
+    note.textContent = '전송에 실패했습니다. 잠시 후 다시 시도하시거나 contact@brandique.co.kr 으로 보내주세요.';
     note.style.color = 'var(--err)';
   }
 });

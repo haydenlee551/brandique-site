@@ -8,7 +8,7 @@
  */
 
 /* ⬇ 알림 메일을 받을 주소 */
-const MAIL_TO = 'brandique22@gmail.com';
+const MAIL_TO = 'contact@brandique.co.kr';
 
 /* ⬇ 저장할 시트 탭 이름 (없으면 자동 생성) */
 const SHEET_NAME = '설문';

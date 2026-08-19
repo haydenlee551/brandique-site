@@ -4,7 +4,7 @@
 set -e
 SRC="/Users/fa/Library/Mobile Documents/com~apple~CloudDocs/Autoworker_Dilly/brandique"
 DST="$HOME/brandique-site"
-cp "$SRC/index.html" "$SRC/survey.html" "$DST/"
+cp "$SRC/index.html" "$SRC/survey.html" "$SRC/legal.html" "$DST/"
 cp "$SRC/setup/apps-script.gs" "$SRC/setup/README.md" "$DST/setup/"
 cd "$DST"
 git add -A

@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>개인정보처리방침 · 이용약관 | 브랜디크</title>
+<meta name="description" content="브랜디크 개인정보처리방침 및 이용약관.">
+<meta name="robots" content="noindex">
+<style>
+/* ══ 브랜디크 법적 고지 — index.html과 동일한 디자인 토큰 ══ */
+:root{
+  --paper:#F8F7F4;--wash:#F1EFE9;--card:#FFFFFF;--ink:#1A1F2E;--sub:#6B7280;
+  --brand:#7C9082;--brand-deep:#54685B;--brand-tint:#EDF1EC;--line:#E4E2DC;
+  --serif:"AppleMyungjo","Nanum Myeongjo","Apple SD Gothic Neo",serif;
+  --sans:"Pretendard","Apple SD Gothic Neo",-apple-system,BlinkMacSystemFont,system-ui,"Malgun Gothic",sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --wrap:800px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.78;
+  word-break:keep-all;overflow-wrap:break-word;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--brand);outline-offset:3px;border-radius:4px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+
+/* 상단바 */
+.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--paper) 88%,transparent);
+  backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px);
+  border-bottom:1px solid var(--line)}
+.top .row{max-width:var(--wrap);margin:0 auto;padding:0 24px;height:66px;display:flex;align-items:center;gap:14px}
+.logo{display:flex;align-items:center;gap:9px;font-family:var(--serif);font-size:1.24rem;font-weight:700}
+.logo .mark{width:26px;height:26px;border-radius:8px;background:var(--brand);color:#fff;flex:none;
+  display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.72rem;font-weight:700}
+.logo small{font-family:var(--mono);font-size:.56rem;letter-spacing:.24em;color:var(--sub);font-weight:600}
+.back{margin-left:auto;font-size:.9rem;color:var(--sub)}
+.back:hover{color:var(--brand-deep)}
+
+/* 헤드 · 탭 */
+.head{padding:clamp(38px,5.5vw,64px) 0 clamp(22px,2.6vw,30px);text-align:center}
+.head h1{font-family:var(--serif);font-size:clamp(1.8rem,4.2vw,2.5rem);font-weight:700;letter-spacing:-.02em}
+.tabs{display:flex;gap:8px;justify-content:center;margin-bottom:clamp(26px,3.4vw,40px);flex-wrap:wrap}
+.tab{font-size:.93rem;font-weight:600;padding:11px 22px;border-radius:999px;
+  border:1px solid var(--line);background:var(--card);color:var(--sub);transition:all .2s}
+.tab:hover{border-color:var(--brand);color:var(--brand-deep)}
+.tab.on{background:var(--brand);border-color:var(--brand);color:#fff;box-shadow:0 6px 16px rgba(124,144,130,.26)}
+
+/* 문서 */
+.doc{display:none;background:var(--card);border:1px solid var(--line);border-radius:18px;
+  padding:clamp(28px,4vw,52px);margin-bottom:clamp(40px,6vw,80px)}
+.doc.on{display:block}
+.doc > .lead{color:var(--sub);font-size:.96rem;padding-bottom:26px;margin-bottom:8px;border-bottom:1px solid var(--line)}
+.doc h2{font-family:var(--serif);font-size:1.16rem;font-weight:700;letter-spacing:-.01em;
+  margin:34px 0 12px;padding-top:4px;color:var(--brand-deep)}
+.doc h2:first-of-type{margin-top:26px}
+.doc p{font-size:.95rem;margin-bottom:10px}
+.doc ul{margin:10px 0 14px;padding-left:0;list-style:none}
+.doc li{font-size:.94rem;padding-left:16px;position:relative;margin-bottom:7px}
+.doc li::before{content:"·";position:absolute;left:4px;color:var(--brand);font-weight:700}
+.doc strong{font-weight:600}
+.doc .note{background:var(--wash);border:1px solid var(--line);border-radius:12px;
+  padding:16px 20px;font-size:.9rem;color:var(--sub);margin:14px 0}
+table{width:100%;border-collapse:collapse;margin:14px 0 18px;font-size:.9rem}
+th,td{border:1px solid var(--line);padding:11px 14px;text-align:left;vertical-align:top}
+th{background:var(--brand-tint);color:var(--brand-deep);font-weight:600;white-space:nowrap}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.meta{margin-top:34px;padding-top:22px;border-top:1px solid var(--line);font-size:.88rem;color:var(--sub)}
+.meta b{color:var(--ink);font-weight:600}
+.pending{color:#A9ADB4;font-style:italic}
+footer{border-top:1px solid var(--line);padding:28px 0;text-align:center;font-size:.82rem;color:var(--sub)}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition-duration:.001ms!important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="row">
+    <a class="logo" href="index.html"><span class="mark">B</span><span>브랜디크 <small>BRANDIQUE</small></span></a>
+    <a class="back" href="index.html">← 홈으로</a>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="head"><h1 id="ttl">개인정보처리방침</h1></div>
+
+  <div class="tabs">
+    <button class="tab on" type="button" data-d="privacy">개인정보처리방침</button>
+    <button class="tab" type="button" data-d="terms">이용약관</button>
+  </div>
+
+  <!-- ══════════ 개인정보처리방침 ══════════ -->
+  <article class="doc on" id="privacy">
+    <p class="lead">
+      브랜디크(이하 '스튜디오')는 「개인정보 보호법」 등 관련 법령을 준수하며, 이용자의 개인정보를 소중히 다룹니다.
+      이 방침을 통해 이용자가 제공한 개인정보가 어떤 목적으로 수집·이용되고, 어떻게 보호되는지 알려드립니다.
+    </p>
+
+    <h2>1. 수집하는 개인정보 항목</h2>
+    <p>스튜디오는 상담 문의와 서비스 제공을 위해 아래 항목을 수집합니다.</p>
+    <div class="tw"><table>
+      <tr><th>구분</th><th>항목</th></tr>
+      <tr><td>필수</td><td>성함, 이메일 주소</td></tr>
+      <tr><td>선택</td><td>연락처(휴대전화 번호), 브랜드명, 설문 응답 내용(비즈니스 설명, 타겟층, 선호 스타일, 희망 예산·일정, 참고 자료 링크, 기타 요청사항 등)</td></tr>
+      <tr><td>자동 수집</td><td>웹사이트 접속 기록(IP 주소, 접속 일시, 브라우저 정보) — 호스팅 서비스에서 자동으로 기록됩니다</td></tr>
+    </table></div>
+    <div class="note">
+      스튜디오는 주민등록번호를 수집하지 않으며, 사상·신념·건강 등 <strong>민감정보를 일절 수집하지 않습니다.</strong>
+      만 14세 미만 아동의 개인정보도 수집하지 않습니다.
+    </div>
+
+    <h2>2. 개인정보 수집 방법</h2>
+    <ul>
+      <li>웹사이트 내 브랜드 설문 폼 제출</li>
+      <li>이메일을 통한 직접 문의</li>
+      <li>상담 및 계약 과정에서 이용자가 자발적으로 제공하는 정보</li>
+    </ul>
+
+    <h2>3. 개인정보의 수집 및 이용 목적</h2>
+    <ul>
+      <li>문의에 대한 답변 및 상담 진행</li>
+      <li>견적 및 제안 내용 안내</li>
+      <li>디자인 작업의 진행, 시안 전달, 결과물 납품</li>
+      <li>계약 체결 및 대금 정산에 관한 업무</li>
+      <li>서비스 이용 관련 공지사항 전달</li>
+    </ul>
+    <p>스튜디오는 위 목적 외의 용도로 개인정보를 이용하지 않으며, <strong>동의 없이 광고성 정보를 발송하지 않습니다.</strong></p>
+
+    <h2>4. 개인정보의 보유 및 이용 기간</h2>
+    <p>수집·이용 목적이 달성되면 해당 정보를 지체 없이 파기합니다. 구체적인 기준은 다음과 같습니다.</p>
+    <div class="tw"><table>
+      <tr><th>구분</th><th>보유 기간</th></tr>
+      <tr><td>상담으로 종료된 문의 (계약 미체결)</td><td>상담 종료 후 1년</td></tr>
+      <tr><td>계약이 체결된 경우</td><td>계약 종료 후 관계 법령이 정한 기간</td></tr>
+    </table></div>
+    <p>다만 아래 법령에 따라 일정 기간 보존이 필요한 경우 해당 기간 동안 보관합니다.</p>
+    <ul>
+      <li>계약 또는 청약철회 등에 관한 기록: 5년 (전자상거래 등에서의 소비자보호에 관한 법률)</li>
+      <li>대금 결제 및 재화 등의 공급에 관한 기록: 5년 (같은 법)</li>
+      <li>소비자의 불만 또는 분쟁 처리에 관한 기록: 3년 (같은 법)</li>
+      <li>표시·광고에 관한 기록: 6개월 (같은 법)</li>
+      <li>웹사이트 접속 기록: 3개월 (통신비밀보호법)</li>
+    </ul>
+    <div class="note">
+      이용자가 <strong>파기를 요청하시면 법령상 보존 의무가 없는 정보는 즉시 파기</strong>합니다.
+    </div>
+
+    <h2>5. 개인정보의 제3자 제공</h2>
+    <p>스튜디오는 이용자의 개인정보를 <strong>외부에 제공하지 않습니다.</strong> 다만 아래의 경우는 예외로 합니다.</p>
+    <ul>
+      <li>이용자가 사전에 명시적으로 동의한 경우</li>
+      <li>법령에 근거가 있거나, 수사기관이 적법한 절차에 따라 요구하는 경우</li>
+    </ul>
+
+    <h2>6. 개인정보 처리의 위탁</h2>
+    <p>스튜디오는 서비스 운영을 위해 아래와 같이 개인정보 처리 업무를 위탁하고 있습니다.</p>
+    <div class="tw"><table>
+      <tr><th>수탁자</th><th>위탁 업무</th><th>보유·이용 기간</th></tr>
+      <tr><td>Google LLC</td><td>설문 응답 데이터의 저장·관리(Google Sheets, Apps Script), 문의 알림 메일 발송 및 수신(Gmail)</td><td>위탁 계약 종료 시 또는 제4항의 보유 기간 만료 시까지</td></tr>
+      <tr><td>GitHub, Inc.</td><td>웹사이트 호스팅 및 접속 기록 처리</td><td>위탁 계약 종료 시까지</td></tr>
+    </table></div>
+    <p>위탁 업무의 내용이나 수탁자가 변경될 경우 이 방침을 통해 공개하겠습니다.</p>
+
+    <h2>7. 개인정보의 국외 이전</h2>
+    <p>제6항의 수탁자는 국외에 서버를 두고 있어, 개인정보가 국외로 이전됩니다.</p>
+    <div class="tw"><table>
+      <tr><th>이전받는 자</th><th>이전 국가</th><th>이전 항목</th><th>이전 목적</th></tr>
+      <tr><td>Google LLC</td><td>미국 등 Google이 운영하는 데이터센터 소재국</td><td>제1항의 필수·선택 항목</td><td>설문 데이터 저장 및 메일 발송</td></tr>
+      <tr><td>GitHub, Inc.</td><td>미국</td><td>접속 기록</td><td>웹사이트 호스팅</td></tr>
+    </table></div>
+    <div class="note">
+      이용자는 개인정보의 국외 이전을 거부할 수 있습니다. 다만 이 경우 웹사이트 설문을 통한 문의가 어려우며,
+      <a href="mailto:brandique22@gmail.com">brandique22@gmail.com</a> 으로 직접 문의해 주시면 동일하게 상담을 진행해 드립니다.
+    </div>
+
+    <h2>8. 정보주체의 권리 및 행사 방법</h2>
+    <p>이용자는 언제든지 다음 권리를 행사할 수 있습니다.</p>
+    <ul>
+      <li>개인정보 열람 요구</li>
+      <li>오류가 있을 경우 정정 요구</li>
+      <li>삭제 요구</li>
+      <li>처리 정지 요구</li>
+      <li>개인정보 수집·이용·제공 동의의 철회</li>
+    </ul>
+    <p>
+      권리 행사는 <a href="mailto:brandique22@gmail.com">brandique22@gmail.com</a> 으로 요청해 주시면 됩니다.
+      스튜디오는 요청을 받은 날부터 <strong>10일 이내</strong>에 처리하고 결과를 알려드립니다.
+      법정대리인이나 위임을 받은 자를 통해서도 요청하실 수 있습니다.
+    </p>
+
+    <h2>9. 개인정보의 파기 절차 및 방법</h2>
+    <p>보유 기간이 지나거나 처리 목적이 달성된 개인정보는 지체 없이 파기합니다.</p>
+    <ul>
+      <li>전자적 파일: 복구·재생할 수 없는 기술적 방법으로 영구 삭제</li>
+      <li>종이 문서: 분쇄 또는 소각</li>
+    </ul>
+
+    <h2>10. 개인정보의 안전성 확보 조치</h2>
+    <ul>
+      <li>개인정보에 접근할 수 있는 인원을 최소한으로 제한</li>
+      <li>개인정보가 저장된 계정에 2단계 인증 적용</li>
+      <li>개인정보 전송 구간의 암호화(HTTPS) 적용</li>
+      <li>개인정보 취급 기기에 보안 프로그램 설치 및 주기적 점검</li>
+    </ul>
+
+    <h2>11. 개인정보 보호책임자</h2>
+    <p>개인정보 처리에 관한 문의, 불만 처리, 피해 구제는 아래로 연락해 주시기 바랍니다.</p>
+    <div class="tw"><table>
+      <tr><th>개인정보 보호책임자</th><td>이화연 (브랜디크 대표)</td></tr>
+      <tr><th>이메일</th><td><a href="mailto:brandique22@gmail.com">brandique22@gmail.com</a></td></tr>
+    </table></div>
+    <p>개인정보 침해로 인한 신고나 상담이 필요하신 경우 아래 기관에도 문의하실 수 있습니다.</p>
+    <ul>
+      <li>개인정보침해 신고센터 (privacy.kisa.or.kr / 국번없이 118)</li>
+      <li>개인정보 분쟁조정위원회 (kopico.go.kr / 1833-6972)</li>
+      <li>대검찰청 사이버수사과 (spo.go.kr / 1301)</li>
+      <li>경찰청 사이버수사국 (ecrm.police.go.kr / 182)</li>
+    </ul>
+
+    <h2>12. 개인정보처리방침의 변경</h2>
+    <p>
+      법령이나 서비스 내용의 변경에 따라 이 방침이 수정될 수 있습니다.
+      변경이 있을 경우 시행 <strong>7일 전</strong>부터 웹사이트를 통해 알려드리며,
+      이용자에게 불리한 변경의 경우 <strong>30일 전</strong>에 공지하겠습니다.
+    </p>
+
+    <div class="meta">
+      <b>공고일자</b> 2026년 8월 19일 · <b>시행일자</b> 2026년 8월 19일<br>
+      이 방침은 최초 제정된 것으로, 이전 버전은 없습니다.
+    </div>
+  </article>
+
+  <!-- ══════════ 이용약관 ══════════ -->
+  <article class="doc" id="terms">
+    <p class="lead">
+      이 약관은 브랜디크(이하 '스튜디오')가 운영하는 웹사이트(brandique.co.kr, 이하 '사이트')의 이용에 관한
+      스튜디오와 이용자 간의 권리·의무 및 책임사항을 정합니다.
+    </p>
+
+    <h2>제1조 (목적)</h2>
+    <p>이 약관은 스튜디오가 제공하는 브랜드 디자인 관련 정보와 서비스의 이용 조건 및 절차, 스튜디오와 이용자의 권리·의무 및 책임사항을 규정함을 목적으로 합니다.</p>
+
+    <h2>제2조 (정의)</h2>
+    <ul>
+      <li><strong>"서비스"</strong>란 스튜디오가 사이트를 통해 제공하는 브랜드 정보, 상담 접수, 포트폴리오 열람 및 이에 부수하는 일체의 서비스를 말합니다.</li>
+      <li><strong>"이용자"</strong>란 사이트에 접속하여 이 약관에 따라 서비스를 이용하는 자를 말합니다.</li>
+      <li><strong>"설문"</strong>이란 이용자가 상담을 신청하기 위해 사이트의 브랜드 설문 폼을 통해 제출하는 내용을 말합니다.</li>
+      <li><strong>"결과물"</strong>이란 스튜디오가 이용자와 체결한 계약에 따라 제작하여 납품하는 로고, 디자인, 웹사이트 등 일체의 산출물을 말합니다.</li>
+    </ul>
+
+    <h2>제3조 (약관의 효력 및 변경)</h2>
+    <p>① 이 약관은 사이트에 게시함으로써 효력이 발생합니다.</p>
+    <p>② 스튜디오는 관련 법령을 위배하지 않는 범위에서 이 약관을 변경할 수 있으며, 변경 시 시행일 7일 전부터 사이트에 공지합니다.</p>
+    <p>③ 이용자가 변경된 약관에 동의하지 않을 경우 서비스 이용을 중단할 수 있습니다.</p>
+
+    <h2>제4조 (서비스의 제공 및 변경)</h2>
+    <p>① 스튜디오는 이용자에게 브랜드 디자인 관련 정보 제공, 온라인 상담 접수, 포트폴리오 열람 등의 서비스를 제공합니다.</p>
+    <p>② 스튜디오는 기술적 사양의 변경이나 운영상의 필요에 따라 서비스의 전부 또는 일부를 변경·중단할 수 있으며, 이 경우 사전에 공지합니다.</p>
+
+    <h2>제5조 (상담 신청과 계약의 성립)</h2>
+    <p>① 이용자의 <strong>설문 제출은 상담 신청이며, 그 자체로 계약이 성립하지 않습니다.</strong></p>
+    <p>② 계약은 상담을 거쳐 작업 범위·금액·일정에 대해 스튜디오와 이용자가 별도로 합의하고, 이용자가 이를 승낙한 때에 성립합니다.</p>
+    <p>③ 사이트에 표시된 가격 정보는 참고용 안내이며, 최종 금액은 상담을 통해 확정됩니다.</p>
+    <p>④ 스튜디오는 다음의 경우 상담 신청을 거절할 수 있습니다.</p>
+    <ul>
+      <li>신청 내용이 허위이거나 타인의 정보를 도용한 경우</li>
+      <li>법령에 위반되거나 공서양속에 반하는 작업을 요청하는 경우</li>
+      <li>타인의 저작권·상표권 등을 침해할 우려가 명백한 작업을 요청하는 경우</li>
+      <li>스튜디오의 작업 여력을 초과하는 경우</li>
+    </ul>
+
+    <h2>제6조 (이용자의 의무)</h2>
+    <p>이용자는 다음 행위를 해서는 안 됩니다.</p>
+    <ul>
+      <li>타인의 정보를 도용하거나 허위 정보를 제공하는 행위</li>
+      <li>사이트의 운영을 방해하거나 서버에 과부하를 유발하는 행위</li>
+      <li>사이트의 콘텐츠를 허가 없이 복제·배포하거나 상업적으로 이용하는 행위</li>
+      <li>스튜디오나 제3자의 지식재산권을 침해하는 행위</li>
+      <li>그 밖에 관계 법령에 위반되거나 공서양속에 반하는 행위</li>
+    </ul>
+
+    <h2>제7조 (작업 결과물의 저작권)</h2>
+    <p>① 스튜디오가 납품한 최종 결과물의 저작재산권은 <strong>대금이 완납된 시점에 이용자에게 전부 양도</strong>됩니다.</p>
+    <p>② 이용자는 양도받은 결과물을 사용 범위나 기간의 제한 없이 자유롭게 사용·수정할 수 있습니다.</p>
+    <p>③ 스튜디오는 납품한 결과물을 <strong>포트폴리오 및 홍보 목적으로 게시할 수 있습니다.</strong> 다만 이용자가 사전에 비공개를 요청한 경우에는 게시하지 않습니다.</p>
+    <p>④ <strong>채택되지 않은 시안</strong>의 저작권은 스튜디오에 유보되며, 이용자는 이를 사용할 수 없습니다.</p>
+    <p>⑤ 이용자가 제공한 자료(상호, 문구, 이미지 등)로 인해 제3자의 권리 침해 문제가 발생한 경우, 그 책임은 자료를 제공한 이용자에게 있습니다.</p>
+
+    <h2>제8조 (사이트 콘텐츠의 저작권)</h2>
+    <p>사이트에 게시된 텍스트, 이미지, 디자인 등 모든 콘텐츠의 저작권은 스튜디오 또는 정당한 권리자에게 있으며, 이용자는 사전 허락 없이 이를 복제·배포하거나 2차적 저작물을 작성할 수 없습니다.</p>
+
+    <h2>제9조 (면책조항)</h2>
+    <p>① 스튜디오는 천재지변, 호스팅 서비스 장애, 통신 장애 등 불가항력적 사유로 인한 서비스 중단에 대해 책임을 지지 않습니다.</p>
+    <p>② 스튜디오는 이용자가 사이트의 정보를 본인의 판단과 책임하에 이용하여 발생한 손해에 대해 책임을 지지 않습니다.</p>
+    <p>③ 스튜디오는 사이트에 연결된 외부 링크나 제3자 웹사이트에서 발생한 문제에 대해 책임을 지지 않습니다.</p>
+    <p>④ 이 조항은 스튜디오의 고의 또는 중대한 과실로 인한 손해에는 적용되지 않습니다.</p>
+
+    <h2>제10조 (개인정보 보호)</h2>
+    <p>스튜디오는 이용자의 개인정보를 관련 법령에 따라 보호하며, 구체적인 사항은 별도의 <a href="?doc=privacy" data-go="privacy">개인정보처리방침</a>에 따릅니다.</p>
+
+    <h2>제11조 (분쟁 해결 및 관할 법원)</h2>
+    <p>① 스튜디오와 이용자 간 분쟁은 상호 협의를 통해 원만히 해결하는 것을 원칙으로 합니다.</p>
+    <p>② 협의로 해결되지 않는 경우, 민사소송법에 따른 관할 법원에 소를 제기할 수 있습니다.</p>
+    <p>③ 이 약관은 대한민국 법령을 준거법으로 합니다.</p>
+
+    <div class="meta">
+      <b>공고일자</b> 2026년 8월 19일 · <b>시행일자</b> 2026년 8월 19일
+    </div>
+  </article>
+
+  <!-- 사업자 정보 -->
+  <div class="meta" style="margin-bottom:60px;border-top:0;padding-top:0">
+    <b>상호</b> 브랜디크 · <b>대표</b> 이화연 ·
+    <b>사업자등록번호</b> <span class="pending">등록 진행 중</span><br>
+    <b>주소</b> (06034) 서울특별시 강남구 압구정로2길 46, 214 - S147호 ·
+    <b>이메일</b> <a href="mailto:brandique22@gmail.com">brandique22@gmail.com</a>
+  </div>
+</div>
+
+<footer><div class="wrap">© 2026 BRANDIQUE. All rights reserved.</div></footer>
+
+<script>
+const $=(s,e=document)=>e.querySelector(s), $$=(s,e=document)=>[...e.querySelectorAll(s)];
+const TITLES={privacy:'개인정보처리방침', terms:'이용약관'};
+
+function show(d){
+  if(!TITLES[d]) d='privacy';
+  $$('.tab').forEach(t=>t.classList.toggle('on', t.dataset.d===d));
+  $$('.doc').forEach(a=>a.classList.toggle('on', a.id===d));
+  $('#ttl').textContent = TITLES[d];
+  document.title = TITLES[d] + ' | 브랜디크';
+}
+$$('.tab').forEach(t=>t.addEventListener('click',()=>{
+  show(t.dataset.d);
+  history.replaceState(null,'','?doc='+t.dataset.d);
+  window.scrollTo({top:0,behavior:'smooth'});
+}));
+// 약관 안에서 개인정보처리방침으로 넘어가는 링크
+$$('[data-go]').forEach(a=>a.addEventListener('click',e=>{
+  e.preventDefault(); show(a.dataset.go);
+  history.replaceState(null,'','?doc='+a.dataset.go);
+  window.scrollTo({top:0,behavior:'smooth'});
+}));
+// index.html?doc=terms 처럼 들어오면 해당 문서가 열림
+show(new URLSearchParams(location.search).get('doc') || 'privacy');
+</script>
+</body>
+</html>

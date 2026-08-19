@@ -13,6 +13,12 @@ const MAIL_TO = 'contact@brandique.co.kr';
 /* ⬇ 저장할 시트 탭 이름 (없으면 자동 생성) */
 const SHEET_NAME = '설문';
 
+/* ⬇ 보통은 비워두면 됩니다.
+      구글 시트에서 「확장 프로그램 → Apps Script」로 만드셨다면 그대로 비워두세요.
+      script.google.com 에서 따로 만드셨다면, 시트 주소의
+      .../spreadsheets/d/【이 부분】/edit  을 복사해 아래 따옴표 안에 넣으세요. */
+const SHEET_ID = '';
+
 /** 설문 페이지가 POST로 보낸 데이터를 받는 입구 */
 function doPost(e) {
   try {
@@ -41,8 +47,18 @@ function json_(obj) {
 }
 
 /** 시트에 한 줄 추가 — 새로운 문항이 생기면 열도 자동으로 늘어난다 */
-function saveToSheet_(data) {
+/** 시트 찾기 — 시트에 붙은 스크립트든, 따로 만든 스크립트든 모두 동작 */
+function getSpreadsheet_() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
+  if (ss) return ss;
+  if (SHEET_ID) return SpreadsheetApp.openById(SHEET_ID);
+  throw new Error(
+    '시트를 찾을 수 없습니다. 구글 시트에서 「확장 프로그램 → Apps Script」로 만들거나, ' +
+    '코드 위쪽 SHEET_ID 에 시트 ID를 넣어주세요.');
+}
+
+function saveToSheet_(data) {
+  const ss = getSpreadsheet_();
   const sh = ss.getSheetByName(SHEET_NAME) || ss.insertSheet(SHEET_NAME);
 
   let headers = sh.getLastRow() > 0

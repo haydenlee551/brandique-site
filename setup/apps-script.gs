@@ -50,7 +50,6 @@ function json_(obj) {
     .setMimeType(ContentService.MimeType.JSON);
 }
 
-/** 시트에 한 줄 추가 — 새로운 문항이 생기면 열도 자동으로 늘어난다 */
 /** 첨부 이미지 저장 — base64로 받은 이미지를 드라이브에 넣고 링크만 남긴다 */
 function saveFiles_(data) {
   const links = [];
@@ -92,6 +91,7 @@ function getSpreadsheet_() {
     '코드 위쪽 SHEET_ID 에 시트 ID를 넣어주세요.');
 }
 
+/** 시트에 한 줄 추가 — 새로운 문항이 생기면 열도 자동으로 늘어난다 */
 function saveToSheet_(data) {
   const ss = getSpreadsheet_();
   const sh = ss.getSheetByName(SHEET_NAME) || ss.insertSheet(SHEET_NAME);

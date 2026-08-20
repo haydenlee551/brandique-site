@@ -22,13 +22,18 @@ const SHEET_ID = '';
 /* ⬇ 업로드된 레퍼런스 이미지를 담을 구글 드라이브 폴더 이름 (없으면 자동 생성) */
 const DRIVE_FOLDER = '브랜디크 설문 첨부';
 
+/* ⬇ 시트에 썸네일을 직접 박아 넣을지 (시트가 무거워지면 false 로) */
+const SHEET_THUMBNAILS = true;
+const THUMB_H = 110;   // 썸네일 높이(px)
+
 /** 설문 페이지가 POST로 보낸 데이터를 받는 입구 */
 function doPost(e) {
   try {
     const data = (e && e.parameter) ? e.parameter : {};
-    saveFiles_(data);       // 첨부 이미지를 드라이브에 저장하고 링크로 바꾼다
-    saveToSheet_(data);
-    sendMail_(data);
+    const files = saveFiles_(data);   // 드라이브 저장 + 링크 기록, 이미지 목록 반환
+    const row = saveToSheet_(data);   // 저장한 행 번호
+    insertThumbs_(row, files);        // 시트에 썸네일 삽입
+    sendMail_(data, files);           // 알림 메일에 원본 첨부
     return json_({ ok: true });
   } catch (err) {
     // 저장에 실패해도 내용은 잃지 않도록 오류 알림을 보낸다
@@ -52,7 +57,7 @@ function json_(obj) {
 
 /** 첨부 이미지 저장 — base64로 받은 이미지를 드라이브에 넣고 링크만 남긴다 */
 function saveFiles_(data) {
-  const links = [];
+  const links = [], files = [];
   for (var i = 1; i <= 5; i++) {
     var nameKey = '첨부' + i + '_파일명',
         dataKey = '첨부' + i + '_내용',
@@ -74,6 +79,7 @@ function saveFiles_(data) {
       }
       var blob = Utilities.newBlob(bytes, ftype, fname);
       var file = getFolder_().createFile(blob);
+      files.push({ blob: blob, name: fname });
       // 공개 공유하지 않는다 — 고객 자료이므로 소유자만 열람
       // 용량을 함께 적어두면 시트에서 바로 정상 여부를 알 수 있다
       links.push(file.getUrl() + '  (' + Math.round(bytes.length / 1024) + 'KB)');
@@ -82,6 +88,24 @@ function saveFiles_(data) {
     }
   }
   if (links.length) data['레퍼런스 이미지'] = links.join('\n');
+  return files;
+}
+
+/** 시트 행에 썸네일을 직접 박아 넣는다 — 파일을 공개하지 않아도 보인다 */
+function insertThumbs_(row, files) {
+  if (!SHEET_THUMBNAILS || !files || !files.length || !row) return;
+  try {
+    var sh = getSpreadsheet_().getSheetByName(SHEET_NAME);
+    sh.setRowHeight(row, THUMB_H + 12);
+    var startCol = sh.getLastColumn() + 2;   // 데이터 오른쪽에 여유를 두고 배치
+    files.forEach(function (f, i) {
+      try {
+        var img = sh.insertImage(f.blob, startCol + i * 3, row);
+        var w = img.getWidth(), h = img.getHeight();
+        if (h > 0) img.setHeight(THUMB_H).setWidth(Math.round(w * THUMB_H / h));
+      } catch (_) {}
+    });
+  } catch (_) {}   // 썸네일 실패가 접수 자체를 막지 않도록
 }
 
 /** 첨부 폴더 찾기 (없으면 생성) */
@@ -123,10 +147,11 @@ function saveToSheet_(data) {
     return h === '접수일시' ? new Date() : (data[h] || '');
   });
   sh.appendRow(row);
+  return sh.getLastRow();
 }
 
 /** 알림 메일 발송 — 답장하면 바로 고객에게 가도록 replyTo를 붙인다 */
-function sendMail_(data) {
+function sendMail_(data, files) {
   const type = data['문의 유형'] || '문의';
   const name = data['성함'] || '이름 없음';
   const subject = '[브랜디크 설문] ' + type + ' · ' + name;
@@ -140,13 +165,15 @@ function sendMail_(data) {
 
   const opts = { name: '브랜디크 설문' };
   if (data['이메일']) opts.replyTo = data['이메일'];
+  // 레퍼런스 이미지를 메일에 그대로 붙인다 — Gmail에서 바로 보인다
+  if (files && files.length) opts.attachments = files.map(function (f) { return f.blob; });
 
   MailApp.sendEmail(MAIL_TO, subject, body, opts);
 }
 
 /** 설치 직후 동작 확인용 — 편집기에서 이 함수를 한 번 실행해 보세요 */
 function 테스트() {
-  doPost({ parameter: {
+  return doPost({ parameter: {
     '문의 유형': '로고 · 브랜딩',
     '성함': '테스트',
     '이메일': 'test@example.com',

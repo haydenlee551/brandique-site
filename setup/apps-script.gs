@@ -19,10 +19,14 @@ const SHEET_NAME = '설문';
       .../spreadsheets/d/【이 부분】/edit  을 복사해 아래 따옴표 안에 넣으세요. */
 const SHEET_ID = '';
 
+/* ⬇ 업로드된 레퍼런스 이미지를 담을 구글 드라이브 폴더 이름 (없으면 자동 생성) */
+const DRIVE_FOLDER = '브랜디크 설문 첨부';
+
 /** 설문 페이지가 POST로 보낸 데이터를 받는 입구 */
 function doPost(e) {
   try {
     const data = (e && e.parameter) ? e.parameter : {};
+    saveFiles_(data);       // 첨부 이미지를 드라이브에 저장하고 링크로 바꾼다
     saveToSheet_(data);
     sendMail_(data);
     return json_({ ok: true });
@@ -47,6 +51,37 @@ function json_(obj) {
 }
 
 /** 시트에 한 줄 추가 — 새로운 문항이 생기면 열도 자동으로 늘어난다 */
+/** 첨부 이미지 저장 — base64로 받은 이미지를 드라이브에 넣고 링크만 남긴다 */
+function saveFiles_(data) {
+  const links = [];
+  for (var i = 1; i <= 5; i++) {
+    var nameKey = '첨부' + i + '_파일명',
+        dataKey = '첨부' + i + '_내용',
+        typeKey = '첨부' + i + '_타입';
+    var fname = data[nameKey], b64 = data[dataKey], ftype = data[typeKey] || 'image/jpeg';
+    // 원본 base64는 시트에 절대 넣지 않는다 (셀 길이 초과 · 가독성)
+    delete data[dataKey];
+    delete data[typeKey];
+    delete data[nameKey];
+    if (!fname || !b64) continue;
+    try {
+      var blob = Utilities.newBlob(Utilities.base64Decode(b64), ftype, fname);
+      var file = getFolder_().createFile(blob);
+      // 공개 공유하지 않는다 — 고객 자료이므로 소유자만 열람
+      links.push(file.getUrl());
+    } catch (err) {
+      links.push('(저장 실패: ' + fname + ' — ' + err + ')');
+    }
+  }
+  if (links.length) data['레퍼런스 이미지'] = links.join('\n');
+}
+
+/** 첨부 폴더 찾기 (없으면 생성) */
+function getFolder_() {
+  var it = DriveApp.getFoldersByName(DRIVE_FOLDER);
+  return it.hasNext() ? it.next() : DriveApp.createFolder(DRIVE_FOLDER);
+}
+
 /** 시트 찾기 — 시트에 붙은 스크립트든, 따로 만든 스크립트든 모두 동작 */
 function getSpreadsheet_() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();

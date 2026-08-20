@@ -62,7 +62,10 @@ h1,h2,h3{font-family:var(--serif);font-weight:700;letter-spacing:-.015em;line-he
 form{padding-bottom:clamp(56px,7vw,96px)}
 fieldset{border:0;background:var(--card);border:1px solid var(--line);border-radius:18px;
   padding:clamp(24px,3vw,34px);margin-bottom:20px;box-shadow:var(--shadow)}
-legend{font-family:var(--serif);font-size:1.16rem;font-weight:700;padding:0 0 4px;letter-spacing:-.01em}
+/* legend 기본 배치(테두리에 걸침) 해제 — 카드 안쪽 정상 위치로 */
+legend{float:left;width:100%;font-family:var(--serif);font-size:1.16rem;font-weight:700;
+  padding:0;margin-bottom:6px;letter-spacing:-.01em}
+legend + *{clear:both}
 .fs-note{font-size:.86rem;color:var(--sub);margin-bottom:22px}
 .f{margin-bottom:22px}
 .f:last-child{margin-bottom:0}
@@ -84,6 +87,37 @@ textarea{min-height:104px;resize:vertical;line-height:1.65}
 .opt input:hover + span{border-color:var(--soft)}
 .opt input:checked + span{background:var(--brand-tint);border-color:var(--brand);color:var(--brand-deep);font-weight:600}
 .opt input:focus-visible + span{outline:2px solid var(--brand);outline-offset:2px}
+/* 이미지가 들어가는 선택 카드 */
+.optcards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:700px){.optcards{grid-template-columns:repeat(2,1fr)}}
+.oc{position:relative}
+.oc input{position:absolute;opacity:0;width:0;height:0}
+.oc .card{display:block;border:1px solid var(--line);border-radius:14px;overflow:hidden;
+  background:var(--paper);cursor:pointer;transition:all .2s;text-align:center}
+.oc input:hover + .card{border-color:var(--soft)}
+.oc input:checked + .card{border-color:var(--brand);background:var(--brand-tint);
+  box-shadow:0 6px 18px rgba(124,144,130,.18)}
+.oc input:focus-visible + .card{outline:2px solid var(--brand);outline-offset:2px}
+.oc .thumb{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--card)}
+.oc b{display:block;font-size:.92rem;font-weight:600;padding:11px 8px 3px}
+.oc em{display:block;font-style:normal;font-size:.76rem;color:var(--sub);padding:0 8px 13px;line-height:1.5}
+.oc input:checked + .card b{color:var(--brand-deep)}
+
+/* 레퍼런스 이미지 업로드 */
+.drop{display:block;border:1.5px dashed var(--line);border-radius:14px;background:var(--paper);
+  padding:26px 20px;text-align:center;cursor:pointer;transition:all .2s}
+.drop:hover,.drop.over{border-color:var(--brand);background:var(--brand-tint)}
+.drop .ic{display:block;font-size:24px;color:var(--brand);margin-bottom:8px}
+.drop b{display:block;font-size:.94rem;margin-bottom:4px}
+.drop span.sub{font-size:.8rem;color:var(--sub)}
+.files{list-style:none;margin-top:12px;display:grid;gap:8px}
+.files li{display:flex;align-items:center;gap:10px;background:var(--card);
+  border:1px solid var(--line);border-radius:10px;padding:9px 12px;font-size:.86rem}
+.files img{width:38px;height:38px;object-fit:cover;border-radius:7px;flex:none}
+.files .nm{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.files .sz{color:var(--sub);font-size:.78rem;flex:none}
+.files .x{flex:none;width:24px;height:24px;border-radius:50%;background:var(--wash);color:var(--sub);line-height:1}
+.files .x:hover{background:var(--err);color:#fff}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 @media(max-width:600px){.two{grid-template-columns:1fr}}
 .f.bad input,.f.bad textarea{border-color:var(--err);background:#FCF6F5}
@@ -186,12 +220,16 @@ footer{border-top:1px solid var(--line);padding:30px 0;text-align:center;font-si
         <textarea id="l2" name="비즈니스 설명" placeholder="어떤 제품·서비스를 하시는지 편하게 적어주세요."></textarea></div>
       <div class="f"><label for="l3">타겟층 (성별 · 연령대)</label>
         <input type="text" id="l3" name="타겟층" placeholder="예: 20~30대 여성"></div>
-      <div class="f"><span class="lab">원하는 로고 형태</span>
-        <div class="opts">
-          <label class="opt"><input type="radio" name="로고 형태" value="텍스트형"><span>텍스트형</span></label>
-          <label class="opt"><input type="radio" name="로고 형태" value="심볼형"><span>심볼형</span></label>
-          <label class="opt"><input type="radio" name="로고 형태" value="엠블럼형"><span>엠블럼형</span></label>
-          <label class="opt"><input type="radio" name="로고 형태" value="상담 후 결정"><span>상담 후 결정</span></label>
+      <div class="f"><span class="lab">원하는 로고 형태 <span class="hint">예시를 보고 가까운 쪽을 골라주세요.</span></span>
+        <div class="optcards">
+          <label class="oc"><input type="radio" name="로고 형태" value="텍스트형">
+            <span class="card"><img class="thumb" src="assets/logo-text.png" alt="" onerror="this.style.display='none'"><b>텍스트형</b><em>이름 자체를 디자인</em></span></label>
+          <label class="oc"><input type="radio" name="로고 형태" value="심볼형">
+            <span class="card"><img class="thumb" src="assets/logo-symbol.png" alt="" onerror="this.style.display='none'"><b>심볼형</b><em>그림 기호 + 이름</em></span></label>
+          <label class="oc"><input type="radio" name="로고 형태" value="엠블럼형">
+            <span class="card"><img class="thumb" src="assets/logo-emblem.png" alt="" onerror="this.style.display='none'"><b>엠블럼형</b><em>테두리 안에 묶은 형태</em></span></label>
+          <label class="oc"><input type="radio" name="로고 형태" value="상담 후 결정">
+            <span class="card"><img class="thumb" src="assets/logo-ask.png" alt="" onerror="this.style.display='none'"><b>상담 후 결정</b><em>함께 정하고 싶어요</em></span></label>
         </div></div>
       <div class="f"><label for="l4">로고에 담고 싶은 이미지</label>
         <textarea id="l4" name="담고 싶은 이미지" placeholder="떠오르는 사물·느낌·이야기가 있다면"></textarea></div>
@@ -363,7 +401,17 @@ footer{border-top:1px solid var(--line);padding:30px 0;text-align:center;font-si
         <div class="f"><label for="due">희망 일정</label>
           <input type="text" id="due" name="희망 일정" placeholder="예: 다음 달 오픈 / 급하지 않음"></div>
       </div>
-      <div class="f"><label for="ref">참고 자료 링크 <span class="hint">이미지가 있으시면 구글 드라이브·네이버 MYBOX 링크를 남겨주세요.</span></label>
+      <div class="f">
+        <span class="lab">레퍼런스 이미지 <span class="hint">마음에 드는 분위기가 담긴 이미지를 올려주세요. 최대 5장.</span></span>
+        <label class="drop" id="drop">
+          <input type="file" id="fileInput" accept="image/*" multiple hidden>
+          <span class="ic">⬆</span>
+          <b>이미지를 끌어다 놓거나 클릭해서 선택</b>
+          <span class="sub">JPG · PNG · WEBP · 올릴 때 자동으로 용량을 줄입니다</span>
+        </label>
+        <ul class="files" id="fileList"></ul>
+      </div>
+      <div class="f"><label for="ref">참고 자료 링크 <span class="hint">용량이 크거나 파일이 많으면 구글 드라이브·네이버 MYBOX 링크로 주셔도 됩니다.</span></label>
         <input type="text" id="ref" name="참고 자료 링크" placeholder="https://..."></div>
       <div class="f"><label for="etc">기타 요청사항</label>
         <textarea id="etc" name="기타 요청사항" placeholder="꼭 전하고 싶은 이야기가 있다면 적어주세요."></textarea></div>
@@ -458,6 +506,70 @@ $('#picker').addEventListener('click',e=>{
 // index.html에서 survey.html?type=store 처럼 들어오면 그 항목이 먼저 열림
 setType(new URLSearchParams(location.search).get('type') || 'logo');
 
+/* ── 레퍼런스 이미지 업로드 ── */
+const MAX_FILES = 5, MAX_PX = 1400, JPEG_Q = 0.8;
+let picked = [];   // {name, dataUrl, bytes}
+
+const humanSize = n => n < 1048576 ? Math.round(n/1024)+'KB' : (n/1048576).toFixed(1)+'MB';
+
+/* 캔버스로 축소 후 JPEG로 변환 — 원본 그대로 보내면 전송이 실패한다 */
+function shrink(file){
+  return new Promise((res, rej) => {
+    const img = new Image(), url = URL.createObjectURL(file);
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      let w = img.naturalWidth, h = img.naturalHeight;
+      const r = Math.min(1, MAX_PX / Math.max(w, h));
+      w = Math.max(1, Math.round(w*r)); h = Math.max(1, Math.round(h*r));
+      const c = document.createElement('canvas'); c.width = w; c.height = h;
+      c.getContext('2d').drawImage(img, 0, 0, w, h);
+      res(c.toDataURL('image/jpeg', JPEG_Q));
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); rej(new Error('읽을 수 없는 이미지')); };
+    img.src = url;
+  });
+}
+
+function drawFiles(){
+  const ul = $('#fileList');
+  ul.innerHTML = picked.map((f,i)=>`
+    <li>
+      <img src="${f.dataUrl}" alt="">
+      <span class="nm">${esc(f.name)}</span>
+      <span class="sz">${humanSize(f.bytes)}</span>
+      <button type="button" class="x" data-i="${i}" aria-label="${esc(f.name)} 삭제">×</button>
+    </li>`).join('');
+}
+
+async function addFiles(list){
+  for (const file of list){
+    if (picked.length >= MAX_FILES){ alert(`이미지는 최대 ${MAX_FILES}장까지 올릴 수 있습니다.`); break; }
+    if (!/^image\//.test(file.type)){ alert(`"${file.name}" 은 이미지 파일이 아닙니다.`); continue; }
+    try{
+      const dataUrl = await shrink(file);
+      picked.push({ name: file.name, dataUrl, bytes: Math.round(dataUrl.length * 0.75) });
+    }catch(_){ alert(`"${file.name}" 을 읽지 못했습니다.`); }
+  }
+  drawFiles();
+}
+
+(function initUpload(){
+  const drop = $('#drop'), input = $('#fileInput');
+  if(!drop || !input) return;
+  input.addEventListener('change', e => { addFiles([...e.target.files]); input.value = ''; });
+  $('#fileList').addEventListener('click', e => {
+    const b = e.target.closest('.x'); if(!b) return;
+    picked.splice(+b.dataset.i, 1); drawFiles();
+  });
+  ['dragenter','dragover'].forEach(ev => drop.addEventListener(ev, e => {
+    e.preventDefault(); drop.classList.add('over');
+  }));
+  ['dragleave','drop'].forEach(ev => drop.addEventListener(ev, e => {
+    e.preventDefault(); drop.classList.remove('over');
+  }));
+  drop.addEventListener('drop', e => { if(e.dataTransfer) addFiles([...e.dataTransfer.files]); });
+})();
+
 /* ── 검증 ── */
 function validate(){
   let firstBad = null;
@@ -511,7 +623,8 @@ $('#form').addEventListener('submit', async e=>{
   if(!ENDPOINT){
     // 아직 서버를 연결하지 않은 상태 — 메일 앱으로 넘김(임시)
     const subj = `[브랜디크 설문] ${data['문의 유형']} · ${data['성함']||''}`;
-    location.href = `mailto:${MAILTO}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(asText(data))}`;
+    const extra = picked.length ? `\n\n※ 이미지 ${picked.length}장은 메일에 직접 첨부해 주세요.` : '';
+    location.href = `mailto:${MAILTO}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(asText(data)+extra)}`;
     note.textContent = '메일 앱이 열립니다. 그대로 보내주시면 접수됩니다.';
     return;
   }
@@ -521,6 +634,13 @@ $('#form').addEventListener('submit', async e=>{
     // file:// 에서도 전달되도록 no-cors + 폼 형식으로 전송
     const body = new URLSearchParams();
     Object.entries(data).forEach(([k,v])=>body.append(k,v));
+    // 이미지는 base64 본문만 떼어 첨부N_* 로 함께 보낸다 (서버가 드라이브에 저장)
+    picked.forEach((f,i)=>{
+      const n = i+1;
+      body.append(`첨부${n}_파일명`, f.name);
+      body.append(`첨부${n}_타입`, 'image/jpeg');
+      body.append(`첨부${n}_내용`, f.dataUrl.split(',')[1]);
+    });
     await fetch(ENDPOINT, {method:'POST', mode:'no-cors', body});
 
     $('#form').style.display = 'none';

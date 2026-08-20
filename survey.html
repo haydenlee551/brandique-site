@@ -513,6 +513,8 @@ const MAILTO = 'contact@brandique.co.kr';
 /* ══ 아래부터는 동작 코드 (수정 불필요) ══ */
 const $ = (s,el=document)=>el.querySelector(s);
 const $$ = (s,el=document)=>[...el.querySelectorAll(s)];
+/* 파일명 등 사용자 입력을 화면에 넣을 때 태그로 해석되지 않도록 이스케이프 */
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
 const TYPES = {
   logo:'로고', brand:'브랜딩', web:'웹사이트', print:'패키지 · 인쇄물',

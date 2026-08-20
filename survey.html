@@ -72,7 +72,7 @@ legend + *{clear:both}
 .f > label,.f .lab{display:block;font-size:.92rem;font-weight:600;margin-bottom:9px;letter-spacing:-.01em}
 .req{color:var(--err);font-weight:700;margin-left:3px}
 .hint{display:block;font-size:.82rem;color:var(--sub);font-weight:400;margin-top:3px}
-input[type=text],input[type=email],input[type=tel],textarea,select{
+input[type=text],input[type=email],input[type=tel],input[type=date],textarea,select{
   width:100%;font-family:var(--sans);font-size:.96rem;color:var(--ink);background:var(--paper);
   border:1px solid var(--line);border-radius:11px;padding:13px 15px;transition:border-color .2s,background-color .2s;
 }
@@ -166,8 +166,8 @@ footer{border-top:1px solid var(--line);padding:30px 0;text-align:center;font-si
 
   <div class="head" id="head">
     <span class="eyebrow">Brand survey</span>
-    <h1>브랜드 설문</h1>
-    <p>5분이면 충분합니다. 작성해 주시면 방향과 견적을 정리해 답변드립니다.</p>
+    <h1 id="headTitle">브랜드 설문</h1>
+    <p id="headLede">5분이면 충분합니다. 작성해 주시면 방향과 견적을 정리해 답변드립니다.</p>
   </div>
 
   <!-- 서비스 선택 -->
@@ -178,6 +178,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;text-align:center;font-si
     <button class="chip" type="button" data-t="print">패키지 · 인쇄물</button>
     <button class="chip" type="button" data-t="naming">네이밍</button>
     <button class="chip" type="button" data-t="store">스마트스토어 키트</button>
+    <button class="chip" type="button" data-t="visit">방문 상담</button>
   </div>
 
   <form id="form" novalidate>
@@ -391,6 +392,42 @@ footer{border-top:1px solid var(--line);padding:30px 0;text-align:center;font-si
         </div></div>
     </fieldset>
 
+    <fieldset data-t="visit" hidden>
+      <legend>방문 상담 예약</legend>
+      <p class="fs-note">희망 일정을 남겨주시면 확인 후 확정 시간을 회신해 드립니다. 예약 없이 방문하시면 상담이 어려울 수 있습니다.</p>
+      <div class="two">
+        <div class="f"><label for="v1">희망 방문일</label>
+          <input type="date" id="v1" name="희망 방문일"></div>
+        <div class="f"><label for="v2">방문 인원</label>
+          <input type="text" id="v2" name="방문 인원" placeholder="예: 2명"></div>
+      </div>
+      <div class="f"><span class="lab">희망 시간대 <span class="hint">평일 10:00 – 19:00 운영합니다.</span></span>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="희망 시간대" value="오전 10~12시"><span>오전 10~12시</span></label>
+          <label class="opt"><input type="radio" name="희망 시간대" value="오후 1~3시"><span>오후 1~3시</span></label>
+          <label class="opt"><input type="radio" name="희망 시간대" value="오후 3~5시"><span>오후 3~5시</span></label>
+          <label class="opt"><input type="radio" name="희망 시간대" value="오후 5~7시"><span>오후 5~7시</span></label>
+          <label class="opt"><input type="radio" name="희망 시간대" value="협의 가능"><span>협의 가능</span></label>
+        </div></div>
+      <div class="f"><span class="lab">상담하고 싶은 내용 <span class="hint">여러 개 고르셔도 됩니다.</span></span>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" name="상담 주제" value="로고"><span>로고</span></label>
+          <label class="opt"><input type="checkbox" name="상담 주제" value="브랜딩"><span>브랜딩</span></label>
+          <label class="opt"><input type="checkbox" name="상담 주제" value="웹사이트"><span>웹사이트</span></label>
+          <label class="opt"><input type="checkbox" name="상담 주제" value="패키지·인쇄물"><span>패키지 · 인쇄물</span></label>
+          <label class="opt"><input type="checkbox" name="상담 주제" value="네이밍"><span>네이밍</span></label>
+          <label class="opt"><input type="checkbox" name="상담 주제" value="스마트스토어 키트"><span>스마트스토어 키트</span></label>
+          <label class="opt"><input type="checkbox" name="상담 주제" value="아직 정하지 못함"><span>아직 정하지 못함</span></label>
+        </div></div>
+      <div class="f"><span class="lab">원격 상담도 괜찮으신가요?</span>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="원격 상담" value="방문을 원합니다"><span>방문을 원합니다</span></label>
+          <label class="opt"><input type="radio" name="원격 상담" value="원격도 괜찮습니다"><span>원격도 괜찮습니다</span></label>
+        </div></div>
+      <div class="f"><label for="v3">브랜드 · 사업 소개</label>
+        <textarea id="v3" name="비즈니스 설명" placeholder="어떤 일을 하시는지, 무엇이 고민이신지 간단히 적어주세요."></textarea></div>
+    </fieldset>
+
     <!-- ── 공통: 예산 · 일정 · 기타 ── -->
     <fieldset>
       <legend>예산 · 일정</legend>
@@ -474,7 +511,7 @@ const $$ = (s,el=document)=>[...el.querySelectorAll(s)];
 
 const TYPES = {
   logo:'로고', brand:'브랜딩', web:'웹사이트', print:'패키지 · 인쇄물',
-  naming:'네이밍', store:'스마트스토어 브랜드 키트'
+  naming:'네이밍', store:'스마트스토어 브랜드 키트', visit:'방문 상담 예약'
 };
 const STYLES = ['여성스러운','남성스러운','트렌디한','클래식한','캐주얼한','고급스러운','심플한','디테일한','추상적인','직관적인'];
 
@@ -491,6 +528,12 @@ function setType(t){
   if(!TYPES[t]) t = 'logo';
   type = t;
   $$('#picker .chip').forEach(c=>c.classList.toggle('on', c.dataset.t===t));
+  // 방문 상담은 성격이 달라 머리말을 바꾼다
+  const visit = (t === 'visit');
+  $('#headTitle').textContent = visit ? '방문 상담 예약' : '브랜드 설문';
+  $('#headLede').textContent = visit
+    ? '희망 일정을 남겨주시면 확인 후 확정 시간을 회신해 드립니다.'
+    : '5분이면 충분합니다. 작성해 주시면 방향과 견적을 정리해 답변드립니다.';
   $$('fieldset[data-t]').forEach(fs=>{
     const on = fs.dataset.t===t;
     fs.hidden = !on;

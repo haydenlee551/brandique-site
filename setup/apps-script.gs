@@ -64,10 +64,19 @@ function saveFiles_(data) {
     delete data[nameKey];
     if (!fname || !b64) continue;
     try {
-      var blob = Utilities.newBlob(Utilities.base64Decode(b64), ftype, fname);
+      // 폼 전송 중 '+'가 공백으로 바뀌어도 안전하도록 web-safe로 받는다.
+      // 혹시 옛 방식(표준 base64)으로 들어와도 되도록 되돌려 붙인다.
+      var normalized = String(b64).replace(/\s/g, '').replace(/-/g, '+').replace(/_/g, '/');
+      var bytes = Utilities.base64Decode(normalized);
+      if (!bytes || bytes.length === 0) {
+        links.push('(빈 파일로 도착: ' + fname + ')');
+        continue;
+      }
+      var blob = Utilities.newBlob(bytes, ftype, fname);
       var file = getFolder_().createFile(blob);
       // 공개 공유하지 않는다 — 고객 자료이므로 소유자만 열람
-      links.push(file.getUrl());
+      // 용량을 함께 적어두면 시트에서 바로 정상 여부를 알 수 있다
+      links.push(file.getUrl() + '  (' + Math.round(bytes.length / 1024) + 'KB)');
     } catch (err) {
       links.push('(저장 실패: ' + fname + ' — ' + err + ')');
     }

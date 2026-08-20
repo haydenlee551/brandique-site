@@ -24,6 +24,9 @@ const DRIVE_FOLDER = '브랜디크 설문 첨부';
 
 /* ⬇ 시트에 썸네일을 직접 박아 넣을지 (시트가 무거워지면 false 로) */
 const SHEET_THUMBNAILS = true;
+
+/* 배포된 코드가 최신인지 밖에서 확인하기 위한 표식 — 고칠 필요 없습니다 */
+const VERSION = 'v3 · 시트썸네일+메일첨부';
 const THUMB_H = 110;   // 썸네일 높이(px)
 
 /** 설문 페이지가 POST로 보낸 데이터를 받는 입구 */
@@ -47,7 +50,7 @@ function doPost(e) {
 
 /** 배포가 살아있는지 브라우저로 확인할 때 쓰는 주소 */
 function doGet() {
-  return ContentService.createTextOutput('브랜디크 설문 수신기가 작동 중입니다.');
+  return ContentService.createTextOutput('브랜디크 설문 수신기가 작동 중입니다. [' + VERSION + ']');
 }
 
 function json_(obj) {

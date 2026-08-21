@@ -176,4 +176,37 @@ const WORKS = [
     cover: "assets/works/from-top-to-toe-01.png",
     images: ["assets/works/from-top-to-toe-01.png", "assets/works/from-top-to-toe-02.jpg", "assets/works/from-top-to-toe-03.jpg", "assets/works/from-top-to-toe-04.jpg", "assets/works/from-top-to-toe-05.jpg", "assets/works/from-top-to-toe-06.jpg"],
   },
+  {
+    title: "커몬시스터즈",
+    cat: "의류, 건강",
+    type: "로고",
+    cover: "assets/works/keomonsiseuteojeu-01.jpg",
+    images: ["assets/works/keomonsiseuteojeu-01.jpg", "assets/works/keomonsiseuteojeu-02.jpg", "assets/works/keomonsiseuteojeu-03.jpg", "assets/works/keomonsiseuteojeu-04.jpg", "assets/works/keomonsiseuteojeu-05.jpg"],
+  },
+  {
+    title: "태양건설",
+    cat: "건설",
+    type: "로고",
+    tags: "로고",
+    cover: "assets/works/taeyanggeonseol-01.png",
+  },
+  {
+    title: "세종솔루션",
+    cat: "유통",
+    type: "로고",
+    tags: "로고",
+    cover: "assets/works/sejongsolrusyeon-01.png",
+  },
+  {
+    title: "디딤돌 정형외과",
+    cat: "병원",
+    type: "로고",
+    cover: "assets/works/didimdol-jeonghyeongoegwa-01.png",
+  },
+  {
+    title: "한일탑내과",
+    cat: "병원",
+    type: "로고",
+    cover: "assets/works/haniltapnaegwa-01.png",
+  },
 ];

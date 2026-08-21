@@ -4,7 +4,8 @@
 set -e
 SRC="/Users/fa/Library/Mobile Documents/com~apple~CloudDocs/Autoworker_Dilly/brandique"
 DST="$HOME/brandique-site"
-cp "$SRC/index.html" "$SRC/survey.html" "$SRC/legal.html" "$SRC/works.html" "$SRC/works.js" "$DST/"
+# admin.html 은 내부 도구라 배포하지 않습니다
+cp "$SRC/index.html" "$SRC/survey.html" "$SRC/legal.html" "$SRC/works.html" "$SRC/works.js" "$SRC/works-data.js" "$DST/"
 cp "$SRC/robots.txt" "$SRC/sitemap.xml" "$DST/"
 cp "$SRC/setup/apps-script.gs" "$SRC/setup/README.md" "$DST/setup/"
 mkdir -p "$DST/assets" && cp -R "$SRC/assets/." "$DST/assets/" 2>/dev/null || true

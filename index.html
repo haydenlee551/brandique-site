@@ -215,9 +215,12 @@ h3{font-size:1.18rem}
 .hero .cta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:52px}
 .hero-facts{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);
   border:1px solid var(--line);border-radius:var(--r);overflow:hidden;position:relative;z-index:1}
-.hero-facts div{background:var(--paper);padding:22px 20px}
-.hero-facts b{display:block;font-family:var(--serif);font-size:1.55rem;color:var(--brand-deep);line-height:1.2}
-.hero-facts span{font-size:.83rem;color:var(--sub);letter-spacing:-.01em}
+.hero-facts div{background:var(--paper);padding:26px 22px}
+.hero-facts b{display:flex;align-items:baseline;gap:3px;font-family:var(--serif);font-weight:700;
+  color:var(--brand-deep);line-height:1.05;letter-spacing:-.02em}
+.hero-facts i{font-style:normal;font-size:clamp(2.1rem,3.6vw,3rem);font-variant-numeric:tabular-nums}
+.hero-facts em{font-style:normal;font-size:clamp(.95rem,1.3vw,1.15rem);font-weight:700;opacity:.75}
+.hero-facts span{display:block;margin-top:8px;font-size:.84rem;color:var(--sub);letter-spacing:-.01em}
 @media(max-width:760px){.hero-facts{grid-template-columns:repeat(2,1fr)}}
 
 /* ══ 포트폴리오 ══ */
@@ -579,10 +582,10 @@ footer{background:var(--paper);border-top:1px solid var(--line);padding:60px 0 4
       </div>
     </div>
     <div class="hero-facts reveal">
-      <div><b>로고+웹+인쇄물</b><span>한 스튜디오에서 전부</span></div>
-      <div><b>3종</b><span>서로 다른 로고 시안 제안</span></div>
-      <div><b>100%</b><span>저작권 전체 양도</span></div>
-      <div><b>디자인 안심 보증</b><span>방향이 어긋나면 다시 제안</span></div>
+      <div><b><i data-to="0" id="factBrands">0</i><em>개</em></b><span>함께 만든 브랜드</span></div>
+      <div><b><i data-to="0" id="factCats">0</i><em>개 업종</em></b><span>업종의 언어를 읽습니다</span></div>
+      <div><b><i data-to="100">0</i><em>%</em></b><span>저작권 전체 양도</span></div>
+      <div><b><i data-to="4">0</i><em>주</em></b><span>로고 기준 작업 기간</span></div>
     </div>
   </div>
 </section>
@@ -1011,6 +1014,35 @@ const FAQ = {
 
 const $ = (s,el=document)=>el.querySelector(s);
 const esc = s => String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* ── 히어로 지표 — 포트폴리오 데이터에서 실제 숫자를 뽑아 세어 올린다 ── */
+(function heroFacts(){
+  const box = $('.hero-facts'); if(!box) return;
+  const works = (window.BQ && BQ.WORKS) || [];
+  const brands = works.length;
+  const cats = new Set(works.map(w => (w.cat||'').trim()).filter(Boolean)).size;
+  const bEl = $('#factBrands'), cEl = $('#factCats');
+  if(bEl) bEl.dataset.to = brands;
+  if(cEl) cEl.dataset.to = cats;
+
+  const nums = [...box.querySelectorAll('i[data-to]')];
+  const still = !matchMedia('(prefers-reduced-motion: no-preference)').matches;
+  const paint = el => el.textContent = el.dataset.to;
+  if(still || !('IntersectionObserver' in window)){ nums.forEach(paint); return; }
+
+  function run(el){
+    const to = +el.dataset.to || 0, dur = 1100, t0 = performance.now();
+    (function step(now){
+      const p = Math.min(1, (now - t0) / dur);
+      el.textContent = Math.round(to * (1 - Math.pow(1 - p, 3)));   // 끝에서 부드럽게 감속
+      if(p < 1) requestAnimationFrame(step);
+    })(t0);
+  }
+  const io = new IntersectionObserver(es => es.forEach(x => {
+    if(x.isIntersecting){ nums.forEach(run); io.disconnect(); }
+  }), {threshold:.4});
+  io.observe(box);
+})();
 
 /* ── 포트폴리오 카드 (대표작 9개) ── */
 (function renderWorks(){

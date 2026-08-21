@@ -590,11 +590,11 @@ footer{background:var(--paper);border-top:1px solid var(--line);padding:60px 0 4
         <h2 style="margin-top:16px">브랜디크가 설계한 브랜드</h2>
         <p>각 브랜드가 가진 이야기를 읽고, 그에 맞는 톤앤매너를 설계합니다.</p>
       </div>
-      <a class="btn ghost sm" href="#contact" id="workAll">전체 보기 <span class="arw">→</span></a>
+      <a class="btn ghost sm" href="works.html" id="workAll">전체 보기 <span class="arw">→</span></a>
     </div>
-    <div class="grid-work reveal" id="workGrid"></div>
+    <div class="grid-work reveal" id="workGrid" data-workgrid></div>
     <div class="work-more reveal" id="workMore">
-      <a class="btn ghost" href="#contact">더 많은 작업 보기 <span class="arw">→</span></a>
+      <a class="btn ghost" href="works.html">전체 포트폴리오 보기 <span class="arw">→</span></a>
     </div>
   </div>
 </section>
@@ -958,27 +958,13 @@ footer{background:var(--paper);border-top:1px solid var(--line);padding:60px 0 4
   </div>
 </footer>
 
+<script src="works.js"></script>
 <script>
 /* ══════════════════════════════════════════════════════════
    ⬇⬇ 여기만 고치면 됩니다 — 포트폴리오 / 후기 데이터 ⬇⬇
    ══════════════════════════════════════════════════════════ */
 
-/* 포트폴리오: 배열이 비어 있으면 자리표시자 카드 9개가 자동으로 깔립니다.
-   작업물이 생기면 아래 형식으로 한 줄씩 추가하세요.
-   img 는 같은 폴더 기준 상대경로 (예: 'assets/butter.jpg'), 없으면 '' 로 두면 됩니다. */
-const WORKS = [
-  // {
-  //   title : '버터제과',                       // 브랜드명
-  //   cat   : '베이커리',                       // 업종
-  //   tags  : '로고 · 패키지',                   // 작업 범위
-  //   cover : 'assets/works/butter-01.jpg',     // 카드 썸네일 (4:3 권장)
-  //   images: ['assets/works/butter-01.jpg',    // 팝업에서 넘겨볼 이미지들
-  //            'assets/works/butter-02.jpg'],   //   — 한 장뿐이면 생략 가능(cover 사용)
-  //   desc  : '동네 빵집의 따뜻한 인상을 유지하면서\n간판과 포장에 일관되게 쓰이도록 정리했습니다.',
-  //   link  : 'samples/bakery.html',            // (선택) 결과물 링크
-  //   linkLabel: '웹사이트 보기',                 // (선택) 링크 버튼 문구
-  // },
-];
+/* 포트폴리오 데이터는 works.js 에 있습니다 — 그 파일만 고치면 홈과 전체 페이지에 함께 반영됩니다. */
 
 /* 후기: 비어 있으면 "첫 후기를 기다리는 중" 자리표시자가 나옵니다. */
 const REVIEWS = [
@@ -1019,100 +1005,18 @@ const FAQ = {
 const $ = (s,el=document)=>el.querySelector(s);
 const esc = s => String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
-/* ── 포트폴리오 카드 ── */
+/* ── 포트폴리오 카드 (대표작 9개) ── */
 (function renderWorks(){
-  const grid = $('#workGrid');
-  if(!grid) return;
-  if(WORKS.length){
-    grid.innerHTML = WORKS.map((w,i)=>{
-      const cover = w.cover || w.img;
-      const thumb = cover
-        ? `<img src="${esc(cover)}" alt="${esc(w.title)} 브랜딩 작업물" loading="lazy">`
-        : `<div class="ph"><span class="sym">${esc((w.title||'B').slice(0,1))}</span><span class="lbl">Brandique</span></div>`;
-      const card =
-        `<div class="thumb">${thumb}</div>
-         <div class="meta">
-           <span class="cat">${esc(w.cat||'브랜딩')}</span>
-           <h3>${esc(w.title||'')}</h3>
-           <p class="tags">${esc(w.tags||'')}</p>
-         </div>`;
-      return `<button class="work" type="button" data-i="${i}">${card}</button>`;
-    }).join('');
-    $('#workAll').style.display = '';
-    $('#workMore').style.display = '';
-  }else{
-    // 작업물이 아직 없을 때 — 자리표시자 6칸 (있는 척하지 않고 준비 중임을 그대로 표기)
-    grid.innerHTML = Array.from({length:6},(_,i)=>`
-      <div class="work">
-        <div class="thumb"><div class="ph">
-          <span class="sym">${['✦','▦','◍','✎','◈','✧'][i]}</span>
-          <span class="lbl">Work ${String(i+1).padStart(2,'0')}</span>
-        </div></div>
-        <div class="meta">
-          <span class="cat">준비 중</span>
-          <h3>작업물 공개 준비 중</h3>
-          <p class="tags">로고 · 웹사이트 · 인쇄물</p>
-        </div>
-      </div>`).join('');
-    // 보여줄 작업이 없으면 "전체 보기 / 더보기" 버튼은 숨김 (빈 링크 방지)
-    $('#workAll').style.display = 'none';
-    $('#workMore').style.display = 'none';
-  }
+  const grid = $('#workGrid'); if(!grid) return;
+  const items = BQ.featured(9);
+  BQ.renderGrid(grid, items, 6);
+  const on = items.length ? '' : 'none';
+  $('#workAll').style.display = on;
+  $('#workMore').style.display = on;
 })();
 
-/* ── 포트폴리오 상세 팝업 ── */
-(function workModal(){
-  const box=$('#wmodal'); if(!box) return;
-  const img=$('#wmImg'), dots=$('#wmDots'), prev=$('#wmPrev'), next=$('#wmNext'), link=$('#wmLink');
-  let cur=0, shots=[], lastFocus=null;
-
-  const imagesOf = w => (w.images && w.images.length) ? w.images : [w.cover || w.img].filter(Boolean);
-
-  function showShot(n){
-    if(!shots.length) return;
-    cur=(n+shots.length)%shots.length;
-    img.src=shots[cur];
-    dots.innerHTML=shots.map((_,i)=>`<i class="${i===cur?'on':''}"></i>`).join('');
-    const many=shots.length>1;
-    prev.style.display=next.style.display=many?'':'none';
-    dots.style.display=many?'':'none';
-  }
-
-  function open(i){
-    const w=WORKS[i]; if(!w) return;
-    lastFocus=document.activeElement;
-    $('#wmCat').textContent=w.cat||'브랜딩';
-    $('#wmTitle').textContent=w.title||'';
-    $('#wmTags').textContent=w.tags||'';
-    $('#wmDesc').textContent=w.desc||'';
-    shots=imagesOf(w);
-    // 이미지가 없으면 무대를 감춰 빈 상자가 보이지 않게 한다
-    $('.stage',box).style.display=shots.length?'':'none';
-    showShot(0);
-    if(w.link){ link.href=w.link; link.innerHTML=(w.linkLabel||'자세히 보기')+' <span class="arw">→</span>'; link.style.display=''; }
-    else link.style.display='none';
-    box.classList.add('on'); document.body.classList.add('locked');
-    $('.close',box).focus();
-  }
-
-  function close(){
-    box.classList.remove('on'); document.body.classList.remove('locked');
-    img.src=''; if(lastFocus) lastFocus.focus();
-  }
-
-  $('#workGrid').addEventListener('click',e=>{
-    const b=e.target.closest('button.work'); if(b) open(+b.dataset.i);
-  });
-  box.addEventListener('click',e=>{ if(e.target.closest('[data-close]')) close(); });
-  prev.addEventListener('click',()=>showShot(cur-1));
-  next.addEventListener('click',()=>showShot(cur+1));
-  document.addEventListener('keydown',e=>{
-    if(!box.classList.contains('on')) return;
-    if(e.key==='Escape') close();
-    else if(e.key==='ArrowLeft') showShot(cur-1);
-    else if(e.key==='ArrowRight') showShot(cur+1);
-  });
-})();
+/* ── 포트폴리오 상세 팝업 (works.js 공용) ── */
+BQ.initModal();
 
 /* ── 후기 카드 ── */
 (function renderReviews(){

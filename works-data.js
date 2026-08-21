@@ -1,37 +1,38 @@
 /* ═══════════════════════════════════════════════════════════════════
-   브랜디크 포트폴리오 — 데이터 + 표시 코드
-   이 파일 하나만 고치면 홈(index.html)과 전체 페이지(works.html)에
-   모두 반영됩니다. 아래 WORKS 배열만 채우시면 됩니다.
+   브랜디크 포트폴리오 — 데이터
+   admin.html 에서 내보낸 파일입니다. 직접 고치셔도 됩니다.
+   내보낸 시각: 2026. 8. 21. 오후 2:15:00
    ═══════════════════════════════════════════════════════════════════ */
 
-/* ── 작업 유형 (전체 페이지의 필터 버튼이 됩니다) ── */
-const WORK_TYPES = ['로고', '캐릭터 로고', '브랜딩', '웹사이트', '패키지 · 인쇄물', '네이밍'];
+/* 작업 유형 — 전체 페이지(works.html)의 필터 버튼이 됩니다 */
+const WORK_TYPES = ["로고", "캐릭터 로고", "브랜딩", "웹사이트", "패키지 · 인쇄물", "네이밍"];
 
-/* ═══════════════════════════════════════════════════════════════════
-   ⬇⬇ 여기만 채우시면 됩니다 ⬇⬇
-
-   title    브랜드명
-   cat      업종 (카드에 작은 글씨로 표시)
-   type     작업 유형 — 위 WORK_TYPES 중 하나 (필터에 쓰임)
-   tags     작업 범위 (예: '로고 · 패키지')
-   cover    카드 썸네일 — 4:3 권장 (1200×900)
-   images   팝업에서 넘겨볼 이미지들 — 생략하면 cover 한 장만 표시
-   desc     한두 문장 설명 — \n 으로 줄바꿈
-   link     (선택) 결과물 링크
-   linkLabel(선택) 링크 버튼 문구 — 기본값 '자세히 보기'
-   featured (선택) true 면 홈 대표작에 노출 (최대 9개)
-   ═══════════════════════════════════════════════════════════════════ */
 const WORKS = [
-  // {
-  //   title : '버터제과',
-  //   cat   : '베이커리',
-  //   type  : '로고',
-  //   tags  : '로고 · 패키지',
-  //   cover : 'assets/works/butter-01.jpg',
-  //   images: ['assets/works/butter-01.jpg', 'assets/works/butter-02.jpg'],
-  //   desc  : '동네 빵집의 따뜻한 인상을 유지하면서\n간판과 포장에 일관되게 쓰이도록 정리했습니다.',
-  //   link  : 'samples/bakery.html',
-  //   linkLabel: '웹사이트 보기',
-  //   featured: true,
-  // },
+  {
+    title: "펜캉스",
+    cat: "마케팅",
+    type: "로고",
+    tags: "로고",
+    cover: "assets/works/penkangs-02.jpg",
+    images: ["assets/works/penkangs-02.jpg", "assets/works/penkangs-01.jpg", "assets/works/penkangs-03.jpg", "assets/works/penkangs-04.jpg"],
+    featured: true,
+  },
+  {
+    title: "스토밍아트",
+    cat: "교육",
+    type: "로고",
+    tags: "로고",
+    cover: "assets/works/stomingart-01.jpg",
+    featured: true,
+    images: ["assets/works/stomingart-01.jpg", "assets/works/stomingart-02.jpg", "assets/works/stomingart-03.jpg", "assets/works/stomingart-04.jpg"],
+  },
+  {
+    title: "TRIPOD WORKS",
+    cat: "캠핑",
+    type: "로고",
+    tags: "로고",
+    cover: "assets/works/TRIPOD-WORKS-01.jpg",
+    featured: true,
+    images: ["assets/works/TRIPOD-WORKS-01.jpg", "assets/works/TRIPOD-WORKS-02.jpg", "assets/works/TRIPOD-WORKS-03.jpg", "assets/works/TRIPOD-WORKS-04.jpg", "assets/works/TRIPOD-WORKS-05.jpg", "assets/works/TRIPOD-WORKS-06.jpg", "assets/works/TRIPOD-WORKS-07.jpg", "assets/works/TRIPOD-WORKS-08.jpg"],
+  },
 ];

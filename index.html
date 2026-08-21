@@ -213,7 +213,7 @@ h3{font-size:1.18rem}
 .hero h1 em{font-style:normal;color:var(--brand-deep)}
 .hero .lede{font-size:clamp(1.02rem,1.5vw,1.16rem);color:var(--sub);max-width:50ch;margin-bottom:34px}
 .hero .cta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:52px}
-.hero-facts{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);
+.hero-facts{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);
   border:1px solid var(--line);border-radius:var(--r);overflow:hidden;position:relative;z-index:1}
 .hero-facts div{background:var(--paper);padding:26px 22px}
 .hero-facts b{display:flex;align-items:baseline;gap:3px;font-family:var(--serif);font-weight:700;
@@ -221,7 +221,7 @@ h3{font-size:1.18rem}
 .hero-facts i{font-style:normal;font-size:clamp(2.4rem,4.2vw,3.5rem);font-variant-numeric:tabular-nums}
 .hero-facts em{font-style:normal;font-size:clamp(.95rem,1.3vw,1.15rem);font-weight:700;opacity:.75}
 .hero-facts span{display:block;margin-top:8px;font-size:.84rem;color:var(--sub);letter-spacing:-.01em}
-@media(max-width:760px){.hero-facts{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.hero-facts{grid-template-columns:1fr}}
 
 /* ══ 포트폴리오 ══ */
 .work-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap}
@@ -582,9 +582,8 @@ footer{background:var(--paper);border-top:1px solid var(--line);padding:60px 0 4
       </div>
     </div>
     <div class="hero-facts reveal">
-      <div><b><i data-to="12">0</i><em>년</em></b><span>디자인 경력</span></div>
-      <div><b><i data-to="3800">0</i><em>건+</em></b><span>제작 디자인</span></div>
-      <div><b><i data-to="0" id="factCats">0</i><em>개</em></b><span>함께한 업종</span></div>
+      <div><b><i data-to="3800">0</i><em>건+</em></b><span>누적 디자인 작업</span></div>
+      <div><b><i data-to="260">0</i><em>+</em></b><span>함께 한 기업</span></div>
       <div><b><i data-to="100">0</i><em>%</em></b><span>저작권 전체 양도</span></div>
     </div>
   </div>
@@ -1018,10 +1017,6 @@ const esc = s => String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&g
 /* ── 히어로 지표 — 포트폴리오 데이터에서 실제 숫자를 뽑아 세어 올린다 ── */
 (function heroFacts(){
   const box = $('.hero-facts'); if(!box) return;
-  const works = (window.BQ && BQ.WORKS) || [];
-  const cEl = $('#factCats');
-  if(cEl) cEl.dataset.to = new Set(works.map(w => (w.cat||'').trim()).filter(Boolean)).size;
-
   const nums = [...box.querySelectorAll('i[data-to]')];
   const still = !matchMedia('(prefers-reduced-motion: no-preference)').matches;
   const paint = el => el.textContent = (+el.dataset.to).toLocaleString('ko-KR');

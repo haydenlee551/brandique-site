@@ -8,7 +8,9 @@ DST="$HOME/brandique-site"
 cp "$SRC/index.html" "$SRC/survey.html" "$SRC/legal.html" "$SRC/works.html" "$SRC/works.js" "$SRC/works-data.js" "$DST/"
 cp "$SRC/robots.txt" "$SRC/sitemap.xml" "$DST/"
 cp "$SRC/setup/apps-script.gs" "$SRC/setup/README.md" "$DST/setup/"
-mkdir -p "$DST/assets" && cp -R "$SRC/assets/." "$DST/assets/" 2>/dev/null || true
+# assets 는 원본과 똑같이 맞춘다 (지운 파일이 배포본에 남지 않도록)
+mkdir -p "$DST/assets"
+rsync -a --delete --exclude "_raw" "$SRC/assets/" "$DST/assets/"
 cd "$DST"
 git add -A
 git commit -m "${1:-사이트 업데이트}" || { echo "변경 사항 없음"; exit 0; }

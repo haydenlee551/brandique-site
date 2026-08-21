@@ -230,7 +230,8 @@ function buildFilters(){
   BQ.WORKS.forEach(w => { const t = w.type || '기타'; counts[t] = (counts[t]||0)+1; });
   const types = BQ.WORK_TYPES.filter(t => counts[t]);
   Object.keys(counts).forEach(t => { if(!types.includes(t)) types.push(t); });   // 목록에 없는 유형도 살림
-  if(!BQ.WORKS.length){ $('#filters').style.display='none'; return; }
+  /* 작업 유형이 한 종류뿐이면 필터가 의미 없으므로 감춘다 */
+  if(!BQ.WORKS.length || types.length <= 1){ $('#filters').style.display='none'; return; }
   $('#filters').innerHTML =
     [['전체', BQ.WORKS.length], ...types.map(t=>[t,counts[t]])]
       .map(([t,n])=>`<button class="filt${t===filter?' on':''}" type="button" data-t="${BQ.esc(t)}">${BQ.esc(t)}<span class="n">${n}</span></button>`)

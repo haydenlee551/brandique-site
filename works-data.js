@@ -145,7 +145,6 @@ const WORKS = [
     tags: "로고",
     cover: "assets/works/stoming-art-01.png",
     images: ["assets/works/stoming-art-01.png", "assets/works/stoming-art-02.jpg", "assets/works/stoming-art-03.jpg", "assets/works/stoming-art-04.jpg", "assets/works/stoming-art-05.jpg"],
-    featured: true,
   },
   {
     title: "커몬시스터즈",

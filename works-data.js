@@ -1,7 +1,7 @@
 /* ═══════════════════════════════════════════════════════════════════
    브랜디크 포트폴리오 — 데이터
    admin.html 에서 내보낸 파일입니다. 직접 고치셔도 됩니다.
-   내보낸 시각: 2026. 8. 21. 오후 3:29:53
+   내보낸 시각: 2026. 8. 21. 오후 4:11:24
    ═══════════════════════════════════════════════════════════════════ */
 
 /* 작업 유형 — 전체 페이지(works.html)의 필터 버튼이 됩니다 */
@@ -70,7 +70,9 @@ const WORKS = [
   },
   {
     title: "MANS SELECTOR",
+    cat: "패션",
     type: "로고",
+    tags: "로고",
     cover: "assets/works/mans-selector-01.jpg",
     images: ["assets/works/mans-selector-01.jpg", "assets/works/mans-selector-02.jpg", "assets/works/mans-selector-03.jpg", "assets/works/mans-selector-04.jpg"],
     featured: true,
@@ -141,5 +143,37 @@ const WORKS = [
     cover: "assets/works/tripod-works-01.png",
     images: ["assets/works/tripod-works-01.png", "assets/works/tripod-works-02.png", "assets/works/tripod-works-03.png", "assets/works/tripod-works-04.png", "assets/works/tripod-works-05.jpg", "assets/works/tripod-works-06.jpg", "assets/works/tripod-works-07.jpg", "assets/works/tripod-works-08.jpg", "assets/works/tripod-works-09.jpg"],
     featured: true,
+  },
+  {
+    title: "안성배뜰",
+    cat: "농산",
+    type: "로고",
+    tags: "로고",
+    cover: "assets/works/anseongbaetteul-01.jpg",
+    images: ["assets/works/anseongbaetteul-01.jpg", "assets/works/anseongbaetteul-02.jpg", "assets/works/anseongbaetteul-03.jpg", "assets/works/anseongbaetteul-04.jpg", "assets/works/anseongbaetteul-05.jpg"],
+  },
+  {
+    title: "GRIME",
+    cat: "음악",
+    type: "로고",
+    tags: "로고",
+    cover: "assets/works/grime-01.jpg",
+    images: ["assets/works/grime-01.jpg", "assets/works/grime-02.jpg", "assets/works/grime-03.jpg", "assets/works/grime-04.jpg", "assets/works/grime-05.jpg"],
+  },
+  {
+    title: "HEALTH BANK",
+    cat: "건강",
+    type: "로고",
+    tags: "로고",
+    cover: "assets/works/health-bank-01.jpg",
+    images: ["assets/works/health-bank-01.jpg", "assets/works/health-bank-02.jpg", "assets/works/health-bank-03.jpg", "assets/works/health-bank-04.jpg", "assets/works/health-bank-05.jpg"],
+  },
+  {
+    title: "FROM TOP TO TOE",
+    cat: "뷰티",
+    type: "로고",
+    tags: "로고",
+    cover: "assets/works/from-top-to-toe-01.png",
+    images: ["assets/works/from-top-to-toe-01.png", "assets/works/from-top-to-toe-02.jpg", "assets/works/from-top-to-toe-03.jpg", "assets/works/from-top-to-toe-04.jpg", "assets/works/from-top-to-toe-05.jpg", "assets/works/from-top-to-toe-06.jpg"],
   },
 ];

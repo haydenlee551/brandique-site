@@ -385,6 +385,41 @@ body.locked{overflow:hidden}
 .rev.ph{border-style:dashed;background:transparent}
 .rev.ph p{color:var(--sub)}
 
+/* ══ 후기 (좌: 제목 · 우: 엇갈린 카드) ══ */
+.revwrap{display:grid;grid-template-columns:minmax(260px,.8fr) 1.2fr;gap:clamp(32px,5vw,72px);align-items:center}
+@media(max-width:900px){.revwrap{grid-template-columns:1fr;gap:34px}}
+.revhead h2{margin:18px 0 14px}
+.revhead p{color:var(--sub);margin-bottom:24px}
+.revcards{display:grid;gap:16px}
+.rev{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 24px;
+  box-shadow:var(--shadow);max-width:520px}
+.rev:nth-child(odd){justify-self:end}
+.rev:nth-child(even){justify-self:start;margin-left:clamp(0px,4vw,52px)}
+@media(max-width:900px){.rev,.rev:nth-child(odd),.rev:nth-child(even){justify-self:stretch;margin-left:0;max-width:none}}
+.rev p{font-size:.95rem;line-height:1.75;margin-bottom:14px}
+.rev .stars{color:var(--brand);font-size:.9rem;letter-spacing:.12em}
+.rev .foot{display:flex;align-items:center;gap:10px;margin-top:10px;font-size:.8rem;color:var(--sub)}
+.rev .foot b{font-weight:600;color:var(--ink)}
+.rev .foot .via{margin-left:auto;font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;
+  background:var(--brand-tint);color:var(--brand-deep);padding:3px 8px;border-radius:5px}
+
+/* ══ 작업 현황 티커 ══ */
+.ticker{margin-top:clamp(28px,3.4vw,42px);overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+          mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.tape{display:flex;gap:16px;width:max-content;animation:slide 46s linear infinite}
+.ticker:hover .tape{animation-play-state:paused}
+@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.tape .st{flex:none;width:250px;background:var(--card);border:1px solid var(--line);
+  border-radius:14px;padding:18px 20px}
+.tape .st .tag{display:inline-block;font-size:.7rem;font-weight:700;padding:4px 11px;border-radius:999px;margin-bottom:11px}
+.tape .st .tag.신규{background:#FBECEA;color:#B4544A}
+.tape .st .tag.진행중{background:var(--brand-tint);color:var(--brand-deep)}
+.tape .st .tag.완료{background:var(--brand);color:#fff}
+.tape .st h4{font-family:var(--sans);font-size:.95rem;font-weight:600;margin-bottom:7px}
+.tape .st time{font-family:var(--mono);font-size:.74rem;color:var(--sub)}
+@media(prefers-reduced-motion:reduce){.tape{animation:none}}
+
 /* ══ 가격 ══ */
 .grid-price{display:grid;grid-template-columns:repeat(6,1fr);gap:20px;align-items:stretch}
 .plan{grid-column:span 2}          /* 아랫줄 3장 */
@@ -697,15 +732,28 @@ footer{background:var(--paper);border-top:1px solid var(--line);padding:60px 0 4
 </section>
 
 <!-- ══════════ 고객 후기 ══════════ -->
-<section id="review" class="wash">
+<section id="review" class="wash" hidden>
+  <div class="wrap revwrap">
+    <div class="revhead reveal">
+      <span class="live-badge"><span class="dot"></span>LIVE 실시간 후기</span>
+      <h2>함께 만든 브랜드의 이야기</h2>
+      <p class="muted">작업을 마치신 뒤 직접 남겨주신 후기만 올립니다.<br>지어낸 후기는 올리지 않습니다.</p>
+      <a class="btn ghost sm" href="survey.html">나도 의뢰하기 <span class="arw">→</span></a>
+    </div>
+    <div class="revcards reveal" id="revGrid"></div>
+  </div>
+</section>
+
+<!-- ══════════ 작업 현황 ══════════ -->
+<section id="status" hidden>
   <div class="wrap">
     <div class="sec-head center reveal">
-      <span id="revBadge"></span>
-      <h2 style="margin-top:18px" id="revTitle"></h2>
-      <p id="revLede"></p>
+      <span class="live-badge"><span class="dot"></span>LIVE 작업 현황</span>
+      <h2 style="margin-top:18px">지금 진행 중인 일</h2>
+      <p>최근 <span id="statusDays">30</span>일 안의 진행 상황입니다.</p>
     </div>
-    <div class="grid-rev reveal" id="revGrid"></div>
   </div>
+  <div class="ticker reveal"><div class="tape" id="statusTape"></div></div>
 </section>
 
 <!-- ══════════ 가격 안내 ══════════ -->
@@ -967,6 +1015,7 @@ footer{background:var(--paper);border-top:1px solid var(--line);padding:60px 0 4
 </footer>
 
 <script src="works-data.js"></script>
+<script src="board-data.js"></script>
 <script src="works.js"></script>
 <script>
 /* ══════════════════════════════════════════════════════════
@@ -1049,36 +1098,49 @@ const esc = s => String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&g
 /* ── 포트폴리오 상세 팝업 (works.js 공용) ── */
 BQ.initModal();
 
-/* ── 후기 카드 ── */
+/* ── 고객 후기 — 실제 후기가 있을 때만 섹션을 보여준다 ── */
 (function renderReviews(){
-  const grid = $('#revGrid');
-  if(!grid) return;
-  if(REVIEWS.length){
-    // 후기가 있을 때만 LIVE 뱃지를 켠다 (없는데 실시간인 척하지 않음)
-    $('#revBadge').outerHTML = '<span class="live-badge" id="revBadge"><span class="dot"></span>LIVE 실시간 후기</span>';
-    $('#revTitle').textContent = '함께 만든 브랜드의 이야기';
-    $('#revLede').textContent = '작업을 마친 고객이 직접 남긴 후기만 올립니다.';
-    grid.innerHTML = REVIEWS.map(r=>`
-      <div class="rev">
-        <div class="stars">${'★'.repeat(r.stars||5)}${'☆'.repeat(5-(r.stars||5))}</div>
-        <p>${esc(r.text||'')}</p>
-        <div class="who">
-          <span class="av">${esc((r.name||'?').slice(0,1))}</span>
-          <span><b>${esc(r.name||'')}</b><span>${esc(r.biz||'')}</span></span>
-        </div>
-      </div>`).join('');
-  }else{
-    // 후기가 없을 때 — 담백하게 준비 중임을 밝힌다
-    $('#revBadge').outerHTML = '<span class="eyebrow" id="revBadge">Reviews</span>';
-    $('#revTitle').textContent = '함께 만든 브랜드의 이야기';
-    $('#revLede').textContent = '작업을 마치신 뒤 직접 남겨주신 후기만 이 자리에 올립니다.';
-    grid.innerHTML = Array.from({length:3},()=>`
-      <div class="rev ph">
-        <div class="stars">☆☆☆☆☆</div>
-        <p>첫 후기를 기다리고 있습니다. 지어낸 후기는 올리지 않습니다.</p>
-        <div class="who"><span class="av">·</span><span><b>후기 준비 중</b><span>&nbsp;</span></span></div>
-      </div>`).join('');
-  }
+  const sec = $('#review'), grid = $('#revGrid');
+  if(!sec || !grid) return;
+  const list = (typeof REVIEWS !== 'undefined' ? REVIEWS : []).filter(r => r && r.text);
+  if(!list.length){ sec.hidden = true; return; }
+  sec.hidden = false;
+  grid.innerHTML = list.map(r => {
+    const n = Math.max(1, Math.min(5, +r.stars || 5));
+    return `<div class="rev">
+      <p>${esc(r.text)}</p>
+      <div class="stars">${'★'.repeat(n)}${'☆'.repeat(5-n)}</div>
+      <div class="foot">
+        <b>${esc(r.name || '')}</b>
+        <span>${esc(r.date || '')}</span>
+        ${r.via ? `<span class="via">${esc(r.via)}</span>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+})();
+
+/* ── 작업 현황 — 최근 것만, 없으면 섹션을 감춘다 ── */
+(function renderStatus(){
+  const sec = $('#status'), tape = $('#statusTape');
+  if(!sec || !tape) return;
+  const days = (typeof STATUS_FRESH_DAYS !== 'undefined' ? STATUS_FRESH_DAYS : 30);
+  const cut = Date.now() - days * 86400000;
+  const list = (typeof STATUS !== 'undefined' ? STATUS : [])
+    .filter(x => x && x.name && x.date && new Date(x.date).getTime() >= cut)
+    .sort((a,b) => new Date(b.date) - new Date(a.date));
+  if(!list.length){ sec.hidden = true; return; }
+  sec.hidden = false;
+  const daysEl = $('#statusDays'); if(daysEl) daysEl.textContent = days;
+
+  const card = x => `<div class="st">
+      <span class="tag ${esc(x.state||'진행중')}">${esc(x.state||'진행중')}</span>
+      <h4>${esc(x.name)} ${esc(x.step||'')}</h4>
+      <time>${esc((x.date||'').replace(/-/g,'.'))}</time>
+    </div>`;
+  /* 끊김 없이 흐르도록 같은 목록을 두 번 이어 붙인다 */
+  const html = list.map(card).join('');
+  tape.innerHTML = html + html;
+  if(list.length < 4) tape.style.animation = 'none';   // 몇 개 안 되면 흐르지 않게
 })();
 
 /* ── FAQ 탭 + 아코디언 ── */

@@ -5,7 +5,7 @@ set -e
 SRC="/Users/fa/Library/Mobile Documents/com~apple~CloudDocs/Autoworker_Dilly/brandique"
 DST="$HOME/brandique-site"
 # admin.html 은 내부 도구라 배포하지 않습니다
-cp "$SRC/index.html" "$SRC/survey.html" "$SRC/legal.html" "$SRC/works.html" "$SRC/works.js" "$SRC/works-data.js" "$DST/"
+cp "$SRC/index.html" "$SRC/survey.html" "$SRC/legal.html" "$SRC/works.html" "$SRC/works.js" "$SRC/works-data.js" "$SRC/board-data.js" "$DST/"
 cp "$SRC/robots.txt" "$SRC/sitemap.xml" "$DST/"
 cp "$SRC/setup/apps-script.gs" "$SRC/setup/README.md" "$DST/setup/"
 # assets 는 원본과 똑같이 맞춘다 (지운 파일이 배포본에 남지 않도록)

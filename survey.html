@@ -177,6 +177,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;text-align:center;font-si
   <!-- 서비스 선택 -->
   <div class="picker" id="picker">
     <button class="chip on" type="button" data-t="logo">로고</button>
+    <button class="chip" type="button" data-t="character">캐릭터 로고</button>
     <button class="chip" type="button" data-t="brand">브랜딩</button>
     <button class="chip" type="button" data-t="web">웹사이트</button>
     <button class="chip" type="button" data-t="print">패키지 · 인쇄물</button>
@@ -241,6 +242,45 @@ footer{border-top:1px solid var(--line);padding:30px 0;text-align:center;font-si
       <div class="f"><label for="l5">선호하는 컬러톤</label>
         <input type="text" id="l5" name="선호 컬러톤" placeholder="예: 따뜻한 베이지 계열 / 채도 낮은 초록"></div>
       <div class="f"><span class="lab">마음에 드는 스타일 <span class="hint">여러 개 고르셔도 됩니다.</span></span>
+        <div class="opts" data-style></div></div>
+    </fieldset>
+
+    <fieldset data-t="character" hidden>
+      <legend>캐릭터 로고</legend>
+      <p class="fs-note">떠오르는 이미지가 막연해도 괜찮습니다. 설문을 바탕으로 함께 구체화합니다.</p>
+      <div class="f"><label for="c1">비즈니스 설명</label>
+        <textarea id="c1" name="비즈니스 설명" placeholder="어떤 제품·서비스를 하시는지 편하게 적어주세요."></textarea></div>
+      <div class="f"><label for="c2">타겟층 (성별 · 연령대)</label>
+        <input type="text" id="c2" name="타겟층" placeholder="예: 20~30대 여성"></div>
+      <div class="f"><label for="c3">형상화하고 싶은 캐릭터</label>
+        <textarea id="c3" name="캐릭터 유형" placeholder="예: 동물 / 사람 / 사물 의인화 / 아직 모르겠어요"></textarea></div>
+      <div class="f"><span class="lab">캐릭터 성격 <span class="hint">여러 개 고르셔도 됩니다.</span></span>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" name="캐릭터 성격" value="귀여운"><span>귀여운</span></label>
+          <label class="opt"><input type="checkbox" name="캐릭터 성격" value="친근한"><span>친근한</span></label>
+          <label class="opt"><input type="checkbox" name="캐릭터 성격" value="유쾌한"><span>유쾌한</span></label>
+          <label class="opt"><input type="checkbox" name="캐릭터 성격" value="차분한"><span>차분한</span></label>
+          <label class="opt"><input type="checkbox" name="캐릭터 성격" value="고급스러운"><span>고급스러운</span></label>
+          <label class="opt"><input type="checkbox" name="캐릭터 성격" value="개성 있는"><span>개성 있는</span></label>
+          <label class="opt"><input type="checkbox" name="캐릭터 성격" value="단순한"><span>단순한</span></label>
+        </div></div>
+      <div class="f"><span class="lab">어디에 쓰실 예정인가요? <span class="hint">여러 개 고르셔도 됩니다.</span></span>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" name="활용 계획" value="패키지"><span>패키지</span></label>
+          <label class="opt"><input type="checkbox" name="활용 계획" value="굿즈"><span>굿즈</span></label>
+          <label class="opt"><input type="checkbox" name="활용 계획" value="SNS·이모티콘"><span>SNS · 이모티콘</span></label>
+          <label class="opt"><input type="checkbox" name="활용 계획" value="웹사이트·앱"><span>웹사이트 · 앱</span></label>
+          <label class="opt"><input type="checkbox" name="활용 계획" value="간판·공간"><span>간판 · 공간</span></label>
+          <label class="opt"><input type="checkbox" name="활용 계획" value="아직 미정"><span>아직 미정</span></label>
+        </div></div>
+      <div class="f"><span class="lab">기존 로고를 가지고 계신가요?</span>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="로고 보유" value="있음"><span>있습니다</span></label>
+          <label class="opt"><input type="radio" name="로고 보유" value="없음 (함께 제작)"><span>없습니다 (함께 제작)</span></label>
+        </div></div>
+      <div class="f"><label for="c4">선호하는 컬러톤</label>
+        <input type="text" id="c4" name="선호 컬러톤" placeholder="예: 밝고 채도 높은 색 / 파스텔 계열"></div>
+      <div class="f"><span class="lab">원하는 분위기 <span class="hint">여러 개 고르셔도 됩니다.</span></span>
         <div class="opts" data-style></div></div>
     </fieldset>
 
@@ -516,7 +556,7 @@ const $$ = (s,el=document)=>[...el.querySelectorAll(s)];
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
 const TYPES = {
-  logo:'로고', brand:'브랜딩', web:'웹사이트', print:'패키지 · 인쇄물',
+  logo:'로고', character:'캐릭터 로고', brand:'브랜딩', web:'웹사이트', print:'패키지 · 인쇄물',
   naming:'네이밍', store:'스마트스토어 브랜드 키트', visit:'방문 상담 예약'
 };
 const STYLES = ['여성스러운','남성스러운','트렌디한','클래식한','캐주얼한','고급스러운','심플한','디테일한','추상적인','직관적인'];

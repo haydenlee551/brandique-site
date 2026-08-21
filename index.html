@@ -281,8 +281,8 @@ h3{font-size:1.18rem}
 .rev.ph p{color:var(--sub)}
 
 /* ══ 가격 ══ */
-.grid-price{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;align-items:stretch}
-@media(max-width:1080px){.grid-price{grid-template-columns:repeat(2,1fr);gap:20px}}
+.grid-price{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
+@media(max-width:1000px){.grid-price{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:640px){.grid-price{grid-template-columns:1fr;max-width:520px;margin:0 auto}}
 .plan{
   background:var(--card);border:1px solid var(--line);border-radius:20px;padding:32px 24px 30px;
@@ -510,7 +510,7 @@ footer{background:var(--paper);border-top:1px solid var(--line);padding:60px 0 4
       <a class="svc" href="survey.html?type=web"><div class="ico">▦</div><h3>웹사이트</h3><p>반응형 브랜드 사이트 · 랜딩 페이지</p></a>
       <a class="svc" href="survey.html?type=print"><div class="ico">◍</div><h3>패키지 · 인쇄물</h3><p>포장지, 라벨, 명함, 리플릿, 메뉴판</p></a>
       <a class="svc" href="survey.html?type=naming"><div class="ico">✎</div><h3>네이밍</h3><p>브랜드명 후보 도출과 상표 사전 검토</p></a>
-      <a class="svc" href="survey.html?type=store"><div class="ico">▤</div><h3>스마트스토어 키트</h3><p>로고 · 배너 · 썸네일 템플릿 · 상세 모듈</p></a>
+      <a class="svc" href="survey.html?type=store"><div class="ico">▤</div><h3>스마트스토어 키트</h3><p>로고 · 상단 배너 · 상세페이지 모듈</p></a>
     </div>
   </div>
 </section>
@@ -606,16 +606,31 @@ footer{background:var(--paper);border-top:1px solid var(--line);padding:60px 0 4
     <div class="grid-price reveal">
 
       <div class="plan">
-        <div class="pname">Logo identity</div>
+        <div class="pname">Logo</div>
         <h3>로고 · 아이덴티티</h3>
         <p class="desc">먼저 브랜드의 얼굴부터 갖추고 싶을 때.</p>
         <!-- ⬇ 가격 확정되면 아래 한 줄만 바꾸면 됩니다 (예: <div class="price">450,000원<small> 부터</small></div>) -->
         <div class="price">상담 후 견적<small> 안내</small></div>
         <ul>
-          <li>로고 시안 3종 제안</li>
-          <li>워드마크 · 심볼 · 서브마크</li>
-          <li>컬러 · 폰트 가이드</li>
-          <li>원본 파일 전체 제공</li>
+          <li>시안 3종 제안</li>
+          <li>수정 3회</li>
+          <li>디자인 가이드</li>
+          <li>원본 파일 제공</li>
+        </ul>
+        <a class="btn ghost" href="survey.html?type=logo">견적 문의</a>
+      </div>
+
+      <div class="plan">
+        <div class="pname">Character logo</div>
+        <h3>캐릭터 로고</h3>
+        <p class="desc">브랜드를 대신할 캐릭터가 필요할 때.</p>
+        <!-- ⬇ 가격 확정되면 아래 한 줄만 바꾸면 됩니다 -->
+        <div class="price">상담 후 견적<small> 안내</small></div>
+        <ul>
+          <li>시안 2종 제안</li>
+          <li>수정 2회</li>
+          <li>디자인 가이드</li>
+          <li>원본 파일 제공</li>
         </ul>
         <a class="btn ghost" href="survey.html?type=logo">견적 문의</a>
       </div>
@@ -627,42 +642,42 @@ footer{background:var(--paper);border-top:1px solid var(--line);padding:60px 0 4
         <!-- ⬇ 가격 확정되면 아래 한 줄만 바꾸면 됩니다 -->
         <div class="price">상담 후 견적<small> 안내</small></div>
         <ul>
-          <li>로고 · 아이덴티티 전체 포함</li>
-          <li>반응형 브랜드 웹사이트</li>
-          <li>명함 · 스티커 · 라벨</li>
+          <li>로고 시안 2종 제안 (1차)</li>
+          <li>로고 2종 제안 (2차)</li>
+          <li>시스템 설계</li>
+          <li>브랜드 방향 재제안 1회</li>
+          <li>브랜드 가이드</li>
           <li>패키지 · 인쇄물 기본 세트</li>
-          <li>브랜드 가이드 문서</li>
         </ul>
         <a class="btn primary" href="survey.html">무료 상담 신청 <span class="arw">→</span></a>
       </div>
 
       <div class="plan">
-        <div class="pname">Smart store kit</div>
+        <div class="pname">Smart store brand kit</div>
         <h3>스마트스토어 브랜드 키트</h3>
         <p class="desc">스토어를 브랜드처럼 보이게 하는 한 세트.</p>
         <!-- ⬇ 가격 확정되면 아래 한 줄만 바꾸면 됩니다 -->
         <div class="price">상담 후 견적<small> 안내</small></div>
         <ul>
-          <li>로고 (가로형 · 정사각형)</li>
-          <li>스토어 상단 배너 PC · 모바일</li>
-          <li>상품 썸네일 템플릿 (편집 가능)</li>
-          <li>상세페이지 공통 모듈 (상단 · 하단)</li>
-          <li>컬러 · 폰트 가이드</li>
+          <li>로고 시안 2종 제안 (가로형 · 정사각형)</li>
+          <li>스토어 상단 배너 2종 제안</li>
+          <li>상세페이지 공통 모듈 (상단 · 하단) 1종 제안</li>
+          <li>디자인 가이드</li>
         </ul>
         <a class="btn ghost" href="survey.html?type=store">견적 문의</a>
       </div>
 
       <div class="plan">
-        <div class="pname">Brand website</div>
+        <div class="pname">Web only</div>
         <h3>브랜드 웹사이트</h3>
         <p class="desc">이미 아이덴티티가 있고, 웹으로 확장할 때.</p>
         <!-- ⬇ 가격 확정되면 아래 한 줄만 바꾸면 됩니다 -->
         <div class="price">상담 후 견적<small> 안내</small></div>
         <ul>
           <li>반응형 브랜드 사이트</li>
-          <li>기존 로고 톤에 맞춘 설계</li>
-          <li>모바일 최적화</li>
+          <li>기존 로고의 톤앤매너에 맞춘 설계</li>
           <li>도메인 · 배포 안내</li>
+          <li>SEO 설정</li>
         </ul>
         <a class="btn ghost" href="survey.html?type=web">견적 문의</a>
       </div>
@@ -842,7 +857,7 @@ const FAQ = {
     ['이미 있는 로고를 다듬는 것도 되나요?','가능합니다. 기존 로고의 자산을 유지하면서 정리하는 리브랜딩과, 완전히 새로 만드는 방식 중에 상담에서 함께 결정합니다.'],
     ['규모가 작아도, 또는 커도 맡길 수 있나요?','1인 브랜드부터 기업 단위 프로젝트까지 진행합니다. 규모에 따라 범위·일정·인원이 달라질 뿐, 브랜드를 설계하는 방식은 같습니다. 기업 프로젝트는 별도 제안서로 안내해 드립니다.'],
     ['어떤 서비스까지 맡길 수 있나요?','로고, 브랜딩(컬러·폰트 시스템과 가이드), 웹사이트, 패키지·인쇄물, 네이밍까지 가능합니다. 필요한 영역만 진행하실 수도, 하나의 브랜드 시스템으로 통합해 진행하실 수도 있습니다.'],
-    ['스마트스토어만 운영하는데도 맡길 수 있나요?','네. <strong>스마트스토어 브랜드 키트</strong>를 따로 두고 있습니다. 로고(가로형·정사각형), 스토어 상단 배너(PC·모바일), 상품 썸네일 템플릿, 상세페이지 공통 모듈, 컬러·폰트 가이드가 한 세트입니다. 썸네일은 <strong>편집 가능한 템플릿</strong>으로 드리기 때문에 상품이 늘어도 계속 쓰실 수 있습니다. 상품별 상세페이지 전체 제작은 상품 수에 따라 작업량이 달라져 별도 견적으로 안내드립니다.'],
+    ['스마트스토어만 운영하는데도 맡길 수 있나요?','네. <strong>스마트스토어 브랜드 키트</strong>를 따로 두고 있습니다. 로고 시안 2종(가로형·정사각형), 스토어 상단 배너 2종, 상세페이지 공통 모듈(상단·하단), 디자인 가이드가 한 세트입니다. 상품별 상세페이지 전체 제작은 상품 수에 따라 작업량이 달라져 별도 견적으로 안내드립니다.'],
   ],
   work:[
     ['작업 기간은 얼마나 걸리나요?','로고 · 아이덴티티는 약 <strong>4주</strong>, 웹사이트와 인쇄물까지 포함하는 브랜드 통합 구축은 약 <strong>12주</strong>가 기준입니다. 정확한 일정은 상담에서 범위를 확정한 뒤 안내해 드립니다.'],

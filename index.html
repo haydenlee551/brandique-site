@@ -5,7 +5,67 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>브랜디크 · 브랜드 디자인 스튜디오</title>
 <meta name="description" content="흩어진 디자인을 하나의 언어로. 로고·네이밍부터 웹사이트, 패키지·인쇄물까지 완성하는 브랜드 디자인 스튜디오 브랜디크. 서울 강남구 압구정로2길 46.">
+<link rel="canonical" href="https://brandique.co.kr/">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <meta name="theme-color" content="#F8F7F4">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="브랜디크">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:url" content="https://brandique.co.kr/">
+<meta property="og:title" content="브랜디크 · 브랜드 디자인 스튜디오">
+<meta property="og:description" content="흩어진 디자인을 하나의 언어로. 로고·캐릭터·브랜딩부터 웹사이트, 패키지·인쇄물, 네이밍까지 완성하는 브랜드 디자인 스튜디오. 서울 강남구 신사동.">
+<meta property="og:image" content="https://brandique.co.kr/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="브랜디크 — 오래 기억되는 브랜드에는 이유가 있습니다">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="브랜디크 · 브랜드 디자인 스튜디오">
+<meta name="twitter:description" content="흩어진 디자인을 하나의 언어로. 로고·캐릭터·브랜딩부터 웹사이트, 패키지·인쇄물, 네이밍까지 완성하는 브랜드 디자인 스튜디오. 서울 강남구 신사동.">
+<meta name="twitter:image" content="https://brandique.co.kr/assets/og-image.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": "https://brandique.co.kr/#studio",
+  "name": "브랜디크",
+  "alternateName": "BRANDIQUE",
+  "description": "로고·캐릭터·브랜딩부터 웹사이트, 패키지·인쇄물, 네이밍까지 하나의 톤으로 설계하는 브랜드 디자인 스튜디오.",
+  "url": "https://brandique.co.kr/",
+  "image": "https://brandique.co.kr/assets/og-image.png",
+  "email": "contact@brandique.co.kr",
+  "founder": { "@type": "Person", "name": "이화연" },
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "압구정로2길 46, 214-S147호",
+    "addressLocality": "강남구",
+    "addressRegion": "서울특별시",
+    "postalCode": "06034",
+    "addressCountry": "KR"
+  },
+  "openingHoursSpecification": [{
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+    "opens": "10:00",
+    "closes": "19:00"
+  }],
+  "areaServed": { "@type": "Country", "name": "대한민국" },
+  "knowsAbout": ["브랜드 디자인","로고 디자인","캐릭터 디자인","브랜딩","웹사이트 디자인","패키지 디자인","네이밍","스마트스토어 브랜딩"],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "브랜디크 서비스",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "로고 디자인" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "캐릭터 로고 디자인" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "브랜딩 · 브랜드 아이덴티티" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "브랜드 웹사이트 제작" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "패키지 · 인쇄물 디자인" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "네이밍" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "스마트스토어 브랜드 키트" } }
+    ]
+  }
+}
+</script>
 <style>
 /* ══════════════════════════════════════════════════════════
    브랜디크 홈페이지 — 언디자이닝 구조 + 브랜디크 감성 톤
@@ -1000,6 +1060,20 @@ const esc = s => String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&g
     txt.textContent = '복사됨';
     setTimeout(()=>{ txt.textContent = '주소 복사'; }, 1600);
   });
+})();
+
+/* ── FAQ 구조화 데이터 — 위 FAQ 내용에서 자동 생성 ── */
+(function faqSchema(){
+  const items=[];
+  Object.values(FAQ).forEach(g=>g.forEach(([q,ans])=>{
+    items.push({'@type':'Question', name:q,
+      acceptedAnswer:{'@type':'Answer', text:String(ans).replace(/<[^>]+>/g,'')}});
+  }));
+  if(!items.length) return;
+  const el=document.createElement('script');
+  el.type='application/ld+json';
+  el.textContent=JSON.stringify({'@context':'https://schema.org','@type':'FAQPage',mainEntity:items});
+  document.head.appendChild(el);
 })();
 
 /* ── 모바일 메뉴 ── */

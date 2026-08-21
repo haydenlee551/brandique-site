@@ -7,6 +7,9 @@
 /* 작업 유형 — 전체 페이지(works.html)의 필터 버튼이 됩니다 */
 const WORK_TYPES = ["로고", "캐릭터 로고", "브랜딩", "웹사이트", "패키지 · 인쇄물", "네이밍"];
 
+/* 업종 목록 — 관리자 페이지의 업종 선택 항목이 됩니다 */
+const WORK_CATS = ["IT", "가구", "건강", "건설", "공방", "교육", "금융", "기타", "농산", "마케팅", "문화·예술", "물류", "미용", "반려동물", "법률", "베이커리", "병원", "부동산", "뷰티", "세무·회계", "수산", "숙박", "스포츠", "약국", "여행", "요리", "유통", "음식점", "음악", "의류", "인테리어", "자동차", "잡화", "제조", "주점", "카페", "캠핑", "패션", "학원", "헬스"];
+
 const WORKS = [
   {
     title: "펜캉스",
@@ -178,7 +181,7 @@ const WORKS = [
   },
   {
     title: "커몬시스터즈",
-    cat: "의류, 건강",
+    cat: "건강",
     type: "로고",
     cover: "assets/works/keomonsiseuteojeu-01.jpg",
     images: ["assets/works/keomonsiseuteojeu-01.jpg", "assets/works/keomonsiseuteojeu-02.jpg", "assets/works/keomonsiseuteojeu-03.jpg", "assets/works/keomonsiseuteojeu-04.jpg", "assets/works/keomonsiseuteojeu-05.jpg"],
@@ -208,5 +211,31 @@ const WORKS = [
     cat: "병원",
     type: "로고",
     cover: "assets/works/haniltapnaegwa-01.png",
+  },
+  {
+    title: "노무사사무소 해담",
+    cat: "법률",
+    type: "로고",
+    cover: "assets/works/nomusasamuso-haedam-01.png",
+  },
+  {
+    title: "디노코코",
+    cat: "유통",
+    type: "로고",
+    tags: "로고",
+    cover: "assets/works/dinokoko-02.jpg",
+  },
+  {
+    title: "책밤",
+    cat: "요리",
+    type: "로고",
+    cover: "assets/works/chaekbam-02.jpg",
+  },
+  {
+    title: "카페 몽루",
+    cat: "카페",
+    type: "로고",
+    tags: "로고",
+    cover: "assets/works/kape-mongru-03.jpg",
   },
 ];

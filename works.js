@@ -116,5 +116,7 @@
     });
   }
 
-  window.BQ = { WORKS, WORK_TYPES, featured, renderGrid, initModal, esc };
+  window.BQ = { WORKS, WORK_TYPES,
+    WORK_CATS: (typeof WORK_CATS !== 'undefined' ? WORK_CATS : []),
+    featured, renderGrid, initModal, esc };
 })();

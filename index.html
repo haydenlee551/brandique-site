@@ -207,11 +207,12 @@ h3{font-size:1.18rem}
   content:"";position:absolute;top:-220px;right:-160px;width:620px;height:620px;border-radius:50%;
   background:radial-gradient(circle,rgba(124,144,130,.16),transparent 68%);pointer-events:none;
 }
-.hero .inner{position:relative;z-index:1;max-width:820px}
+.hero .inner{position:relative;z-index:1;max-width:880px}
 .hero .eyebrow{margin-bottom:22px}
 .hero h1{margin-bottom:22px}
 .hero h1 em{font-style:normal;color:var(--brand-deep)}
-.hero .lede{font-size:clamp(1.02rem,1.5vw,1.16rem);color:var(--sub);max-width:50ch;margin-bottom:34px}
+/* 한 문장이 한 줄에 온전히 들어가도록 폭 제한을 두지 않는다 (좁은 화면에선 자연스럽게 접힘) */
+.hero .lede{font-size:clamp(1.02rem,1.5vw,1.16rem);color:var(--sub);max-width:none;margin-bottom:34px}
 .hero .cta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:52px}
 .hero-facts{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);
   border:1px solid var(--line);border-radius:var(--r);overflow:hidden;position:relative;z-index:1}
@@ -651,7 +652,7 @@ footer{background:var(--paper);border-top:1px solid var(--line);padding:60px 0 4
     <div class="sec-head center reveal">
       <span class="eyebrow">Services</span>
       <h2 style="margin-top:16px">하나의 브랜드, 일관된 경험</h2>
-      <p>로고, 컬러, 웹사이트, 패키지와 인쇄물까지 서로 다른 접점에서도 같은 브랜드로 느껴지도록 설계합니다.<br>필요한 영역만 선택하거나, 하나의 브랜드 시스템으로 통합하여 진행할 수 있습니다.</p>
+      <p>로고, 컬러, 웹사이트, 패키지와 인쇄물까지<br>서로 다른 접점에서도 같은 브랜드로 느껴지도록 설계합니다.<br>필요한 영역만 선택하거나, 하나의 브랜드 시스템으로 통합하여 진행할 수 있습니다.</p>
     </div>
     <div class="svc-grid reveal">
       <a class="svc" href="survey.html?type=logo"><div class="ico">✦</div><h3>로고</h3><p>워드마크, 심볼, 서브마크</p></a>
@@ -846,7 +847,7 @@ footer{background:var(--paper);border-top:1px solid var(--line);padding:60px 0 4
       </div>
 
     </div>
-    <p class="price-note reveal">표시 금액은 부가세가 포함된 금액입니다.<br>시안 수, 납기, 선택사항에 따라 견적이 달라지며, 상담은 무료이며 비용이 발생하지 않습니다.</p>
+    <p class="price-note reveal">표시 금액은 부가세가 포함된 금액입니다.<br>시안 수, 납기, 선택사항에 따라 견적이 달라지며, 상담은 무료이고 비용이 발생하지 않습니다.</p>
   </div>
 </section>
 

@@ -357,9 +357,12 @@ body.locked{overflow:hidden}
 @media(max-width:560px){.steps{grid-template-columns:1fr}}
 .step{background:var(--card);padding:34px 28px 32px;transition:background-color .25s}
 .step:hover{background:var(--brand-tint)}
-.step .k{display:flex;align-items:center;gap:9px;margin-bottom:16px}
-.step .sym{font-size:.62rem;color:var(--brand);line-height:1}
-.step .no{font-family:var(--mono);font-size:.72rem;font-weight:700;letter-spacing:.16em;color:var(--brand)}
+.step .k{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.step .ico{flex:none;width:44px;height:44px;border-radius:13px;background:var(--brand-tint);
+  display:flex;align-items:center;justify-content:center;color:var(--brand-deep);transition:background-color .25s}
+.step:hover .ico{background:var(--soft)}
+.step .ico svg{width:23px;height:23px}
+.step .no{font-family:var(--mono);font-size:.74rem;font-weight:700;letter-spacing:.16em;color:var(--brand)}
 .step h3{font-size:1.08rem;margin-bottom:8px}
 .step p{font-size:.88rem;color:var(--sub);line-height:1.65}
 
@@ -608,7 +611,7 @@ footer{background:var(--paper);border-top:1px solid var(--line);padding:60px 0 4
       <span class="eyebrow">Make your brand unforgettable</span>
       <h1>오래 기억되는 브랜드에는<br><em>이유가 있습니다</em></h1>
       <p class="lede">
-        로고와 컬러, 웹사이트와 패키지까지 흩어진 디자인을 하나의 언어로 연결합니다.
+        로고와 컬러, 웹사이트와 패키지까지 흩어진 디자인을 하나의 언어로 연결합니다.<br>
         일관된 인상을 설계하고 오래 기억되는 브랜드를 만드는 것, 브랜디크가 하는 일입니다.
       </p>
       <div class="cta">
@@ -679,7 +682,7 @@ footer{background:var(--paper);border-top:1px solid var(--line);padding:60px 0 4
         <h2 style="margin:16px 0 14px">디자인 안심 보증</h2>
         <p class="muted">
           첫 제안에서 방향이 충분히 맞지 않았다고 판단될 경우, 피드백을 다시 정리해
-          <strong style="color:var(--ink)">디자인 방향을 한 차례 더 제안합니다.</strong>
+          <strong style="color:var(--ink)">디자인 방향을 한 차례 더 제안합니다.</strong><br>
           단순히 시안의 수를 늘리는 것이 아니라, 브랜드에 맞는 방향을 찾는 것을 우선합니다.
         </p>
         <ul class="guard-list">
@@ -718,15 +721,15 @@ footer{background:var(--paper);border-top:1px solid var(--line);padding:60px 0 4
     <div class="sec-head center reveal">
       <span class="eyebrow">Process</span>
       <h2 style="margin-top:16px">좋은 브랜드는 과정부터 다릅니다</h2>
-      <p>상담과 전략 수립부터 디자인, 최종 가이드까지 체계적인 프로세스로 진행합니다. 각 단계의 목적과 결과를 명확하게 공유합니다.</p>
+      <p>상담과 전략 수립부터 디자인, 최종 가이드까지 체계적인 프로세스로 진행합니다.<br>각 단계의 목적과 결과를 명확하게 공유합니다.</p>
     </div>
     <div class="steps reveal">
-      <div class="step"><div class="k"><span class="sym">●</span><span class="no">01</span></div><h3>브랜드 이해</h3><p>업종·타깃·좋아하는 분위기를 설문으로 받습니다. 이 단계에서 브랜드의 기초가 세워집니다.</p></div>
-      <div class="step"><div class="k"><span class="sym">■</span><span class="no">02</span></div><h3>방향 설정</h3><p>설문을 바탕으로 범위와 일정, 견적을 정리해 드립니다.</p></div>
-      <div class="step"><div class="k"><span class="sym">▲</span><span class="no">03</span></div><h3>계약 · 결제</h3><p>작업 범위와 보증 항목을 문서로 확정하고 시작합니다.</p></div>
-      <div class="step"><div class="k"><span class="sym">●</span><span class="no">04</span></div><h3>전략 · 디자인</h3><p>브랜드의 톤을 먼저 잡고, 거기에 맞춰 시안을 만듭니다.</p></div>
-      <div class="step"><div class="k"><span class="sym">■</span><span class="no">05</span></div><h3>피드백 · 수정</h3><p>실제 적용 예시를 목업으로 확인 후 디자인을 확정하는 단계입니다.</p></div>
-      <div class="step"><div class="k"><span class="sym">▲</span><span class="no">06</span></div><h3>납품 · 브랜드 가이드</h3><p>바로 사용이 가능한 원본 파일과 사용 가이드를 함께 드립니다.</p></div>
+      <div class="step"><div class="k"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="5" y="4.5" width="14" height="16" rx="2.4"/><path d="M9 4.5V3.6a1 1 0 011-1h4a1 1 0 011 1v.9"/><path d="M8.6 10.5h6.8M8.6 14.2h4.6" stroke-linecap="round"/></svg></span><span class="no">01</span></div><h3>브랜드 이해</h3><p>업종·타깃·좋아하는 분위기를 설문으로 받습니다.<br>이 단계에서 브랜드의 기초가 세워집니다.</p></div>
+      <div class="step"><div class="k"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="8.4"/><path d="M15.4 8.6l-2.1 4.7-4.7 2.1 2.1-4.7 4.7-2.1z" stroke-linejoin="round"/></svg></span><span class="no">02</span></div><h3>방향 설정</h3><p>설문을 바탕으로 범위와 일정, 견적을 정리해 드립니다.</p></div>
+      <div class="step"><div class="k"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6.2 3.6h7.6l4.2 4.2v12.6H6.2z" stroke-linejoin="round"/><path d="M13.8 3.6v4.2H18" stroke-linejoin="round"/><path d="M9.2 14.2l2.1 2.1 4-4.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="no">03</span></div><h3>계약 · 결제</h3><p>작업 범위와 보증 항목을 문서로 확정하고 시작합니다.</p></div>
+      <div class="step"><div class="k"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4.2 19.8l1.5-4.4L16 5.1a2.05 2.05 0 012.9 2.9L8.6 18.3l-4.4 1.5z" stroke-linejoin="round"/><path d="M14.5 6.6l2.9 2.9"/></svg></span><span class="no">04</span></div><h3>전략 · 디자인</h3><p>브랜드의 톤을 먼저 잡고, 거기에 맞춰 시안을 만듭니다.</p></div>
+      <div class="step"><div class="k"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M19.8 12a7.8 7.8 0 11-2.3-5.5" stroke-linecap="round"/><path d="M19.8 4.2v4.2h-4.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="no">05</span></div><h3>피드백 · 수정</h3><p>실제 적용 예시를 목업으로 확인 후 디자인을 확정하는 단계입니다.</p></div>
+      <div class="step"><div class="k"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3.2l7.8 3.9v9.8L12 20.8l-7.8-3.9V7.1L12 3.2z" stroke-linejoin="round"/><path d="M4.2 7.1L12 11l7.8-3.9M12 11v9.8" stroke-linejoin="round"/></svg></span><span class="no">06</span></div><h3>납품 · 브랜드 가이드</h3><p>바로 사용이 가능한 원본 파일과 사용 가이드를 함께 드립니다.</p></div>
     </div>
   </div>
 </section>
@@ -843,7 +846,7 @@ footer{background:var(--paper);border-top:1px solid var(--line);padding:60px 0 4
       </div>
 
     </div>
-    <p class="price-note reveal">표시 금액은 부가세가 포함된 금액입니다. 시안 수, 납기, 선택사항에 따라 견적이 달라지며, 상담은 무료이며 비용이 발생하지 않습니다.</p>
+    <p class="price-note reveal">표시 금액은 부가세가 포함된 금액입니다.<br>시안 수, 납기, 선택사항에 따라 견적이 달라지며, 상담은 무료이며 비용이 발생하지 않습니다.</p>
   </div>
 </section>
 
@@ -869,7 +872,7 @@ footer{background:var(--paper);border-top:1px solid var(--line);padding:60px 0 4
     <div class="sec-head center reveal">
       <span class="eyebrow">Studio</span>
       <h2 style="margin-top:16px">브랜디크 스튜디오</h2>
-      <p>서울 강남구 신사동에 위치해있습니다. 방문 상담은 예약 후 진행합니다.</p>
+      <p>서울 강남구 신사동에 위치해있습니다.<br>방문 상담은 예약 후 진행합니다.</p>
     </div>
     <div class="studio reveal">
 
@@ -915,8 +918,8 @@ footer{background:var(--paper);border-top:1px solid var(--line);padding:60px 0 4
         <div>
           <h3>방문 상담 안내</h3>
           <p>
-            브랜드 자료를 함께 보며 이야기하는 편이 정확합니다.
-            아래에서 희망 일정을 남겨주시면 확인 후 확정 시간을 회신해 드립니다.
+            브랜드 자료를 함께 보며 이야기하는 편이 정확합니다.<br>
+            아래에서 희망 일정을 남겨주시면 확인 후 확정 시간을 회신해 드립니다.<br>
             원격 상담도 동일하게 진행합니다.
           </p>
           <a class="btn onink" href="survey.html?type=visit">방문 상담 예약하기 <span class="arw">→</span></a>
@@ -932,7 +935,7 @@ footer{background:var(--paper);border-top:1px solid var(--line);padding:60px 0 4
   <div class="wrap reveal">
     <span class="eyebrow">Let's start</span>
     <h2>브랜드 설문을 작성하고<br>무료 상담을 받아보세요</h2>
-    <p>5분이면 충분합니다. 설문 내용을 보고 방향과 견적을 정리해 답변드립니다.</p>
+    <p>5분이면 충분합니다.<br>설문 내용을 보고 방향과 견적을 정리해 답변드립니다.</p>
     <div class="row">
       <a class="btn onink" href="survey.html">브랜드 설문 작성하기 <span class="arw">→</span></a>
       <a class="btn ghost" style="background:transparent;border-color:rgba(255,255,255,.5);color:#fff" href="mailto:contact@brandique.co.kr">메일로 문의하기</a>
@@ -969,7 +972,7 @@ footer{background:var(--paper);border-top:1px solid var(--line);padding:60px 0 4
     <div class="f-top">
       <div class="f-brand">
         <a class="logo" href="#top"><span class="mark">B</span><span>브랜디크 <small>BRANDIQUE</small></span></a>
-        <p>브랜드 디자인 스튜디오. 로고·네이밍부터 웹사이트, 패키지·인쇄물까지 하나의 톤으로 만듭니다. 1인 브랜드부터 기업 프로젝트까지.</p>
+        <p>브랜드 디자인 스튜디오.<br>로고·네이밍부터 웹사이트, 패키지·인쇄물까지 하나의 톤으로 만듭니다.<br>1인 브랜드부터 기업 프로젝트까지.</p>
       </div>
       <div class="f-col">
         <h4>서비스</h4>

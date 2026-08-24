@@ -1131,7 +1131,7 @@ BQ.initModal();
     return `<div class="rev">
       <div class="stars">${'★'.repeat(n)}${'☆'.repeat(5-n)}</div>
       <p>${esc(r.text)}</p>
-      <div class="foot"><b>${esc(r.name||'')}</b><span>${esc(r.date||'')}</span>
+      <div class="foot"><b>${esc(r.name||'')}</b>
         ${r.via ? `<span class="via">${esc(r.via)}</span>` : ''}</div>
     </div>`;
   };

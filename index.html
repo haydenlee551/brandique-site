@@ -389,6 +389,13 @@ body.locked{overflow:hidden}
 .rev.ph{border-style:dashed;background:transparent}
 .rev.ph p{color:var(--sub)}
 
+/* 평점 뱃지 — 실제로 받은 별점의 평균 */
+.score{display:inline-flex;align-items:center;gap:9px;background:var(--brand);color:#fff;
+  border-radius:999px;padding:8px 18px;box-shadow:0 6px 18px rgba(124,144,130,.3)}
+.score .st{font-size:.86rem;letter-spacing:.1em}
+.score b{font-family:var(--serif);font-size:1.18rem;font-weight:700;line-height:1}
+.score em{font-style:normal;font-size:.76rem;opacity:.85;padding-left:9px;border-left:1px solid rgba(255,255,255,.35)}
+
 /* ══ 후기 — 양방향으로 흐르는 2줄 ══ */
 .revmarq{display:grid;gap:14px;margin-top:clamp(28px,3.4vw,44px)}
 .revrow{overflow:hidden;
@@ -742,7 +749,7 @@ footer{background:var(--paper);border-top:1px solid var(--line);padding:60px 0 4
 <section id="review" class="wash" hidden>
   <div class="wrap">
     <div class="sec-head center reveal">
-      <span class="live-badge"><span class="dot"></span>LIVE 실시간 후기</span>
+      <span class="score" id="revScore"></span>
       <h2 style="margin-top:18px">함께 만든 브랜드의 이야기</h2>
       <p id="revSummary"></p>
     </div>
@@ -1113,9 +1120,11 @@ BQ.initModal();
 
   const avg = (list.reduce((s,r) => s + (+r.stars || 5), 0) / list.length).toFixed(1);
   const vias = [...new Set(list.map(r => r.via).filter(Boolean))];
+  $('#revScore').innerHTML =
+    `<span class="st">★★★★★</span><b>${avg}</b><em>${list.length}건</em>`;
   $('#revSummary').innerHTML =
-    `${vias.join(' · ')}에서 받은 실제 후기입니다.<br>` +
-    `<b style="color:var(--brand-deep)">평균 ${avg}점 · ${list.length}건</b>`;
+    `${vias.join(' · ')}에서 실제로 받은 후기입니다.<br>` +
+    `보내주신 그대로 옮겨 적었습니다.`;
 
   const card = r => {
     const n = Math.max(1, Math.min(5, +r.stars || 5));

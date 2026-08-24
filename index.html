@@ -7,7 +7,8 @@
 <meta name="description" content="흩어진 디자인을 하나의 언어로. 로고·브랜딩부터 웹사이트, 패키지·인쇄물까지 완성하는 브랜드 디자인 스튜디오 브랜디크. 서울 강남구 압구정로2길 46.">
 <meta name="naver-site-verification" content="85a9dc7929b9762d028d2d4e3609cea6fb80e054" />
 <link rel="canonical" href="https://brandique.co.kr/">
-<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="180x180" href="assets/apple-touch-icon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <meta name="theme-color" content="#F8F7F4">
 <meta property="og:type" content="website">
@@ -160,14 +161,8 @@ h3{font-size:1.18rem}
 }
 .gnb.stuck{border-bottom-color:var(--line);box-shadow:0 1px 20px rgba(26,31,46,.05)}
 .gnb .row{max-width:var(--wrap);margin:0 auto;padding:0 24px;height:100%;display:flex;align-items:center;gap:20px}
-.logo{display:flex;align-items:baseline;gap:9px;font-family:var(--serif);font-size:1.32rem;font-weight:700;letter-spacing:-.01em}
-.logo .mark{
-  width:26px;height:26px;border-radius:8px;background:var(--brand);
-  display:inline-flex;align-items:center;justify-content:center;
-  color:#fff;font-family:var(--mono);font-size:.72rem;font-weight:700;
-  align-self:center;flex:none;
-}
-.logo small{font-family:var(--mono);font-size:.56rem;letter-spacing:.24em;color:var(--sub);font-weight:600}
+.logo img{height:34px;width:auto;max-width:100%;display:block}
+@media(max-width:560px){.logo img{height:27px}}
 .menu{margin-left:auto;display:flex;align-items:center;gap:30px}
 .menu a{font-size:.92rem;font-weight:500;color:var(--ink);position:relative;padding:4px 0;transition:color .2s}
 .menu a::after{
@@ -589,10 +584,7 @@ footer{background:var(--paper);border-top:1px solid var(--line);padding:60px 0 4
 <!-- ══════════ 상단 고정 GNB ══════════ -->
 <header class="gnb" id="gnb">
   <div class="row">
-    <a class="logo" href="#top">
-      <span class="mark">B</span>
-      <span>브랜디크 <small>BRANDIQUE</small></span>
-    </a>
+    <a class="logo" href="#top"><img src="assets/brand/logo-h.png" alt="브랜디크 BRANDIQUE" width="977" height="132"></a>
     <nav class="menu" id="menu">
       <a href="#work">포트폴리오</a>
       <a href="#price">구성 및 가격</a>
@@ -978,7 +970,7 @@ footer{background:var(--paper);border-top:1px solid var(--line);padding:60px 0 4
   <div class="wrap">
     <div class="f-top">
       <div class="f-brand">
-        <a class="logo" href="#top"><span class="mark">B</span><span>브랜디크 <small>BRANDIQUE</small></span></a>
+        <a class="logo" href="#top"><img src="assets/brand/logo-h.png" alt="브랜디크 BRANDIQUE" width="977" height="132"></a>
         <p>브랜드 디자인 스튜디오.<br>로고·브랜딩부터 웹사이트, 패키지·인쇄물까지 하나의 톤으로 만듭니다.<br>1인 브랜드부터 기업 프로젝트까지.</p>
       </div>
       <div class="f-col">

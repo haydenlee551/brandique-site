@@ -6,7 +6,8 @@
 <title>포트폴리오 · 브랜디크</title>
 <meta name="description" content="브랜디크가 설계한 브랜드들. 로고·캐릭터·브랜딩·웹사이트·패키지·인쇄물 작업 전체를 업종과 작업 유형으로 살펴보세요.">
 <link rel="canonical" href="https://brandique.co.kr/works.html">
-<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="180x180" href="assets/apple-touch-icon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <meta name="theme-color" content="#F8F7F4">
 <meta property="og:type" content="website">
@@ -50,10 +51,8 @@ h1,h2,h3{font-family:var(--serif);font-weight:700;letter-spacing:-.015em;line-he
   backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px);
   border-bottom:1px solid var(--line)}
 .top .row{max-width:var(--wrap);margin:0 auto;padding:0 24px;height:66px;display:flex;align-items:center;gap:14px}
-.logo{display:flex;align-items:center;gap:9px;font-family:var(--serif);font-size:1.24rem;font-weight:700}
-.logo .mark{width:26px;height:26px;border-radius:8px;background:var(--brand);color:#fff;flex:none;
-  display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.72rem;font-weight:700}
-.logo small{font-family:var(--mono);font-size:.56rem;letter-spacing:.24em;color:var(--sub);font-weight:600}
+.logo img{height:34px;width:auto;max-width:100%;display:block}
+@media(max-width:560px){.logo img{height:27px}}
 .top .right{margin-left:auto;display:flex;align-items:center;gap:18px}
 .top .right a{font-size:.9rem;color:var(--sub)}
 .top .right a:hover{color:var(--brand-deep)}
@@ -163,7 +162,7 @@ body.locked{overflow:hidden}
 
 <header class="top">
   <div class="row">
-    <a class="logo" href="index.html"><span class="mark">B</span><span>브랜디크 <small>BRANDIQUE</small></span></a>
+    <a class="logo" href="index.html"><img src="assets/brand/logo-h.png" alt="브랜디크 BRANDIQUE" width="977" height="132"></a>
     <div class="right">
       <a href="index.html#price">구성 및 가격</a>
       <a href="survey.html">무료 상담 신청</a>

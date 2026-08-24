@@ -389,23 +389,26 @@ body.locked{overflow:hidden}
 .rev.ph{border-style:dashed;background:transparent}
 .rev.ph p{color:var(--sub)}
 
-/* ══ 후기 (좌: 제목 · 우: 엇갈린 카드) ══ */
-.revwrap{display:grid;grid-template-columns:minmax(260px,.8fr) 1.2fr;gap:clamp(32px,5vw,72px);align-items:center}
-@media(max-width:900px){.revwrap{grid-template-columns:1fr;gap:34px}}
-.revhead h2{margin:18px 0 14px}
-.revhead p{color:var(--sub);margin-bottom:24px}
-.revcards{display:grid;gap:16px}
-.rev{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 24px;
-  box-shadow:var(--shadow);max-width:520px}
-.rev:nth-child(odd){justify-self:end}
-.rev:nth-child(even){justify-self:start;margin-left:clamp(0px,4vw,52px)}
-@media(max-width:900px){.rev,.rev:nth-child(odd),.rev:nth-child(even){justify-self:stretch;margin-left:0;max-width:none}}
-.rev p{font-size:.95rem;line-height:1.75;margin-bottom:14px}
-.rev .stars{color:var(--brand);font-size:.9rem;letter-spacing:.12em}
-.rev .foot{display:flex;align-items:center;gap:10px;margin-top:10px;font-size:.8rem;color:var(--sub)}
+/* ══ 후기 — 양방향으로 흐르는 2줄 ══ */
+.revmarq{display:grid;gap:14px;margin-top:clamp(28px,3.4vw,44px)}
+.revrow{overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+          mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.revtape{display:flex;gap:14px;width:max-content;animation:revslide 64s linear infinite}
+.revrow.rev2 .revtape{animation-duration:78s;animation-direction:reverse}
+.revrow:hover .revtape{animation-play-state:paused}
+@keyframes revslide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.rev{flex:none;width:340px;background:var(--card);border:1px solid var(--line);
+  border-radius:16px;padding:20px 22px;box-shadow:var(--shadow)}
+.rev .stars{color:var(--brand);font-size:.86rem;letter-spacing:.12em;margin-bottom:10px}
+.rev p{font-size:.91rem;line-height:1.7;margin-bottom:14px;
+  display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;min-height:6.2em}
+.rev .foot{display:flex;align-items:center;gap:9px;padding-top:12px;border-top:1px solid var(--line);
+  font-size:.79rem;color:var(--sub)}
 .rev .foot b{font-weight:600;color:var(--ink)}
-.rev .foot .via{margin-left:auto;font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;
+.rev .foot .via{margin-left:auto;font-family:var(--mono);font-size:.64rem;letter-spacing:.08em;
   background:var(--brand-tint);color:var(--brand-deep);padding:3px 8px;border-radius:5px}
+@media(prefers-reduced-motion:reduce){.revtape{animation:none}}
 
 /* ══ 작업 현황 티커 ══ */
 .ticker{margin-top:clamp(28px,3.4vw,42px);overflow:hidden;
@@ -737,14 +740,16 @@ footer{background:var(--paper);border-top:1px solid var(--line);padding:60px 0 4
 
 <!-- ══════════ 고객 후기 ══════════ -->
 <section id="review" class="wash" hidden>
-  <div class="wrap revwrap">
-    <div class="revhead reveal">
+  <div class="wrap">
+    <div class="sec-head center reveal">
       <span class="live-badge"><span class="dot"></span>LIVE 실시간 후기</span>
-      <h2>함께 만든 브랜드의 이야기</h2>
-      <p class="muted">작업을 마치신 뒤 직접 남겨주신 후기만 올립니다.<br>지어낸 후기는 올리지 않습니다.</p>
-      <a class="btn ghost sm" href="survey.html">나도 의뢰하기 <span class="arw">→</span></a>
+      <h2 style="margin-top:18px">함께 만든 브랜드의 이야기</h2>
+      <p id="revSummary"></p>
     </div>
-    <div class="revcards reveal" id="revGrid"></div>
+  </div>
+  <div class="revmarq reveal">
+    <div class="revrow"><div class="revtape" id="revTape1"></div></div>
+    <div class="revrow rev2"><div class="revtape" id="revTape2"></div></div>
   </div>
 </section>
 
@@ -1098,25 +1103,36 @@ const esc = s => String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&g
 /* ── 포트폴리오 상세 팝업 (works.js 공용) ── */
 BQ.initModal();
 
-/* ── 고객 후기 — 실제 후기가 있을 때만 섹션을 보여준다 ── */
+/* ── 고객 후기 — 양방향 마퀴. 실제 후기가 있을 때만 섹션을 보여준다 ── */
 (function renderReviews(){
-  const sec = $('#review'), grid = $('#revGrid');
-  if(!sec || !grid) return;
+  const sec = $('#review'), t1 = $('#revTape1'), t2 = $('#revTape2');
+  if(!sec || !t1 || !t2) return;
   const list = (typeof REVIEWS !== 'undefined' ? REVIEWS : []).filter(r => r && r.text);
   if(!list.length){ sec.hidden = true; return; }
   sec.hidden = false;
-  grid.innerHTML = list.map(r => {
+
+  const avg = (list.reduce((s,r) => s + (+r.stars || 5), 0) / list.length).toFixed(1);
+  const vias = [...new Set(list.map(r => r.via).filter(Boolean))];
+  $('#revSummary').innerHTML =
+    `${vias.join(' · ')}에서 받은 실제 후기입니다.<br>` +
+    `<b style="color:var(--brand-deep)">평균 ${avg}점 · ${list.length}건</b>`;
+
+  const card = r => {
     const n = Math.max(1, Math.min(5, +r.stars || 5));
     return `<div class="rev">
-      <p>${esc(r.text)}</p>
       <div class="stars">${'★'.repeat(n)}${'☆'.repeat(5-n)}</div>
-      <div class="foot">
-        <b>${esc(r.name || '')}</b>
-        <span>${esc(r.date || '')}</span>
-        ${r.via ? `<span class="via">${esc(r.via)}</span>` : ''}
-      </div>
+      <p>${esc(r.text)}</p>
+      <div class="foot"><b>${esc(r.name||'')}</b><span>${esc(r.date||'')}</span>
+        ${r.via ? `<span class="via">${esc(r.via)}</span>` : ''}</div>
     </div>`;
-  }).join('');
+  };
+  /* 두 줄로 나누고, 각 줄은 끊김 없이 흐르도록 같은 목록을 두 번 이어 붙인다 */
+  const half = Math.ceil(list.length / 2);
+  const rows = [list.slice(0, half), list.slice(half)];
+  [t1, t2].forEach((tape, i) => {
+    const html = (rows[i].length ? rows[i] : list).map(card).join('');
+    tape.innerHTML = html + html;
+  });
 })();
 
 /* ── 작업 현황 — 최근 것만, 없으면 섹션을 감춘다 ── */
